@@ -1,17 +1,24 @@
 import React from 'react';
+import styled from 'styled-components';
 
 interface MyButtonPrpos {
-  /** 안녕하세요 */
-  label: string;
+  /** 버튼 명 */
+  children: React.ReactNode;
 }
 
 /**
- * 버튼 입니다
+ * 버튼입니다
  */
-export const MyButton = ({ label, ...props }: MyButtonPrpos) => {
+const MyButton = ({ children, ...props }: MyButtonPrpos) => {
   return (
-    <button type="button" {...props}>
-      {label}
-    </button>
+    <StyledButton type="button" {...props}>
+      {children}
+    </StyledButton>
   );
 };
+
+const StyledButton = styled.button`
+  background-color: ${(props) => props.theme.colors.primary};
+`;
+
+export default MyButton;

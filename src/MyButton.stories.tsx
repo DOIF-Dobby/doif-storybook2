@@ -1,6 +1,6 @@
 import React, { ComponentProps } from 'react';
 import { Story } from '@storybook/react/types-6-0';
-import { MyButton } from './MyButton';
+import MyButton from './MyButton';
 
 export default {
   title: 'Example/MyButton',
@@ -8,10 +8,10 @@ export default {
 };
 
 const Template: Story<ComponentProps<typeof MyButton>> = (args) => (
-  <MyButton {...args} />
+  <MyButton {...args}>{args.children}</MyButton>
 );
 
 export const MyButton1 = Template.bind({});
 MyButton1.args = {
-  label: 'Button1',
+  children: '버튼입니다.',
 };
