@@ -8,10 +8,10 @@ export default {
 };
 
 const Template: Story<ComponentProps<typeof MyButton>> = (args) => (
-  <MyButton {...args}>{args.children}</MyButton>
+  <MyButton {...args}>버튼명</MyButton>
 );
 
 export const MyButton1 = Template.bind({});
 MyButton1.args = {
-  children: '버튼입니다.',
+  disabled: false,
 };

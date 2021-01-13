@@ -1,17 +1,50 @@
 import React from 'react';
-import { ThemeProvider } from 'styled-components';
+import styled, { ThemeProvider } from 'styled-components';
 import { GlobalStyle } from '../src/styles/global-style';
 import { theme } from '../src/styles/themes';
 
+/**
+ * 스토리북에서 globalType를 지정할 수 있게끔 해줌.
+ * 밑에 코드는 스토리북에서 쓰는 테마가 아니라 우리가 패키지로 롤업해서 export할 테마를 지정한다.
+ * src/styles/themes/index.ts 의 theme와 동일하다
+ */
+export const globalTypes = {
+  theme: {
+    name: 'Theme',
+    description: 'Global theme for components',
+    defaultValue: 'light',
+    toolbar: {
+      // icon: 'circlehollow',
+      items: ['light', 'dark'],
+    },
+  },
+};
+
+/**
+ * 해당 데코레이터는 글로벌하게 적용된다.
+ * globalTypes에서 설정한 테마 타입으로 src/styles/themes/index.ts의 theme에서 선택하여 ThemeProvider에 주입한다.
+ */
 export const decorators = [
-  (Story) => (
-    <ThemeProvider theme={theme.light}>
-      <GlobalStyle />
-      <Story />
-    </ThemeProvider>
-  ),
+  (Story, context) => {
+    return (
+      <ThemeProvider theme={theme[context.globals.theme]}>
+        <GlobalStyle />
+        <ThemeWrapper>
+          <Story />
+        </ThemeWrapper>
+      </ThemeProvider>
+    );
+  },
 ];
 
 export const parameters = {
   actions: { argTypesRegex: '^on[A-Z].*' },
 };
+
+/**
+ * 테마별로 background를 지정하기 위한 div
+ */
+const ThemeWrapper = styled.div`
+  background-color: ${(props) => props.theme.colors.pageBackground};
+  padding: 20px;
+`;

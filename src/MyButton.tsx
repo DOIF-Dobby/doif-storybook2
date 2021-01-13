@@ -1,9 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
 
-interface MyButtonPrpos {
-  /** 버튼 명 */
-  children: React.ReactNode;
+interface MyButtonPrpos
+  extends React.DetailedHTMLProps<
+    React.ButtonHTMLAttributes<HTMLButtonElement>,
+    HTMLButtonElement
+  > {
+  /** 버튼을 비활성화 시킵니다. */
+  disabled: boolean;
 }
 
 /**
@@ -11,14 +15,20 @@ interface MyButtonPrpos {
  */
 const MyButton = ({ children, ...props }: MyButtonPrpos) => {
   return (
-    <StyledButton type="button" {...props}>
-      {children}
-    </StyledButton>
+    <StyledButtonWrapper>
+      <button {...props}>{children}</button>
+    </StyledButtonWrapper>
   );
 };
 
-const StyledButton = styled.button`
-  background-color: ${(props) => props.theme.colors.primary};
+MyButton.defaultProps = {
+  disabled: false,
+};
+
+const StyledButtonWrapper = styled.div`
+  > button {
+    background-color: ${(props) => props.theme.colors.primary};
+  }
 `;
 
 export default MyButton;
