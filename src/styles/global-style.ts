@@ -10,5 +10,6 @@ export const GlobalStyle = createGlobalStyle`
     ${reset}
     * {
         outline: none;
+        border: none;
     }
 `;

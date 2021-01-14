@@ -5,7 +5,14 @@
  */
 export interface DoifThemeProps {
   colors: {
-    pageBackground: string;
     primary: string;
+    secondary: string;
+    success: string;
+    warning: string;
+    error: string;
+    info: string;
+    content: string;
+    text: string;
+    pageBackground: string;
   };
 }
