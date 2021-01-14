@@ -1,6 +1,6 @@
 {
   "name": "doif-react-kit",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "module": "dist/index.js",
   "license": "MIT",
   "types": "dist/types/index.d.ts",
@@ -28,7 +28,6 @@
     "rollup-plugin-commonjs": "^10.1.0",
     "rollup-plugin-node-resolve": "^5.2.0",
     "rollup-plugin-peer-deps-external": "^2.2.4",
-    "rollup-plugin-typescript2": "^0.29.0",
     "rollup-plugin-url": "^3.0.1",
     "styled-components": "^5.2.1",
     "styled-normalize": "^8.0.7",
