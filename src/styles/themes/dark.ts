@@ -10,7 +10,7 @@ const Dark: DefaultTheme = {
     success: '#88b04b',
     warning: '#f5df4d',
     error: '#ff5a4a',
-    info: '#34558b',
+    info: '#fafafa',
     content: '#ffffff',
     text: '#424141',
     pageBackground: '#424141',
