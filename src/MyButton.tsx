@@ -31,4 +31,4 @@ const StyledButtonWrapper = styled.div`
   }
 `;
 
-export default MyButton;
+export default React.memo(MyButton);

@@ -4,7 +4,8 @@ import MyButton from './MyButton';
 
 export default {
   title: 'Example/MyButton',
-  component: MyButton,
+  component: MyButton.type,
+  description: 'hi',
 };
 
 const Template: Story<ComponentProps<typeof MyButton>> = (args) => (
