@@ -13,6 +13,7 @@ const Dark: DefaultTheme = {
     info: '#fafafa',
     content: '#ffffff',
     text: '#424141',
+    border: '#424141',
     pageBackground: '#424141',
   },
 };

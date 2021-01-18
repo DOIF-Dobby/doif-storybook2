@@ -19,5 +19,6 @@ export interface DoifThemeColorProps {
   info: string;
   content: string;
   text: string;
+  border: string;
   pageBackground: string;
 }

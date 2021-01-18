@@ -6,13 +6,14 @@ import { DefaultTheme } from 'styled-components';
 const Light: DefaultTheme = {
   colors: {
     primary: '#535150',
-    secondary: '#4e5851',
+    secondary: '#34558b',
     success: '#88b04b',
     warning: '#f5df4d',
     error: '#ff5a4a',
-    info: '#34558b',
+    info: '#005baf',
     content: '#ffffff',
-    text: '#ffffff',
+    text: '#383736',
+    border: '#a5a4a3',
     pageBackground: '#fcfcfc',
   },
 };
