@@ -1,5 +1,6 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
+import Ripple from '../ripple/Ripple';
 
 interface ButtonPrpos
   extends React.DetailedHTMLProps<
@@ -45,6 +46,7 @@ const Button = ({
     >
       <button disabled={disabled} {...props}>
         {children}
+        <Ripple />
       </button>
     </StyledButtonWrapper>
   );
@@ -75,6 +77,9 @@ const StyledButtonWrapper = styled.div<StyledButtonWrapperProps>`
     ${(props) => props.size === 'medium' && MediumButtonStyle}
     ${(props) => props.size === 'large' && LargeButtonStyle}
 
+    overflow: hidden;
+    outline: none;
+    position: relative;
     opacity: ${(props) => (props.disabled ? 0.5 : 1)};
     cursor: ${(props) => (props.disabled ? 'not-allowed' : 'pointer')};
     padding-left: 1rem;

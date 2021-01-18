@@ -10,6 +10,9 @@ export default {
 
 const ButtonWrapper = styled.div`
   display: flex;
+  overflow: hidden;
+  position: relative;
+
   > div + div {
     margin-left: 5px;
   }
@@ -22,10 +25,6 @@ const Template: Story<ComponentProps<typeof Button>> = (args) => (
 export const Default = Template.bind({});
 Default.args = {
   children: '버튼',
-  disabled: false,
-  color: 'primary',
-  variant: 'fill',
-  size: 'medium',
 };
 
 export const Varaints = () => {
@@ -87,5 +86,11 @@ export const ClickAction = () => {
     <ButtonWrapper>
       <Button onClick={onClick}>버튼</Button>
     </ButtonWrapper>
+  );
+};
+
+export const CustomStyle = () => {
+  return (
+    <Button style={{ backgroundColor: '#fab', width: '50%' }}>버튼</Button>
   );
 };
