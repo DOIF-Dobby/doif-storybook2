@@ -16,6 +16,9 @@ const Dark: DefaultTheme = {
     border: '#424141',
     pageBackground: '#424141',
   },
+  variants: {
+    borderRadius: '4px',
+  },
 };
 
 export default Dark;

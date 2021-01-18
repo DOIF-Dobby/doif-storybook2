@@ -5,6 +5,7 @@
  */
 export interface DoifThemeProps {
   colors: DoifThemeColorProps;
+  variants: DoifThemeVariantProps;
 }
 
 /**
@@ -21,4 +22,8 @@ export interface DoifThemeColorProps {
   text: string;
   border: string;
   pageBackground: string;
+}
+
+export interface DoifThemeVariantProps {
+  borderRadius: string;
 }

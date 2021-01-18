@@ -14,7 +14,10 @@ const Light: DefaultTheme = {
     content: '#ffffff',
     text: '#383736',
     border: '#a5a4a3',
-    pageBackground: '#fcfcfc',
+    pageBackground: '#ffffff',
+  },
+  variants: {
+    borderRadius: '4px',
   },
 };
 
