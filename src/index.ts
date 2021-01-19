@@ -5,7 +5,8 @@ export { default as Button } from './components/buttons/Button';
 export { theme } from './styles/themes';
 export {
   DoifThemeProps,
-  DoifThemeColorProps,
+  DoifThemeMainColorProps,
+  DoifThemeSubColorProps,
   DoifThemeVariantProps,
 } from './styles/themes/DoifThemeProps';
 
