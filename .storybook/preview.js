@@ -45,6 +45,6 @@ export const parameters = {
  * 테마별로 background를 지정하기 위한 div
  */
 const ThemeWrapper = styled.div`
-  background-color: ${(props) => props.theme.colors.pageBackground};
+  background-color: ${(props) => props.theme.subColors.pageBackground};
   padding: 20px;
 `;

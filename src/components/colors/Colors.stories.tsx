@@ -11,5 +11,12 @@ const Template: Story<ComponentProps<typeof Colors>> = (args) => (
   <Colors {...args} />
 );
 
-export const Base = Template.bind({});
-Base.args = {};
+export const MainColors = Template.bind({});
+MainColors.args = {
+  type: 'main',
+};
+
+export const SubColors = Template.bind({});
+SubColors.args = {
+  type: 'sub',
+};

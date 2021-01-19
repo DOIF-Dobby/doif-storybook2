@@ -89,52 +89,52 @@ const StyledButtonWrapper = styled.div<StyledButtonWrapperProps>`
 
 /** variant === 'fill' 인 버튼 스타일 */
 const FillButtonStyle = css<StyledButtonWrapperProps>`
-  background-color: ${(props) => props.theme.colors[props.color].base};
-  color: ${(props) => props.theme.colors.content};
+  background-color: ${(props) => props.theme.mainColors[props.color].base};
+  color: ${(props) => props.theme.subColors.content};
   border: none;
   border-radius: ${(props) => props.theme.variants.borderRadius};
 
   &:hover {
     background-color: ${(props) =>
-      !props.disabled && props.theme.colors[props.color].dark};
+      !props.disabled && props.theme.mainColors[props.color].dark};
   }
 
   span.ripple-effect {
-    background-color: ${(props) => props.theme.colors.content};
+    background-color: ${(props) => props.theme.subColors.content};
   }
 `;
 
 /** variant === 'outline' 인 버튼 스타일 */
 const OutlineButtonStyle = css<StyledButtonWrapperProps>`
   background-color: transparent;
-  color: ${(props) => props.theme.colors[props.color].base};
-  border: 1px solid ${(props) => props.theme.colors[props.color].base};
+  color: ${(props) => props.theme.mainColors[props.color].base};
+  border: 1px solid ${(props) => props.theme.mainColors[props.color].base};
   border-radius: ${(props) => props.theme.variants.borderRadius};
 
   &:hover {
     background-color: ${(props) =>
-      !props.disabled && props.theme.colors[props.color].light};
+      !props.disabled && props.theme.mainColors[props.color].light};
   }
 
   span.ripple-effect {
-    background-color: ${(props) => props.theme.colors[props.color].base};
+    background-color: ${(props) => props.theme.mainColors[props.color].base};
   }
 `;
 
 /** variant === 'ghost' 인 버튼 스타일 */
 const GhostButtonStyle = css<StyledButtonWrapperProps>`
   background-color: transparent;
-  color: ${(props) => props.theme.colors[props.color].base};
+  color: ${(props) => props.theme.mainColors[props.color].base};
   border: none;
   border-radius: ${(props) => props.theme.variants.borderRadius};
 
   &:hover {
     background-color: ${(props) =>
-      !props.disabled && props.theme.colors[props.color].light};
+      !props.disabled && props.theme.mainColors[props.color].light};
   }
 
   span.ripple-effect {
-    background-color: ${(props) => props.theme.colors[props.color].base};
+    background-color: ${(props) => props.theme.mainColors[props.color].base};
   }
 `;
 

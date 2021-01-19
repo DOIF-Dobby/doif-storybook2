@@ -4,7 +4,7 @@ import { DefaultTheme } from 'styled-components';
  * 밝은 테마이다.
  */
 const Light: DefaultTheme = {
-  colors: {
+  mainColors: {
     primary: {
       base: '#535150',
       dark: '#42403f',
@@ -15,6 +15,8 @@ const Light: DefaultTheme = {
       dark: '#1c4376',
       light: '#dde0eb',
     },
+  },
+  subColors: {
     success: '#88b04b',
     warning: '#f5df4d',
     error: '#ff5a4a',
