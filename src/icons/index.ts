@@ -1,0 +1,9 @@
+export { ReactComponent as exit } from './svg/exit.svg';
+export { ReactComponent as heart } from './svg/heart.svg';
+export { ReactComponent as pencil } from './svg/pencil.svg';
+export { ReactComponent as calendar } from './svg/calendar.svg';
+export { ReactComponent as downArrow } from './svg/down-arrow.svg';
+export { ReactComponent as topArrow } from './svg/top-arrow.svg';
+export { ReactComponent as leftArrow } from './svg/left-arrow.svg';
+export { ReactComponent as rightArrow } from './svg/right-arrow.svg';
+export { ReactComponent as check } from './svg/check.svg';

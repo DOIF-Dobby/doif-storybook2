@@ -30,7 +30,7 @@ const Colors = ({ type }: ColorProps) => {
     return (
       <StyledColorsWrapper>
         {mainColors.map((color: keyof DoifThemeMainColorProps) => (
-          <StyledColorWrapper>
+          <StyledColorWrapper key={color}>
             <StyledMainColor mainColor={color}>
               <div></div>
               <div></div>
@@ -45,7 +45,7 @@ const Colors = ({ type }: ColorProps) => {
     return (
       <StyledColorsWrapper>
         {subColors.map((color: keyof DoifThemeSubColorProps) => (
-          <StyledColorWrapper>
+          <StyledColorWrapper key={color}>
             <StyledSubColor subColor={color}></StyledSubColor>
             <span>{color}</span>
           </StyledColorWrapper>

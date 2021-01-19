@@ -19,7 +19,7 @@ interface ButtonPrpos
   size: 'small' | 'medium' | 'large';
 }
 
-interface StyledButtonWrapperProps {
+interface StyledButtonContainerProps {
   disabled: boolean;
   color: 'primary' | 'secondary';
   variant: 'fill' | 'outline' | 'ghost';
@@ -38,7 +38,7 @@ const Button = ({
   ...props
 }: ButtonPrpos) => {
   return (
-    <StyledButtonWrapper
+    <StyledButtonContainer
       disabled={disabled}
       color={color}
       variant={variant}
@@ -48,7 +48,7 @@ const Button = ({
         {children}
         <Ripple disabled={disabled} />
       </button>
-    </StyledButtonWrapper>
+    </StyledButtonContainer>
   );
 };
 
@@ -61,7 +61,7 @@ Button.defaultProps = {
 };
 
 /** Button 컴포넌트의 스타일 */
-const StyledButtonWrapper = styled.div<StyledButtonWrapperProps>`
+const StyledButtonContainer = styled.div<StyledButtonContainerProps>`
   & {
     display: inline;
   }
@@ -88,7 +88,7 @@ const StyledButtonWrapper = styled.div<StyledButtonWrapperProps>`
 `;
 
 /** variant === 'fill' 인 버튼 스타일 */
-const FillButtonStyle = css<StyledButtonWrapperProps>`
+const FillButtonStyle = css<StyledButtonContainerProps>`
   background-color: ${(props) => props.theme.mainColors[props.color].base};
   color: ${(props) => props.theme.subColors.content};
   border: none;
@@ -105,7 +105,7 @@ const FillButtonStyle = css<StyledButtonWrapperProps>`
 `;
 
 /** variant === 'outline' 인 버튼 스타일 */
-const OutlineButtonStyle = css<StyledButtonWrapperProps>`
+const OutlineButtonStyle = css<StyledButtonContainerProps>`
   background-color: transparent;
   color: ${(props) => props.theme.mainColors[props.color].base};
   border: 1px solid ${(props) => props.theme.mainColors[props.color].base};
@@ -122,7 +122,7 @@ const OutlineButtonStyle = css<StyledButtonWrapperProps>`
 `;
 
 /** variant === 'ghost' 인 버튼 스타일 */
-const GhostButtonStyle = css<StyledButtonWrapperProps>`
+const GhostButtonStyle = css<StyledButtonContainerProps>`
   background-color: transparent;
   color: ${(props) => props.theme.mainColors[props.color].base};
   border: none;
@@ -139,19 +139,19 @@ const GhostButtonStyle = css<StyledButtonWrapperProps>`
 `;
 
 /** size === 'small' 인 버튼 스타일 */
-const SmallButtonStyle = css<StyledButtonWrapperProps>`
+const SmallButtonStyle = css<StyledButtonContainerProps>`
   height: 1.5rem;
   font-size: 0.9rem;
 `;
 
 /** size === 'medium' 인 버튼 스타일 */
-const MediumButtonStyle = css<StyledButtonWrapperProps>`
+const MediumButtonStyle = css<StyledButtonContainerProps>`
   height: 2rem;
   font-size: 1rem;
 `;
 
 /** size === 'large' 인 버튼 스타일 */
-const LargeButtonStyle = css<StyledButtonWrapperProps>`
+const LargeButtonStyle = css<StyledButtonContainerProps>`
   height: 2.5rem;
   font-size: 1.1rem;
 `;

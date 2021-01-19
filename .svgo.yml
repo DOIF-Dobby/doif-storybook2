@@ -1,0 +1,3 @@
+# svg 크기를 자유자재로 설정하기 위한 파일
+plugins:
+  - removeViewBox: false

@@ -27,7 +27,7 @@ MyButton.defaultProps = {
 
 const StyledButtonWrapper = styled.div`
   > button {
-    background-color: ${(props) => props.theme.colors.primary};
+    background-color: ${(props) => props.theme.mainColors.primary.base};
   }
 `;
 
