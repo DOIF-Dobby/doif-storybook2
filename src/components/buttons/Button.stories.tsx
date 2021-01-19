@@ -84,7 +84,9 @@ export const ClickAction = () => {
 
   return (
     <ButtonWrapper>
-      <Button onClick={onClick}>버튼</Button>
+      <Button variant="outline" color="secondary" onClick={onClick}>
+        버튼
+      </Button>
     </ButtonWrapper>
   );
 };

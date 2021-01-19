@@ -12,8 +12,16 @@ export interface DoifThemeProps {
  * 색상 props
  */
 export interface DoifThemeColorProps {
-  primary: string;
-  secondary: string;
+  primary: {
+    base: string;
+    dark: string;
+    light: string;
+  };
+  secondary: {
+    base: string;
+    dark: string;
+    light: string;
+  };
   success: string;
   warning: string;
   error: string;

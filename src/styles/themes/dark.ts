@@ -5,8 +5,16 @@ import { DefaultTheme } from 'styled-components';
  */
 const Dark: DefaultTheme = {
   colors: {
-    primary: '#fafafa',
-    secondary: '#fafafa',
+    primary: {
+      base: '#fafafa',
+      dark: '#fafafa',
+      light: '#fafafa',
+    },
+    secondary: {
+      base: '#fafafa',
+      dark: '#fafafa',
+      light: '#fafafa',
+    },
     success: '#88b04b',
     warning: '#f5df4d',
     error: '#ff5a4a',

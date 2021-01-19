@@ -46,7 +46,7 @@ const Button = ({
     >
       <button disabled={disabled} {...props}>
         {children}
-        <Ripple />
+        <Ripple disabled={disabled} />
       </button>
     </StyledButtonWrapper>
   );
@@ -89,25 +89,53 @@ const StyledButtonWrapper = styled.div<StyledButtonWrapperProps>`
 
 /** variant === 'fill' 인 버튼 스타일 */
 const FillButtonStyle = css<StyledButtonWrapperProps>`
-  background-color: ${(props) => props.theme.colors[props.color]};
+  background-color: ${(props) => props.theme.colors[props.color].base};
   color: ${(props) => props.theme.colors.content};
   border: none;
   border-radius: ${(props) => props.theme.variants.borderRadius};
+
+  &:hover {
+    background-color: ${(props) =>
+      !props.disabled && props.theme.colors[props.color].dark};
+  }
+
+  span.ripple-effect {
+    background-color: ${(props) => props.theme.colors.content};
+  }
 `;
 
 /** variant === 'outline' 인 버튼 스타일 */
 const OutlineButtonStyle = css<StyledButtonWrapperProps>`
   background-color: transparent;
-  color: ${(props) => props.theme.colors[props.color]};
-  border: 1px solid ${(props) => props.theme.colors[props.color]};
+  color: ${(props) => props.theme.colors[props.color].base};
+  border: 1px solid ${(props) => props.theme.colors[props.color].base};
   border-radius: ${(props) => props.theme.variants.borderRadius};
+
+  &:hover {
+    background-color: ${(props) =>
+      !props.disabled && props.theme.colors[props.color].light};
+  }
+
+  span.ripple-effect {
+    background-color: ${(props) => props.theme.colors[props.color].base};
+  }
 `;
 
 /** variant === 'ghost' 인 버튼 스타일 */
 const GhostButtonStyle = css<StyledButtonWrapperProps>`
   background-color: transparent;
-  color: ${(props) => props.theme.colors[props.color]};
+  color: ${(props) => props.theme.colors[props.color].base};
   border: none;
+  border-radius: ${(props) => props.theme.variants.borderRadius};
+
+  &:hover {
+    background-color: ${(props) =>
+      !props.disabled && props.theme.colors[props.color].light};
+  }
+
+  span.ripple-effect {
+    background-color: ${(props) => props.theme.colors[props.color].base};
+  }
 `;
 
 /** size === 'small' 인 버튼 스타일 */
@@ -116,13 +144,13 @@ const SmallButtonStyle = css<StyledButtonWrapperProps>`
   font-size: 0.9rem;
 `;
 
-/** size === 'small' 인 버튼 스타일 */
+/** size === 'medium' 인 버튼 스타일 */
 const MediumButtonStyle = css<StyledButtonWrapperProps>`
   height: 2rem;
   font-size: 1rem;
 `;
 
-/** size === 'small' 인 버튼 스타일 */
+/** size === 'large' 인 버튼 스타일 */
 const LargeButtonStyle = css<StyledButtonWrapperProps>`
   height: 2.5rem;
   font-size: 1.1rem;
