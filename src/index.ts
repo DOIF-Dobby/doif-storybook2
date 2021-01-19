@@ -1,5 +1,5 @@
 // 컴포넌트 export
-export { default as Button } from './components/buttons/Button';
+export { default as Button } from './components/button/Button';
 
 // 테마 export
 export { theme } from './styles/themes';
