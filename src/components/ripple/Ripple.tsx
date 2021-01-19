@@ -3,14 +3,13 @@ import styled from 'styled-components';
 
 interface RippleProps {
   duration: number;
-  color: string;
 }
 
 interface StyledRippleProps {
   duration: number;
-  color: string;
 }
 
+/** 리플 효과를 주기 위해 span를 추가하는데 그것을 지우는 함수 */
 const useDebouncedRippleCleanUp = (
   rippleCount: number,
   duration: number,
@@ -31,7 +30,8 @@ const useDebouncedRippleCleanUp = (
   }, [rippleCount, duration, cleanUpFunction]);
 };
 
-const Ripple = ({ duration, color }: RippleProps) => {
+/** 리플 효과를 주는 컴포넌트 */
+const Ripple = ({ duration }: RippleProps) => {
   const [rippleArray, setRippleArray] = useState<
     Array<{ x: number; y: number; size: number }>
   >([]);
@@ -54,19 +54,17 @@ const Ripple = ({ duration, color }: RippleProps) => {
       y,
       size,
     };
-    console.log(event);
-    console.log(rippleContainer);
-    console.log(newRipple);
 
     setRippleArray([...rippleArray, newRipple]);
   };
 
   return (
-    <RippleContainer duration={duration} color={color} onMouseDown={addRipple}>
+    <RippleContainer duration={duration} onMouseDown={addRipple}>
       {rippleArray.length > 0 &&
         rippleArray.map((ripple, index) => {
           return (
             <span
+              className="ripple-effect"
               key={'span' + index}
               style={{
                 top: ripple.y,
@@ -83,7 +81,6 @@ const Ripple = ({ duration, color }: RippleProps) => {
 
 Ripple.defaultProps = {
   duration: 850,
-  color: '#ffffff',
 };
 
 const RippleContainer = styled.div<StyledRippleProps>`
@@ -98,7 +95,6 @@ const RippleContainer = styled.div<StyledRippleProps>`
     border-radius: 100%;
     position: absolute;
     opacity: 0.75;
-    background-color: ${(props) => props.color};
     animation-name: ripple;
     animation-duration: ${(props) => props.duration}ms;
   }
