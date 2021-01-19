@@ -3,6 +3,7 @@ import styled from 'styled-components';
 
 interface RippleProps {
   duration: number;
+  disabled: boolean;
 }
 
 interface StyledRippleProps {
@@ -31,7 +32,11 @@ const useDebouncedRippleCleanUp = (
 };
 
 /** 리플 효과를 주는 컴포넌트 */
-const Ripple = ({ duration }: RippleProps) => {
+const Ripple = ({ duration, disabled }: RippleProps) => {
+  if (disabled) {
+    return null;
+  }
+
   const [rippleArray, setRippleArray] = useState<
     Array<{ x: number; y: number; size: number }>
   >([]);
@@ -81,6 +86,7 @@ const Ripple = ({ duration }: RippleProps) => {
 
 Ripple.defaultProps = {
   duration: 850,
+  disabled: false,
 };
 
 const RippleContainer = styled.div<StyledRippleProps>`
@@ -94,7 +100,7 @@ const RippleContainer = styled.div<StyledRippleProps>`
     transform: scale(0);
     border-radius: 100%;
     position: absolute;
-    opacity: 0.75;
+    opacity: 0.5;
     animation-name: ripple;
     animation-duration: ${(props) => props.duration}ms;
   }
