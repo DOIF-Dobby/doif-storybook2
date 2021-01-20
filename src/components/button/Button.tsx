@@ -22,6 +22,8 @@ interface ButtonPrpos
   variant: DoifVariantType;
   /** 버튼의 크기를 정합니다. */
   size: DoifSizeType;
+  /** 버튼에서 아이콘만 보여줄 때는 이 값을 `true`로 설정하세요  */
+  iconOnly: boolean;
 }
 
 interface StyledButtonContainerProps {
@@ -30,6 +32,7 @@ interface StyledButtonContainerProps {
   variant: DoifVariantType;
   size: DoifSizeType;
   iconLocation: string;
+  iconOnly: boolean;
 }
 
 /**
@@ -41,6 +44,7 @@ const Button = ({
   color,
   variant,
   size,
+  iconOnly,
   ...props
 }: ButtonPrpos) => {
   let iconLocation: string = '';
@@ -52,7 +56,7 @@ const Button = ({
     );
 
     // 아이콘이 없음
-    if (iconIndex === -1) {
+    if (iconOnly || iconIndex === -1) {
       iconLocation = 'none';
 
       // 아이콘이 버튼명보다 앞에 있음
@@ -72,6 +76,7 @@ const Button = ({
       variant={variant}
       size={size}
       iconLocation={iconLocation}
+      iconOnly={iconOnly}
     >
       <button disabled={disabled} {...props}>
         {children}
@@ -87,6 +92,7 @@ Button.defaultProps = {
   color: 'primary',
   variant: 'fill',
   size: 'medium',
+  iconOnly: false,
 };
 
 /** Button 컴포넌트의 스타일 */
@@ -119,6 +125,9 @@ const StyledButtonContainer = styled.div<StyledButtonContainerProps>`
       margin-right: ${(props) => props.iconLocation === 'left' && '0.5rem'};
       margin-left: ${(props) => props.iconLocation === 'right' && '0.5rem'};
     }
+
+    /** 아이콘만 보여주는 버튼 스타일 */
+    ${(props) => props.iconOnly && IconOnlyStyle}
   }
 `;
 
@@ -193,6 +202,13 @@ const MediumButtonStyle = css<StyledButtonContainerProps>`
 const LargeButtonStyle = css<StyledButtonContainerProps>`
   height: 2.5rem;
   font-size: 1.25rem;
+`;
+
+/** iconOnly === true 인 버튼 스타일 */
+const IconOnlyStyle = css<StyledButtonContainerProps>`
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 export default React.memo(Button);

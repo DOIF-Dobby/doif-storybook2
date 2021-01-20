@@ -166,3 +166,69 @@ export const WithIcon = () => {
     </>
   );
 };
+
+export const OnlyIcon = () => {
+  return (
+    <>
+      <ButtonWrapper>
+        <Button iconOnly>
+          <Icon icon="heart" />
+        </Button>
+        <Button variant="outline" iconOnly>
+          <Icon icon="heart" />
+        </Button>
+        <Button variant="ghost" iconOnly>
+          <Icon icon="heart" />
+        </Button>
+      </ButtonWrapper>
+      <br />
+      <ButtonWrapper>
+        <Button color="secondary" size="small" iconOnly>
+          <Icon icon="heart" color="secondary" size="small" />
+        </Button>
+        <Button variant="outline" color="secondary" iconOnly>
+          <Icon icon="heart" color="secondary" />
+        </Button>
+        <Button variant="ghost" color="secondary" size="large" iconOnly>
+          <Icon icon="heart" color="secondary" size="large" />
+        </Button>
+      </ButtonWrapper>
+      <br />
+      <ButtonWrapper>
+        <Button disabled iconOnly>
+          <Icon icon="heart" />
+        </Button>
+        <Button variant="outline" disabled iconOnly>
+          <Icon icon="heart" />
+        </Button>
+        <Button variant="ghost" disabled iconOnly>
+          <Icon icon="heart" />
+        </Button>
+      </ButtonWrapper>
+      <br />
+      <ButtonWrapper>
+        <Button iconOnly>
+          <Icon icon="heart" style={{ fill: '#f00' }} />
+        </Button>
+        <Button
+          style={{
+            backgroundColor: '#fab',
+            borderRadius: '1.25rem',
+            width: '2.5rem',
+            height: '2.5rem',
+          }}
+          iconOnly
+        >
+          <Icon icon="heart" style={{ fill: 'yellow' }} />
+        </Button>
+        <Button
+          style={{ backgroundColor: '#fab', borderRadius: '20px' }}
+          disabled
+          iconOnly
+        >
+          <Icon icon="heart" style={{ fill: '#aaffb8' }} />
+        </Button>
+      </ButtonWrapper>
+    </>
+  );
+};
