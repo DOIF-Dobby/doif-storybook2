@@ -6,6 +6,7 @@ import {
   DoifSizeType,
   DoifVariantType,
 } from '../../styles/themes/DoifThemeProps';
+import Icon from '../icon/Icon';
 
 interface ButtonPrpos
   extends React.DetailedHTMLProps<
@@ -35,6 +36,21 @@ interface StyledButtonContainerProps {
   iconOnly: boolean;
 }
 
+/** children 에서 icon 타입을 찾기 위한 재귀함수 */
+const iconTypeCheckFunction = (object: any): boolean => {
+  if (object.hasOwnProperty('props')) {
+    if (object.props.hasOwnProperty('children')) {
+      return iconTypeCheckFunction(object.props.children);
+    }
+  }
+
+  if (object.hasOwnProperty('type')) {
+    return iconTypeCheckFunction(object.type);
+  }
+
+  return object.name === 'Icon';
+};
+
 /**
  * `Button` 컴포넌트는 어떠한 작업을 트리거할 때 사용합니다.
  */
@@ -51,9 +67,10 @@ const Button = ({
 
   // 아이콘이 앞에 있는지, 뒤에 있는지 판별하기 위함
   if (typeof children === 'object') {
-    const iconIndex: number = Children.toArray(children).findIndex(
-      (child) => typeof child === 'object',
-    );
+    const iconIndex: number = Children.toArray(children).findIndex((child) => {
+      const childObject: any = new Object(child);
+      return iconTypeCheckFunction(childObject);
+    });
 
     // 아이콘이 없음
     if (iconOnly || iconIndex === -1) {
