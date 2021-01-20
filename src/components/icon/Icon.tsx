@@ -67,12 +67,12 @@ const SmallButtonStyle = css<StyledIconProps>`
 
 /** size === 'medium' 인 아이콘 스타일 */
 const MediumButtonStyle = css<StyledIconProps>`
-  width: 1.5rem;
+  width: 1.25rem;
 `;
 
 /** size === 'large' 인 아이콘 스타일 */
 const LargeButtonStyle = css<StyledIconProps>`
-  width: 2rem;
+  width: 1.5rem;
 `;
 
 export default React.memo(Icon);

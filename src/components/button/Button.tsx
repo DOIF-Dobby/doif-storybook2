@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Children } from 'react';
 import styled, { css } from 'styled-components';
 import Ripple from '../ripple/Ripple';
 import {
@@ -29,6 +29,7 @@ interface StyledButtonContainerProps {
   color: DoifColorType;
   variant: DoifVariantType;
   size: DoifSizeType;
+  iconLocation: string;
 }
 
 /**
@@ -42,12 +43,35 @@ const Button = ({
   size,
   ...props
 }: ButtonPrpos) => {
+  let iconLocation: string = '';
+
+  // 아이콘이 앞에 있는지, 뒤에 있는지 판별하기 위함
+  if (typeof children === 'object') {
+    const iconIndex: number = Children.toArray(children).findIndex(
+      (child) => typeof child === 'object',
+    );
+
+    // 아이콘이 없음
+    if (iconIndex === -1) {
+      iconLocation = 'none';
+
+      // 아이콘이 버튼명보다 앞에 있음
+    } else if (iconIndex === 0) {
+      iconLocation = 'left';
+
+      // 아이콘이 버튼명보다 뒤에 있음
+    } else {
+      iconLocation = 'right';
+    }
+  }
+
   return (
     <StyledButtonContainer
       disabled={disabled}
       color={color}
       variant={variant}
       size={size}
+      iconLocation={iconLocation}
     >
       <button disabled={disabled} {...props}>
         {children}
@@ -89,6 +113,12 @@ const StyledButtonContainer = styled.div<StyledButtonContainerProps>`
     cursor: ${(props) => (props.disabled ? 'not-allowed' : 'pointer')};
     padding-left: 1rem;
     padding-right: 1rem;
+
+    /** 아이콘 위치에 따른 margin 설정 */
+    & svg {
+      margin-right: ${(props) => props.iconLocation === 'left' && '0.5rem'};
+      margin-left: ${(props) => props.iconLocation === 'right' && '0.5rem'};
+    }
   }
 `;
 
@@ -102,6 +132,10 @@ const FillButtonStyle = css<StyledButtonContainerProps>`
   &:hover {
     background-color: ${(props) =>
       !props.disabled && props.theme.mainColors[props.color].dark};
+  }
+
+  & svg {
+    fill: ${(props) => props.theme.subColors.content};
   }
 
   span.ripple-effect {
@@ -146,7 +180,7 @@ const GhostButtonStyle = css<StyledButtonContainerProps>`
 /** size === 'small' 인 버튼 스타일 */
 const SmallButtonStyle = css<StyledButtonContainerProps>`
   height: 1.5rem;
-  font-size: 0.9rem;
+  font-size: 0.75rem;
 `;
 
 /** size === 'medium' 인 버튼 스타일 */
@@ -158,7 +192,7 @@ const MediumButtonStyle = css<StyledButtonContainerProps>`
 /** size === 'large' 인 버튼 스타일 */
 const LargeButtonStyle = css<StyledButtonContainerProps>`
   height: 2.5rem;
-  font-size: 1.1rem;
+  font-size: 1.25rem;
 `;
 
 export default React.memo(Button);
