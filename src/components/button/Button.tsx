@@ -1,6 +1,11 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 import Ripple from '../ripple/Ripple';
+import {
+  DoifColorType,
+  DoifSizeType,
+  DoifVariantType,
+} from '../../styles/themes/DoifThemeProps';
 
 interface ButtonPrpos
   extends React.DetailedHTMLProps<
@@ -12,18 +17,18 @@ interface ButtonPrpos
   /** 버튼을 비활성화 시킵니다. */
   disabled: boolean;
   /** 버튼의 색상을 정합니다. */
-  color: 'primary' | 'secondary';
+  color: DoifColorType;
   /** 버튼의 모양을 정합니다. */
-  variant: 'fill' | 'outline' | 'ghost';
+  variant: DoifVariantType;
   /** 버튼의 크기를 정합니다. */
-  size: 'small' | 'medium' | 'large';
+  size: DoifSizeType;
 }
 
 interface StyledButtonContainerProps {
   disabled: boolean;
-  color: 'primary' | 'secondary';
-  variant: 'fill' | 'outline' | 'ghost';
-  size: 'small' | 'medium' | 'large';
+  color: DoifColorType;
+  variant: DoifVariantType;
+  size: DoifSizeType;
 }
 
 /**

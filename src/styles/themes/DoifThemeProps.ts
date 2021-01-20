@@ -45,3 +45,12 @@ export interface DoifThemeSubColorProps {
 export interface DoifThemeVariantProps {
   borderRadius: string;
 }
+
+/** 컬러 type */
+export type DoifColorType = 'primary' | 'secondary';
+
+/** 사이즈 type */
+export type DoifSizeType = 'small' | 'medium' | 'large';
+
+/** 모양 type */
+export type DoifVariantType = 'fill' | 'outline' | 'ghost';

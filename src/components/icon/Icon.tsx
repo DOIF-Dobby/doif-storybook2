@@ -1,6 +1,10 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 import * as icons from '../../icons/';
+import {
+  DoifColorType,
+  DoifSizeType,
+} from '../../styles/themes/DoifThemeProps';
 
 type IconType = keyof typeof icons;
 export const iconTypes: IconType[] = Object.keys(icons) as any[]; // 스토리에서 불러오기 위함
@@ -9,14 +13,14 @@ export interface IconProps extends React.SVGProps<SVGSVGElement> {
   /** 사용할 아이콘 타입 */
   icon: IconType;
   /** 아이콘 색상 */
-  color: 'primary' | 'secondary';
+  color: DoifColorType;
   /** 아이콘 크기 */
-  size: 'small' | 'medium' | 'large';
+  size: DoifSizeType;
 }
 
 interface StyledIconProps {
-  mainColor: 'primary' | 'secondary';
-  size: 'small' | 'medium' | 'large';
+  mainColor: DoifColorType;
+  size: DoifSizeType;
 }
 
 /**
