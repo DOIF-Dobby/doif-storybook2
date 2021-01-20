@@ -50,7 +50,7 @@ Icon.defaultProps = {
 /** Icon 컴포넌트의 스타일 */
 const StyledIconContainer = styled.div<StyledIconProps>`
   & {
-    display: inline-block;
+    display: flex;
   }
 
   & > svg {
@@ -66,17 +66,17 @@ const StyledIconContainer = styled.div<StyledIconProps>`
 
 /** size === 'small' 인 아이콘 스타일 */
 const SmallButtonStyle = css<StyledIconProps>`
-  width: 0.9rem;
+  width: 0.8rem;
 `;
 
 /** size === 'medium' 인 아이콘 스타일 */
 const MediumButtonStyle = css<StyledIconProps>`
-  width: 1.15rem;
+  width: 1rem;
 `;
 
 /** size === 'large' 인 아이콘 스타일 */
 const LargeButtonStyle = css<StyledIconProps>`
-  width: 1.4rem;
+  width: 1.2rem;
 `;
 
 export default React.memo(Icon);

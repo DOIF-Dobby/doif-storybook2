@@ -114,7 +114,7 @@ Button.defaultProps = {
 /** Button 컴포넌트의 스타일 */
 const StyledButtonContainer = styled.div<StyledButtonContainerProps>`
   & {
-    display: inline-block;
+    display: flex;
   }
 
   & > button {
@@ -144,9 +144,6 @@ const StyledButtonContainer = styled.div<StyledButtonContainerProps>`
       margin-right: ${(props) => props.iconLocation === 'left' && '0.5rem'};
       margin-left: ${(props) => props.iconLocation === 'right' && '0.5rem'};
     }
-
-    /** 아이콘만 보여주는 버튼 스타일 */
-    ${(props) => props.iconOnly && IconOnlyStyle}
   }
 `;
 
@@ -224,13 +221,6 @@ const LargeButtonStyle = css<StyledButtonContainerProps>`
   height: 2.5rem;
   line-height: 2.5rem;
   font-size: 1.25rem;
-`;
-
-/** iconOnly === true 인 버튼 스타일 */
-const IconOnlyStyle = css<StyledButtonContainerProps>`
-  display: flex;
-  justify-content: center;
-  align-items: center;
 `;
 
 export default React.memo(Button);
