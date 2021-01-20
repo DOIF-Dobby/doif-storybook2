@@ -119,15 +119,15 @@ export const WithIcon = () => {
       <ButtonWrapper>
         <Button color="secondary" size="small">
           버튼
-          <Icon icon="heart" color="secondary" size="small" />
+          <Icon icon="exit" color="secondary" size="small" />
         </Button>
         <Button variant="outline" color="secondary">
           버튼
-          <Icon icon="heart" color="secondary" />
+          <Icon icon="check" color="secondary" />
         </Button>
         <Button variant="ghost" color="secondary" size="large">
           버튼
-          <Icon icon="heart" color="secondary" size="large" />
+          <Icon icon="calendar" color="secondary" size="large" />
         </Button>
       </ButtonWrapper>
       <br />
