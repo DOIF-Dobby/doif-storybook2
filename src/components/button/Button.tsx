@@ -6,7 +6,6 @@ import {
   DoifSizeType,
   DoifVariantType,
 } from '../../styles/themes/DoifThemeProps';
-import Icon from '../icon/Icon';
 
 interface ButtonPrpos
   extends React.DetailedHTMLProps<
