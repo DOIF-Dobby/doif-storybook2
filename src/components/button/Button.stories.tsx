@@ -1,23 +1,13 @@
 import React, { ComponentProps } from 'react';
 import { Story } from '@storybook/react/types-6-0';
-import styled from 'styled-components';
 import Button from './Button';
 import Icon from '../icon/Icon';
+import Container from '../container/Container';
 
 export default {
   title: 'Components/Button',
   component: Button.type,
 };
-
-const ButtonWrapper = styled.div`
-  display: flex;
-  overflow: hidden;
-  position: relative;
-
-  > div + div {
-    margin-left: 5px;
-  }
-`;
 
 const Template: Story<ComponentProps<typeof Button>> = (args) => (
   <Button {...args}>{args.children}</Button>
@@ -30,36 +20,36 @@ Default.args = {
 
 export const Varaints = () => {
   return (
-    <ButtonWrapper>
+    <Container>
       <Button>Fill</Button>
       <Button variant="outline">Outline</Button>
       <Button variant="ghost">Ghost</Button>
-    </ButtonWrapper>
+    </Container>
   );
 };
 
 export const Colors = () => {
   return (
-    <ButtonWrapper>
+    <Container>
       <Button>Primary</Button>
       <Button color="secondary">Secondary</Button>
-    </ButtonWrapper>
+    </Container>
   );
 };
 
 export const Sizes = () => {
   return (
-    <ButtonWrapper>
+    <Container>
       <Button size="small">Small</Button>
       <Button>Medium</Button>
       <Button size="large">Large</Button>
-    </ButtonWrapper>
+    </Container>
   );
 };
 
 export const Disable = () => {
   return (
-    <ButtonWrapper>
+    <Container>
       <Button disabled>Fill</Button>
       <Button disabled variant="outline">
         Outline
@@ -76,7 +66,7 @@ export const Disable = () => {
       <Button disabled variant="ghost" color="secondary">
         Ghost
       </Button>
-    </ButtonWrapper>
+    </Container>
   );
 };
 
@@ -84,11 +74,11 @@ export const ClickAction = () => {
   const onClick = () => alert('버튼을 클릭하셨군요!');
 
   return (
-    <ButtonWrapper>
+    <Container>
       <Button variant="outline" color="secondary" onClick={onClick}>
         버튼
       </Button>
-    </ButtonWrapper>
+    </Container>
   );
 };
 
@@ -101,7 +91,7 @@ export const CustomStyle = () => {
 export const WithIcon = () => {
   return (
     <>
-      <ButtonWrapper>
+      <Container>
         <Button>
           <Icon icon="heart" />
           버튼
@@ -114,9 +104,9 @@ export const WithIcon = () => {
           <Icon icon="heart" />
           버튼
         </Button>
-      </ButtonWrapper>
+      </Container>
       <br />
-      <ButtonWrapper>
+      <Container>
         <Button color="secondary" size="small">
           버튼
           <Icon icon="exit" color="secondary" size="small" />
@@ -129,9 +119,9 @@ export const WithIcon = () => {
           버튼
           <Icon icon="calendar" color="secondary" size="large" />
         </Button>
-      </ButtonWrapper>
+      </Container>
       <br />
-      <ButtonWrapper>
+      <Container>
         <Button disabled>
           <Icon icon="heart" />
           버튼
@@ -144,9 +134,9 @@ export const WithIcon = () => {
           <Icon icon="heart" />
           버튼
         </Button>
-      </ButtonWrapper>
+      </Container>
       <br />
-      <ButtonWrapper>
+      <Container>
         <Button>
           <Icon icon="heart" style={{ fill: '#f00' }} />
           버튼
@@ -162,7 +152,7 @@ export const WithIcon = () => {
           <Icon icon="heart" style={{ fill: '#aaffb8' }} />
           버튼
         </Button>
-      </ButtonWrapper>
+      </Container>
     </>
   );
 };
@@ -170,7 +160,7 @@ export const WithIcon = () => {
 export const OnlyIcon = () => {
   return (
     <>
-      <ButtonWrapper>
+      <Container>
         <Button iconOnly>
           <Icon icon="heart" />
         </Button>
@@ -180,9 +170,9 @@ export const OnlyIcon = () => {
         <Button variant="ghost" iconOnly>
           <Icon icon="heart" />
         </Button>
-      </ButtonWrapper>
+      </Container>
       <br />
-      <ButtonWrapper>
+      <Container>
         <Button color="secondary" size="small" iconOnly>
           <Icon icon="heart" color="secondary" size="small" />
         </Button>
@@ -192,9 +182,9 @@ export const OnlyIcon = () => {
         <Button variant="ghost" color="secondary" size="large" iconOnly>
           <Icon icon="heart" color="secondary" size="large" />
         </Button>
-      </ButtonWrapper>
+      </Container>
       <br />
-      <ButtonWrapper>
+      <Container>
         <Button disabled iconOnly>
           <Icon icon="heart" />
         </Button>
@@ -204,9 +194,9 @@ export const OnlyIcon = () => {
         <Button variant="ghost" disabled iconOnly>
           <Icon icon="heart" />
         </Button>
-      </ButtonWrapper>
+      </Container>
       <br />
-      <ButtonWrapper>
+      <Container>
         <Button iconOnly>
           <Icon icon="heart" style={{ fill: '#f00' }} />
         </Button>
@@ -228,7 +218,7 @@ export const OnlyIcon = () => {
         >
           <Icon icon="heart" style={{ fill: '#aaffb8' }} />
         </Button>
-      </ButtonWrapper>
+      </Container>
     </>
   );
 };

@@ -2,21 +2,12 @@ import React, { ComponentProps } from 'react';
 import { Story } from '@storybook/react/types-6-0';
 import styled from 'styled-components';
 import Icon, { iconTypes } from './Icon';
+import Container from '../container/Container';
 
 export default {
   title: 'Components/Icon',
   component: Icon.type,
 };
-
-const IconWrapper = styled.div`
-  display: flex;
-  overflow: hidden;
-  position: relative;
-
-  > div + div {
-    margin-left: 5px;
-  }
-`;
 
 const ListIconWrapper = styled.ul`
   list-style: none;
@@ -45,22 +36,22 @@ Default.args = {
 
 export const Colors = () => {
   return (
-    <IconWrapper>
+    <Container>
       <Icon icon="heart" />
       <Icon icon="heart" color="secondary" />
       <Icon icon="exit" />
       <Icon icon="exit" color="secondary" />
       <Icon icon="calendar" />
       <Icon icon="calendar" color="secondary" />
-    </IconWrapper>
+    </Container>
   );
 };
 
 export const CustomStyle = () => {
   return (
-    <IconWrapper>
+    <Container>
       <Icon icon="heart" style={{ fill: '#f00', width: '4rem' }} />
-    </IconWrapper>
+    </Container>
   );
 };
 
