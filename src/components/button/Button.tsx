@@ -133,10 +133,14 @@ const StyledButtonContainer = styled.div<StyledButtonContainerProps>`
     overflow: hidden;
     outline: none;
     position: relative;
-    opacity: ${(props) => (props.disabled ? 0.5 : 1)};
-    cursor: ${(props) => (props.disabled ? 'not-allowed' : 'pointer')};
+    cursor: pointer;
     padding-left: 1rem;
     padding-right: 1rem;
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: default;
+    }
 
     /** 아이콘 위치에 따른 margin 설정 */
     & svg {
@@ -171,7 +175,10 @@ const FillButtonStyle = css<StyledButtonContainerProps>`
 const OutlineButtonStyle = css<StyledButtonContainerProps>`
   background-color: transparent;
   color: ${(props) => props.theme.mainColors[props.color].base};
-  border: 1px solid ${(props) => props.theme.mainColors[props.color].base};
+  border: ${(props) =>
+    `${props.theme.variants.borderWidth} solid ${
+      props.theme.mainColors[props.color].base
+    }`};
   border-radius: ${(props) => props.theme.variants.borderRadius};
 
   &:hover {
