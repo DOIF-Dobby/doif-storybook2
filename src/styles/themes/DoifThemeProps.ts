@@ -36,6 +36,7 @@ export interface DoifThemeSubColorProps {
   content: string;
   text: string;
   border: string;
+  disabled: string;
   pageBackground: string;
 }
 
@@ -44,6 +45,7 @@ export interface DoifThemeSubColorProps {
  */
 export interface DoifThemeVariantProps {
   borderRadius: string;
+  borderWidth: string;
 }
 
 /** 컬러 type */

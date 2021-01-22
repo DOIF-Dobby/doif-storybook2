@@ -23,11 +23,13 @@ const Dark: DefaultTheme = {
     info: '#fafafa',
     content: '#ffffff',
     text: '#ffffff',
-    border: '#424141',
+    border: '#ff0000',
+    disabled: '#e0e0df',
     pageBackground: '#424141',
   },
   variants: {
     borderRadius: '4px',
+    borderWidth: '1px',
   },
 };
 

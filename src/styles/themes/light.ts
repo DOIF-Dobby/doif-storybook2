@@ -22,12 +22,14 @@ const Light: DefaultTheme = {
     error: '#ff5a4a',
     info: '#005baf',
     content: '#ffffff',
-    text: '#383736',
+    text: '#2b2a2a',
     border: '#a5a4a3',
+    disabled: '#e0e0df',
     pageBackground: '#ffffff',
   },
   variants: {
     borderRadius: '4px',
+    borderWidth: '1px',
   },
 };
 
