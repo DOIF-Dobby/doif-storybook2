@@ -22,6 +22,8 @@ interface ButtonPrpos
   variant: DoifVariantType;
   /** 버튼의 크기를 정합니다. */
   size: DoifSizeType;
+  /** 버튼의 `width`를 정합니다. */
+  width: string | number;
   /** 버튼에서 아이콘만 보여줄 때는 이 값을 `true`로 설정하세요  */
   iconOnly: boolean;
 }
@@ -33,6 +35,7 @@ interface StyledButtonContainerProps {
   size: DoifSizeType;
   iconLocation: string;
   iconOnly: boolean;
+  width: string | number;
 }
 
 /** children 에서 icon 타입을 찾기 위한 재귀함수 */
@@ -59,6 +62,7 @@ const Button = ({
   color,
   variant,
   size,
+  width,
   iconOnly,
   ...props
 }: ButtonPrpos) => {
@@ -90,6 +94,7 @@ const Button = ({
       color={color}
       variant={variant}
       size={size}
+      width={width}
       iconLocation={iconLocation}
       iconOnly={iconOnly}
     >
@@ -107,16 +112,19 @@ Button.defaultProps = {
   color: 'primary',
   variant: 'fill',
   size: 'medium',
+  width: 'auto',
   iconOnly: false,
 };
 
 /** Button 컴포넌트의 스타일 */
 const StyledButtonContainer = styled.div<StyledButtonContainerProps>`
   & {
-    display: flex;
+    display: inline-flex;
+    width: ${(props) => props.width};
   }
 
   & > button {
+
     // 모양에 따른 스타일
     ${(props) => props.variant === 'fill' && FillButtonStyle}
     ${(props) => props.variant === 'outline' && OutlineButtonStyle}
@@ -127,6 +135,7 @@ const StyledButtonContainer = styled.div<StyledButtonContainerProps>`
     ${(props) => props.size === 'medium' && MediumButtonStyle}
     ${(props) => props.size === 'large' && LargeButtonStyle}
 
+    width: max-content;
     display: flex;
     justify-content: center;
     align-items: center;

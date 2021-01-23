@@ -37,6 +37,17 @@ export const Colors = () => {
   );
 };
 
+export const Width = () => {
+  return (
+    <Container>
+      <Button width="50%">Primary</Button>
+      <Button width="200px" color="secondary">
+        Secondary
+      </Button>
+    </Container>
+  );
+};
+
 export const Sizes = () => {
   return (
     <Container>
@@ -84,7 +95,7 @@ export const ClickAction = () => {
 
 export const CustomStyle = () => {
   return (
-    <Button style={{ backgroundColor: '#fab', width: '50%' }}>버튼</Button>
+    <Button style={{ backgroundColor: '#fab', color: '#f00' }}>버튼</Button>
   );
 };
 
