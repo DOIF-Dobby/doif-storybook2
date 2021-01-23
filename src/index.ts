@@ -2,6 +2,7 @@
 export { default as Button } from './components/button/Button';
 export { default as Icon } from './components/icon/Icon';
 export { default as Container } from './components/container/Container';
+export { default as Input } from './components/input/Input';
 
 // 테마 export
 export { theme } from './styles/themes';
