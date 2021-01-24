@@ -3,6 +3,7 @@ import { Story } from '@storybook/react/types-6-0';
 import Container from './Container';
 import Button from '../button/Button';
 import Icon from '../icon/Icon';
+import Input from '../input/Input';
 
 export default {
   title: 'Components/Container',
@@ -107,6 +108,15 @@ export const ColumnGap = () => {
         <Icon icon="exit" />
         취소
       </Button>
+    </Container>
+  );
+};
+
+export const VariousCase = () => {
+  return (
+    <Container>
+      <Input />
+      <Button>안녕하세요</Button>
     </Container>
   );
 };

@@ -1,5 +1,5 @@
 import React from 'react';
-import styled, { css } from 'styled-components';
+import { StyledContainer } from './Container.style';
 
 interface ContainerProps
   extends React.DetailedHTMLProps<
@@ -13,12 +13,6 @@ interface ContainerProps
   /** 내용의 위치 */
   align: 'left' | 'center' | 'right';
   /** 내용과 내용 사이의 간격을 설정합니다. */
-  gap: number | string;
-}
-
-interface StyledContainerProps {
-  direction: 'row' | 'column';
-  align: 'flex-start' | 'center' | 'flex-end';
   gap: number | string;
 }
 
@@ -52,24 +46,5 @@ Container.defaultProps = {
   align: 'left',
   gap: '0.5rem',
 };
-
-const StyledContainer = styled.div<StyledContainerProps>`
-  & {
-    display: flex;
-  }
-
-  & > div {
-    width: 100%;
-    display: flex;
-    flex-direction: ${(props) => props.direction};
-    justify-content: ${(props) => props.align};
-
-    // 내용들 스타일
-    & > div + div {
-      margin-left: ${(props) => props.direction === 'row' && props.gap};
-      margin-top: ${(props) => props.direction === 'column' && props.gap};
-    }
-  }
-`;
 
 export default React.memo(Container);
