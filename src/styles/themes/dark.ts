@@ -6,14 +6,14 @@ import { DefaultTheme } from 'styled-components';
 const Dark: DefaultTheme = {
   mainColors: {
     primary: {
-      base: '#fafafa',
-      dark: '#fafafa',
-      light: '#fafafa',
+      base: '#ffaa00',
+      dark: '#ff0000',
+      light: '#baba00',
     },
     secondary: {
-      base: '#fafafa',
-      dark: '#fafafa',
-      light: '#fafafa',
+      base: '#aafff0',
+      dark: '#0000ff',
+      light: '#00bbff',
     },
   },
   subColors: {
@@ -22,7 +22,7 @@ const Dark: DefaultTheme = {
     error: '#ff5a4a',
     info: '#fafafa',
     content: '#ffffff',
-    text: '#ffffff',
+    text: '#ff00ff',
     border: '#ff0000',
     disabled: '#e0e0df',
     pageBackground: '#424141',
