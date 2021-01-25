@@ -1,13 +1,13 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import { DoifColorType } from '../../styles/themes/DoifThemeProps';
 
-interface StyledCheckContainerProps {
+interface StyledRadioContainerProps {
   color: DoifColorType;
   disabled: boolean;
 }
 
-/** Check 컴포넌트 스타일  */
-export const StyledCheckContainer = styled.div<StyledCheckContainerProps>`
+/** Radio 컴포넌트 스타일  */
+export const StyledRadioContainer = styled.div<StyledRadioContainerProps>`
   & {
     display: flex;
   }
@@ -23,7 +23,7 @@ export const StyledCheckContainer = styled.div<StyledCheckContainerProps>`
       ${(props) => !props.disabled && `cursor: pointer`};
     }
 
-    & > input[type='checkbox'] {
+    & > input[type='radio'] {
       display: none;
     }
 
@@ -63,28 +63,26 @@ export const StyledCheckContainer = styled.div<StyledCheckContainerProps>`
       height: 100%;
     }
 
-    & > div > div.checkbox {
+    & > div > div.radiobox {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 1rem;
+      height: 1rem;
+      border-radius: 1rem;
+
       border: ${(props) =>
         `2px solid ${props.theme.mainColors[props.color].base}`};
-      border-radius: ${(props) => props.theme.variants.borderRadius};
 
       opacity: ${(props) => props.disabled && 0.5};
 
-      & svg {
-        opacity: 0;
-      }
-    }
+      & > div.checked {
+        background-color: ${(props) =>
+          props.theme.mainColors[props.color].base};
 
-    // 체크 됬을 때 스타일
-    & > div > div.checked {
-      border: ${(props) =>
-        `2px solid ${props.theme.mainColors[props.color].base}`};
-      border-radius: ${(props) => props.theme.variants.borderRadius};
-      background-color: ${(props) => props.theme.mainColors[props.color].base};
-
-      & svg {
-        fill: ${(props) => props.theme.subColors.content};
-        opacity: 1;
+        width: 0.5rem;
+        height: 0.5rem;
+        border-radius: 0.5rem;
       }
     }
 

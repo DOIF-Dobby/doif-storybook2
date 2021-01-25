@@ -6,9 +6,7 @@ import React, {
 } from 'react';
 import { Story } from '@storybook/react/types-6-0';
 import Check from './Check';
-import Icon from '../icon/Icon';
 import Container from '../container/Container';
-import Button from '../button/Button';
 
 export default {
   title: 'Components/Check',

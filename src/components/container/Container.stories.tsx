@@ -10,6 +10,7 @@ import Button from '../button/Button';
 import Icon from '../icon/Icon';
 import Input from '../input/Input';
 import Check from '../check/Check';
+import Radio from '../radio/Radio';
 
 export default {
   title: 'Components/Container',
@@ -120,6 +121,7 @@ export const ColumnGap = () => {
 
 export const VariousCase = () => {
   const [values, setValues] = useState([]);
+  const [value, setValue] = useState('hi');
 
   const onChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     const { checked, value: codeValue } = e.target;
@@ -131,6 +133,10 @@ export const VariousCase = () => {
     );
   }, []);
 
+  const onChageRadio = useCallback((e: ChangeEvent<HTMLInputElement>) => {
+    setValue(e.target.value);
+  }, []);
+
   const data = [
     { code: 'hi', name: '안녕하세요' },
     { code: 'hello', name: '반갑습니다.' },
@@ -140,6 +146,12 @@ export const VariousCase = () => {
     <Container>
       <Input />
       <Check data={data} values={values} name="checkbox1" onChange={onChange} />
+      <Radio
+        data={data}
+        value={value}
+        name="radiobox1"
+        onChange={onChageRadio}
+      />
       <Button>안녕하세요</Button>
     </Container>
   );
