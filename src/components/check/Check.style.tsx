@@ -43,7 +43,7 @@ export const StyledCheckContainer = styled.div<StyledCheckContainerProps>`
         & > div.background {
           opacity: 0.1;
           background-color: ${(props) =>
-            props.theme.mainColors[props.color].base};
+            !props.disabled && props.theme.mainColors[props.color].base};
         }
       }
 
