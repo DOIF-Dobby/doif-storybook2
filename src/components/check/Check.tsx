@@ -49,8 +49,12 @@ const Check = ({
               disabled={disabled}
               onChange={onChange}
             />
-            <div className={`checkbox ${isChecked && 'checked'}`}>
-              <Icon icon={icon} color={color} />
+            <div>
+              <div className={`checkbox ${isChecked && 'checked'}`}>
+                <Icon icon={icon} color={color} />
+              </div>
+              <div className="background"></div>
+              <Ripple disabled={disabled} />
             </div>
             <span>{d.name}</span>
           </label>

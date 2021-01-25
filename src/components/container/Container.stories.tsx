@@ -1,9 +1,15 @@
-import React, { ComponentProps } from 'react';
+import React, {
+  ChangeEvent,
+  ComponentProps,
+  useCallback,
+  useState,
+} from 'react';
 import { Story } from '@storybook/react/types-6-0';
 import Container from './Container';
 import Button from '../button/Button';
 import Icon from '../icon/Icon';
 import Input from '../input/Input';
+import Check from '../check/Check';
 
 export default {
   title: 'Components/Container',
@@ -113,9 +119,27 @@ export const ColumnGap = () => {
 };
 
 export const VariousCase = () => {
+  const [values, setValues] = useState([]);
+
+  const onChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
+    const { checked, value: codeValue } = e.target;
+
+    setValues((value) =>
+      checked
+        ? value.concat(codeValue)
+        : value.filter((val) => val !== codeValue),
+    );
+  }, []);
+
+  const data = [
+    { code: 'hi', name: '안녕하세요' },
+    { code: 'hello', name: '반갑습니다.' },
+  ];
+
   return (
     <Container>
       <Input />
+      <Check data={data} values={values} name="checkbox1" onChange={onChange} />
       <Button>안녕하세요</Button>
     </Container>
   );

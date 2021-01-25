@@ -18,7 +18,7 @@ interface StyledButtonContainerProps {
 /** Button 컴포넌트의 스타일 */
 export const StyledButtonContainer = styled.div<StyledButtonContainerProps>`
   & {
-    display: inline-flex;
+    display: flex;
     width: ${(props) => props.width};
   }
 
