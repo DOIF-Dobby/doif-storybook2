@@ -13,12 +13,12 @@ interface RadioProps {
   name: string;
   /** 라디오박스의 색상을 정합니다. */
   color: DoifColorType;
-  /** 라디오박스의 비활성화 시킵니다. */
+  /** 라디오박스를 비활성화 시킵니다. */
   disabled: boolean;
   /** 라디오박스의 defaultValue를 설정합니다. */
   defaultValue?: DoifDataProps;
   /** 라디오박스를 변경했을 때 실행되는 콜백함수입니다. */
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 /**

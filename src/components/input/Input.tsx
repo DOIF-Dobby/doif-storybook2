@@ -1,5 +1,4 @@
 import React from 'react';
-import styled, { css } from 'styled-components';
 import { DoifColorType } from '../../styles/themes/DoifThemeProps';
 import { StyledInputContainer } from './Input.style';
 
@@ -37,6 +36,8 @@ const Input = ({
   backIcon,
   ...props
 }: InputProps) => {
+  const onClick = disabled ? undefined : props.onClick;
+
   return (
     <StyledInputContainer
       variant={variant}
@@ -46,7 +47,7 @@ const Input = ({
       isFrontIcon={frontIcon ? true : false}
       isBackIcon={backIcon ? true : false}
     >
-      <div className="front-icon">
+      <div className="front-icon" onClick={onClick}>
         <div>{frontIcon}</div>
       </div>
       {variant === 'outline' ? (
@@ -72,7 +73,7 @@ const Input = ({
           {...props}
         />
       )}
-      <div className="back-icon">
+      <div className="back-icon" onClick={onClick}>
         <div>{backIcon}</div>
       </div>
     </StyledInputContainer>

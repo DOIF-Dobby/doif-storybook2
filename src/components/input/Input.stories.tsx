@@ -11,7 +11,7 @@ export default {
 };
 
 const Template: Story<ComponentProps<typeof Input>> = (args) => (
-  <Input {...args}>{args.children}</Input>
+  <Input {...args} />
 );
 
 export const Default = Template.bind({});

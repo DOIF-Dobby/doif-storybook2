@@ -19,7 +19,7 @@ interface CheckProps {
   /** 체크박스의 icon를 정합니다. */
   icon: IconType;
   /** 체크박스를 변경했을 때 실행되는 콜백함수입니다. */
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 /**
