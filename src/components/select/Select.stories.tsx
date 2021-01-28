@@ -12,6 +12,13 @@ import { DoifDataProps } from '../../props/DoifCommonProps';
 export default {
   title: 'Components/Select',
   component: Select.type,
+  decorators: [
+    (Story) => (
+      <div style={{ height: '250px' }}>
+        <Story />
+      </div>
+    ),
+  ],
 };
 
 const Template: Story<ComponentProps<typeof Select>> = (args) => {
@@ -30,6 +37,174 @@ Default.args = {
     { code: 'CC', name: '신용카드' },
     { code: 'AT', name: '계좌이체' },
   ],
-  value: 'hi',
   placeholder: '결제수단',
+};
+
+export const Variants = () => {
+  const [value, setValue] = useState('CC');
+
+  const data: Array<DoifDataProps> = [
+    { code: 'CC', name: '신용카드' },
+    { code: 'AT', name: '계좌이체' },
+  ];
+
+  const onChange = useCallback((e: React.ChangeEvent<HTMLSelectElement>) => {
+    setValue(e.target.value);
+  }, []);
+
+  return (
+    <Container>
+      <Select data={data} value={value} onChange={onChange} />
+      <Select
+        variant="underline"
+        data={data}
+        value={value}
+        onChange={onChange}
+      />
+    </Container>
+  );
+};
+
+export const Colors = () => {
+  const [value, setValue] = useState('CC');
+
+  const data: Array<DoifDataProps> = [
+    { code: 'CC', name: '신용카드' },
+    { code: 'AT', name: '계좌이체' },
+  ];
+
+  const onChange = useCallback((e: React.ChangeEvent<HTMLSelectElement>) => {
+    setValue(e.target.value);
+  }, []);
+
+  return (
+    <Container>
+      <Select data={data} value={value} onChange={onChange} color="secondary" />
+      <Select
+        variant="underline"
+        data={data}
+        value={value}
+        onChange={onChange}
+        color="secondary"
+      />
+    </Container>
+  );
+};
+
+export const Disable = () => {
+  const [value, setValue] = useState('CC');
+
+  const data: Array<DoifDataProps> = [
+    { code: 'CC', name: '신용카드' },
+    { code: 'AT', name: '계좌이체' },
+  ];
+
+  const onChange = useCallback((e: React.ChangeEvent<HTMLSelectElement>) => {
+    setValue(e.target.value);
+  }, []);
+
+  return (
+    <Container>
+      <Select data={data} value={value} onChange={onChange} disabled />
+      <Select
+        variant="underline"
+        data={data}
+        value={value}
+        onChange={onChange}
+        disabled
+      />
+    </Container>
+  );
+};
+
+export const Width = () => {
+  const [value, setValue] = useState('CC');
+
+  const data: Array<DoifDataProps> = [
+    { code: 'CC', name: '신용카드' },
+    { code: 'AT', name: '계좌이체' },
+  ];
+
+  const onChange = useCallback((e: React.ChangeEvent<HTMLSelectElement>) => {
+    setValue(e.target.value);
+  }, []);
+
+  return (
+    <Container>
+      <Select data={data} value={value} onChange={onChange} width="50%" />
+      <Select
+        variant="underline"
+        data={data}
+        value={value}
+        onChange={onChange}
+        width="170px"
+      />
+    </Container>
+  );
+};
+
+export const Height = () => {
+  const [value, setValue] = useState('CODE_1');
+
+  const data: Array<DoifDataProps> = [
+    { code: 'CODE_1', name: '코드명 1' },
+    { code: 'CODE_2', name: '코드명 2' },
+    { code: 'CODE_3', name: '코드명 3' },
+    { code: 'CODE_4', name: '코드명 4' },
+    { code: 'CODE_5', name: '코드명 5' },
+    { code: 'CODE_6', name: '코드명 6' },
+    { code: 'CODE_7', name: '코드명 7' },
+    { code: 'CODE_8', name: '코드명 8' },
+    { code: 'CODE_9', name: '코드명 9' },
+    { code: 'CODE_10', name: '코드명 10' },
+    { code: 'CODE_11', name: '코드명 11' },
+    { code: 'CODE_12', name: '코드명 12' },
+  ];
+
+  const onChange = useCallback((e: React.ChangeEvent<HTMLSelectElement>) => {
+    setValue(e.target.value);
+  }, []);
+
+  return (
+    <Container>
+      <Select data={data} value={value} onChange={onChange} />
+      <Select data={data} value={value} onChange={onChange} height="250px" />
+    </Container>
+  );
+};
+
+export const DefaultValue = () => {
+  const [value, setValue] = useState('');
+
+  const data: Array<DoifDataProps> = [
+    { code: 'CC', name: '신용카드' },
+    { code: 'AT', name: '계좌이체' },
+  ];
+
+  const defaultValue: DoifDataProps = {
+    code: '',
+    name: '선택없음',
+  };
+
+  const onChange = useCallback((e: React.ChangeEvent<HTMLSelectElement>) => {
+    setValue(e.target.value);
+  }, []);
+
+  return (
+    <Container>
+      <Select
+        data={data}
+        value={value}
+        onChange={onChange}
+        defaultValue={defaultValue}
+      />
+      <Select
+        variant="underline"
+        data={data}
+        value={value}
+        onChange={onChange}
+        defaultValue={defaultValue}
+      />
+    </Container>
+  );
 };

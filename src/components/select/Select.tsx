@@ -119,13 +119,12 @@ const Select = ({
       color={color}
       disabled={disabled}
       width={width}
-      heigth={height}
+      height={height}
     >
       <Input
         value={initData.find((d) => d.code === value)?.name}
         color={color}
         variant={variant}
-        width={width}
         disabled={disabled}
         placeholder={placeholder}
         readOnly
@@ -134,8 +133,8 @@ const Select = ({
         onClick={onClick}
       />
       {visible && (
-        <div>
-          <div className="seach-input-container">
+        <div className="select-container">
+          <div className="search-input-container">
             <input
               type="text"
               placeholder="Search..."
@@ -146,23 +145,28 @@ const Select = ({
           <div className="list-container">
             {dataList.map((d) => {
               return (
-                <div key={d.code} data-code={d.code} onClick={onSelect}>
+                <div
+                  key={d.code}
+                  data-code={d.code}
+                  onClick={onSelect}
+                  className={d.code === value ? 'selected' : ''}
+                >
                   {d.name}
                 </div>
               );
             })}
           </div>
-          <select onChange={onChange} ref={selectedRef}>
-            {dataList.map((d) => {
-              return (
-                <option key={d.code} value={d.code}>
-                  {d.name}
-                </option>
-              );
-            })}
-          </select>
         </div>
       )}
+      <select onChange={onChange} ref={selectedRef} title={placeholder}>
+        {dataList.map((d) => {
+          return (
+            <option key={d.code} value={d.code} title={d.name}>
+              {d.name}
+            </option>
+          );
+        })}
+      </select>
     </StyledSelectContainer>
   );
 };

@@ -8,12 +8,12 @@ const Light: DefaultTheme = {
     primary: {
       base: '#535150',
       dark: '#42403f',
-      light: '#e0e0df',
+      light: '#f1f1f1',
     },
     secondary: {
       base: '#34558b',
       dark: '#1c4376',
-      light: '#dde0eb',
+      light: '#f0f1f6',
     },
   },
   subColors: {

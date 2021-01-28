@@ -5,6 +5,7 @@ export { default as Container } from './components/container/Container';
 export { default as Input } from './components/input/Input';
 export { default as Check } from './components/check/Check';
 export { default as Radio } from './components/radio/Radio';
+export { default as Select } from './components/select/Select';
 
 // 테마 export
 export { theme } from './styles/themes';
