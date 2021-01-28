@@ -38,6 +38,7 @@ export interface DoifThemeSubColorProps {
   border: string;
   disabled: string;
   pageBackground: string;
+  componentBackground: string;
 }
 
 /**

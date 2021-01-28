@@ -29,9 +29,11 @@ export const decorators = [
     return (
       <ThemeProvider theme={theme[context.globals.theme]}>
         <GlobalStyle />
-        <ThemeWrapper>
-          <Story />
-        </ThemeWrapper>
+        <ThemeContainer>
+          <ComponentContainer>
+            <Story />
+          </ComponentContainer>
+        </ThemeContainer>
       </ThemeProvider>
     );
   },
@@ -44,7 +46,12 @@ export const parameters = {
 /**
  * 테마별로 background를 지정하기 위한 div
  */
-const ThemeWrapper = styled.div`
+const ThemeContainer = styled.div`
   background-color: ${(props) => props.theme.subColors.pageBackground};
+  padding: 10px;
+`;
+
+const ComponentContainer = styled.div`
+  background-color: ${(props) => props.theme.subColors.componentBackground};
   padding: 20px;
 `;

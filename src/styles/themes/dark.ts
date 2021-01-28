@@ -26,6 +26,7 @@ const Dark: DefaultTheme = {
     border: '#ff0000',
     disabled: '#e0e0df',
     pageBackground: '#424141',
+    componentBackground: '#5c5c5c',
   },
   variants: {
     borderRadius: '4px',

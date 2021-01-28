@@ -25,7 +25,8 @@ const Light: DefaultTheme = {
     text: '#2b2a2a',
     border: '#a5a4a3',
     disabled: '#e0e0df',
-    pageBackground: '#ffffff',
+    pageBackground: '#f1f3f5',
+    componentBackground: '#ffffff',
   },
   variants: {
     borderRadius: '4px',
