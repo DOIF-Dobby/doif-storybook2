@@ -11,7 +11,7 @@ interface DialogProps {
   visible: boolean;
   /** `Dialog` 컴포넌트 상단에 표시되는 글자 */
   title?: string;
-  /** `Dialog` 컴포넌트 유형  */
+  /** `Dialog` 컴포넌트 유형  `undefined`가 아니면 icon과 버튼이 나옴 */
   type?: 'success' | 'warning' | 'error' | 'info';
   /** `Dialog` 컴포넌트의 z-index 속성 */
   zIndex: 1100;
@@ -19,7 +19,7 @@ interface DialogProps {
   children?: React.ReactNode;
   /** `Dialog` 컴포넌트의 색상을 정함 */
   color: DoifColorType;
-  /** 확인/취소 여부를 묻는 confrim 창 여부, `true`: confrim창 `false`: Alert창 */
+  /** 확인/취소 여부를 묻는 confrim 창 여부, `true`: confrim창 `false`: Alert창  `true`면 취소버튼이 나옴 */
   isConfirm: boolean;
   /** 확인 버튼 텍스트명 */
   confirmText: string;
@@ -42,6 +42,10 @@ const Dialog = ({
   children,
   color,
   isConfirm,
+  confirmText,
+  cancelText,
+  onConfirm,
+  onCancel,
 }: DialogProps) => {
   // visible이 false면 null return
   if (!visible) return null;
@@ -59,10 +63,12 @@ const Dialog = ({
             {children && <div className="children-container">{children}</div>}
             {type && (
               <Container align="center" className="button-container">
-                <Button color={color}>확인</Button>
+                <Button color={color} onClick={onConfirm}>
+                  {confirmText}
+                </Button>
                 {isConfirm && (
-                  <Button color={color} variant="ghost">
-                    취소
+                  <Button color={color} variant="ghost" onClick={onCancel}>
+                    {cancelText}
                   </Button>
                 )}
               </Container>
