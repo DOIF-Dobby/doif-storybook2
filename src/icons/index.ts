@@ -7,3 +7,7 @@ export { ReactComponent as topArrow } from './svg/top-arrow.svg';
 export { ReactComponent as leftArrow } from './svg/left-arrow.svg';
 export { ReactComponent as rightArrow } from './svg/right-arrow.svg';
 export { ReactComponent as check } from './svg/check.svg';
+export { ReactComponent as success } from './svg/success.svg';
+export { ReactComponent as warning } from './svg/warning.svg';
+export { ReactComponent as error } from './svg/error.svg';
+export { ReactComponent as info } from './svg/info.svg';
