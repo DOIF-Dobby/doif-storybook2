@@ -1,6 +1,6 @@
 import React, { ChangeEvent } from 'react';
 import { DoifColorType } from '../../styles/themes/DoifThemeProps';
-import Ripple from '../ripple/Ripple';
+import Ripple from '../common/Ripple';
 import { StyledTabContainer } from './Tab.style';
 
 interface TabDataProps {

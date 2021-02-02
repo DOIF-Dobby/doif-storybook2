@@ -7,10 +7,19 @@ import React, {
 import { Story } from '@storybook/react/types-6-0';
 import Check from './Check';
 import Container from '../container/Container';
+import Page from '../common/Page';
+import Box from '../common/Box';
 
 export default {
   title: 'Components/Check',
   component: Check.type,
+  decorators: [
+    (Story) => (
+      <Page>
+        <Box>{Story()}</Box>
+      </Page>
+    ),
+  ],
 };
 
 const Template: Story<ComponentProps<typeof Check>> = (args) => {

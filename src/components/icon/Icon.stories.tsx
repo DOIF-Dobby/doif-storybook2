@@ -3,10 +3,19 @@ import { Story } from '@storybook/react/types-6-0';
 import styled from 'styled-components';
 import Icon, { iconTypes } from './Icon';
 import Container from '../container/Container';
+import Page from '../common/Page';
+import Box from '../common/Box';
 
 export default {
   title: 'Components/Icon',
   component: Icon.type,
+  decorators: [
+    (Story) => (
+      <Page>
+        <Box>{Story()}</Box>
+      </Page>
+    ),
+  ],
 };
 
 const ListIconWrapper = styled.ul`

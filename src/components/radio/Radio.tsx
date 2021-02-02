@@ -1,5 +1,5 @@
 import React from 'react';
-import Ripple from '../ripple/Ripple';
+import Ripple from '../common/Ripple';
 import { DoifColorType } from '../../styles/themes/DoifThemeProps';
 import { DoifDataProps } from '../../props/DoifCommonProps';
 import { StyledRadioContainer } from './Radio.style';

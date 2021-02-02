@@ -19,7 +19,7 @@ export const StyledModal = styled.div<StyledModalProps>`
     & > div {
       box-sizing: border-box;
       border-radius: ${(props) => props.theme.variants.borderRadius};
-      background-color: ${(props) => props.theme.subColors.componentBackground};
+      background-color: ${(props) => props.theme.subColors.boxBackground};
       box-shadow: 0px 4px 8px 8px rgba(0, 0, 0, 0.05);
       padding: 1.5rem 1rem 1.5rem 1rem;
 

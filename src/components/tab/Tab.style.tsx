@@ -74,8 +74,7 @@ export const StyledTabContainer = styled.div<StyledTabContainerProps>`
       padding: 0.5rem;
 
       &.selected {
-        background-color: ${(props) =>
-          props.theme.subColors.componentBackground};
+        background-color: ${(props) => props.theme.subColors.boxBackground};
         color: ${(props) => props.theme.mainColors[props.color].dark};
       }
 

@@ -9,10 +9,19 @@ import Tab from './Tab';
 import Container from '../container/Container';
 import Button from '../button/Button';
 import Input from '../input/Input';
+import Page from '../common/Page';
+import Box from '../common/Box';
 
 export default {
   title: 'Components/Tab',
   component: Tab.type,
+  decorators: [
+    (Story) => (
+      <Page>
+        <Box>{Story()}</Box>
+      </Page>
+    ),
+  ],
 };
 
 const Template: Story<ComponentProps<typeof Tab>> = (args) => {

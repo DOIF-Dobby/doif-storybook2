@@ -1,5 +1,5 @@
 import React, { Children } from 'react';
-import Ripple from '../ripple/Ripple';
+import Ripple from '../common/Ripple';
 import {
   DoifColorType,
   DoifSizeType,

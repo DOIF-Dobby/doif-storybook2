@@ -8,15 +8,19 @@ import { Story } from '@storybook/react/types-6-0';
 import Select from './Select';
 import Container from '../container/Container';
 import { DoifDataProps } from '../../props/DoifCommonProps';
+import Page from '../common/Page';
+import Box from '../common/Box';
 
 export default {
   title: 'Components/Select',
   component: Select.type,
   decorators: [
     (Story) => (
-      <div style={{ height: '250px' }}>
-        <Story />
-      </div>
+      <Page>
+        <Box>
+          <div style={{ height: '250px' }}>{Story()}</div>
+        </Box>
+      </Page>
     ),
   ],
 };

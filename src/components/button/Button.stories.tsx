@@ -3,10 +3,19 @@ import { Story } from '@storybook/react/types-6-0';
 import Button from './Button';
 import Icon from '../icon/Icon';
 import Container from '../container/Container';
+import Page from '../common/Page';
+import Box from '../common/Box';
 
 export default {
   title: 'Components/Button',
   component: Button.type,
+  decorators: [
+    (Story) => (
+      <Page>
+        <Box>{Story()}</Box>
+      </Page>
+    ),
+  ],
 };
 
 const Template: Story<ComponentProps<typeof Button>> = (args) => (

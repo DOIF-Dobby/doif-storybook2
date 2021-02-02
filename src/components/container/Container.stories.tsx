@@ -11,10 +11,19 @@ import Icon from '../icon/Icon';
 import Input from '../input/Input';
 import Check from '../check/Check';
 import Radio from '../radio/Radio';
+import Page from '../common/Page';
+import Box from '../common/Box';
 
 export default {
   title: 'Components/Container',
   component: Container.type,
+  decorators: [
+    (Story) => (
+      <Page>
+        <Box>{Story()}</Box>
+      </Page>
+    ),
+  ],
 };
 
 const Template: Story<ComponentProps<typeof Container>> = (args) => (

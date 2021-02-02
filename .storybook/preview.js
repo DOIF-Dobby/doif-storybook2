@@ -29,11 +29,7 @@ export const decorators = [
     return (
       <ThemeProvider theme={theme[context.globals.theme]}>
         <GlobalStyle />
-        <ThemeContainer>
-          <ComponentContainer>
-            <Story />
-          </ComponentContainer>
-        </ThemeContainer>
+        <Story />
       </ThemeProvider>
     );
   },
@@ -42,16 +38,3 @@ export const decorators = [
 export const parameters = {
   actions: { argTypesRegex: '^on[A-Z].*' },
 };
-
-/**
- * 테마별로 background를 지정하기 위한 div
- */
-const ThemeContainer = styled.div`
-  background-color: ${(props) => props.theme.subColors.pageBackground};
-  padding: 10px;
-`;
-
-const ComponentContainer = styled.div`
-  background-color: ${(props) => props.theme.subColors.componentBackground};
-  padding: 20px;
-`;
