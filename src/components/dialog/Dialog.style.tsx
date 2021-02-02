@@ -27,8 +27,7 @@ export const StyledDialog = styled.div<StyledDialogProps>`
 
       & div.title {
         padding-bottom: 1rem;
-        border-bottom: 1px solid
-          ${(props) => props.theme.subColors.pageBackground};
+        border-bottom: 1px solid ${(props) => props.theme.subColors.disabled};
       }
 
       & div.content {

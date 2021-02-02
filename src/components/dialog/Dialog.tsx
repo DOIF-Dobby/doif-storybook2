@@ -14,7 +14,7 @@ interface DialogProps {
   /** `Dialog` 컴포넌트 유형  `undefined`가 아니면 icon과 버튼이 나옴 */
   type?: 'success' | 'warning' | 'error' | 'info';
   /** `Dialog` 컴포넌트의 z-index 속성 */
-  zIndex: 1100;
+  zIndex: number;
   /** `Dialog` 컴포넌트에 넣을 커스텀한 ReactNode */
   children?: React.ReactNode;
   /** `Dialog` 컴포넌트의 색상을 정함 */
@@ -81,7 +81,7 @@ const Dialog = ({
 };
 
 Dialog.defaultProps = {
-  zIndex: 1100,
+  zIndex: 1200,
   color: 'primary',
   isConfirm: false,
   confirmText: '확인',
