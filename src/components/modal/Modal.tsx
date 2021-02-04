@@ -23,8 +23,8 @@ const Modal = ({ visible, title, zIndex, children }: ModalProps) => {
 
   return (
     <>
-      <Overlay />
-      <StyledModal zIndex={zIndex}>
+      <Overlay zIndex={zIndex} />
+      <StyledModal zIndex={zIndex + 1}>
         <Container direction="column" gap="1rem">
           {title && <div className="title">{title}</div>}
           <div className="content">{children}</div>

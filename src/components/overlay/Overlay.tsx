@@ -7,7 +7,7 @@ interface OverlayProps {
 }
 
 /**
- * `Overlay` 화면 전체를 반투명한 Layer로 덮습니다.
+ * `Overlay` 컴포넌트는 화면 전체를 반투명한 Layer로 덮습니다.
  */
 const Overlay = ({ zIndex }: OverlayProps) => {
   return <StyledOverlay zIndex={zIndex} />;

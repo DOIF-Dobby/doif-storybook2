@@ -7,6 +7,8 @@ export { default as Check } from './components/check/Check';
 export { default as Radio } from './components/radio/Radio';
 export { default as Select } from './components/select/Select';
 export { default as Tab } from './components/tab/Tab';
+export { default as Loading } from './components/loading/Loading';
+
 export { default as Page } from './components/common/Page';
 export { default as Box } from './components/common/Box';
 

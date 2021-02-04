@@ -52,8 +52,8 @@ const Dialog = ({
 
   return (
     <>
-      <Overlay />
-      <StyledDialog zIndex={zIndex} type={type}>
+      <Overlay zIndex={zIndex} />
+      <StyledDialog zIndex={zIndex + 1} type={type}>
         <Container direction="column" gap="1rem">
           {title && <div className="title">{title}</div>}
           <div className="content">
