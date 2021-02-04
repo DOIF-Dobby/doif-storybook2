@@ -21,7 +21,7 @@ const Dark: DefaultTheme = {
     warning: '#f5df4d',
     error: '#ff5a4a',
     info: '#fafafa',
-    content: '#ffffff',
+    content: '#424141',
     text: '#ff00ff',
     border: '#ff0000',
     disabled: '#e0e0df',
