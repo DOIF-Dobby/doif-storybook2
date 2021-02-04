@@ -7,6 +7,7 @@ import url from 'rollup-plugin-url';
 import peerDepsExternal from 'rollup-plugin-peer-deps-external';
 import typescript from '@rollup/plugin-typescript';
 import { terser } from 'rollup-plugin-terser';
+import postcss from 'rollup-plugin-postcss';
 
 const extensions = ['.js', '.jsx', '.ts', '.tsx']; // 어떤 확장자를 처리 할 지 정함
 
@@ -27,6 +28,11 @@ export default {
     svgr(), // SVG를 컴포넌트로 사용 할 수 있게 해줌.
     typescript(), // interface도 export 할 수 있게 해줌
     terser(), // build 결과물 난독화 해줌
+    postcss({
+      // 사용된 css를 뽑아서 `datepicker.css` 파일로 추출한다. 라이브러리를 사용하는 쪽에선 App.tsx에 imprt 'doif-react-uikit/dist/datepicker.css' 해서 사용한다.
+      plugins: [],
+      extract: 'datepicker.css',
+    }),
   ],
   output: [
     {

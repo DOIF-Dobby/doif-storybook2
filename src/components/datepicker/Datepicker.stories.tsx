@@ -32,7 +32,7 @@ export default {
 const Template: Story<ComponentProps<typeof Datepicker>> = (args) => {
   const [startDate, setStartDate] = useState(new Date());
 
-  const onChange = useCallback((date, e: SyntheticEvent<any, Event>) => {
+  const onChange = useCallback((date: Date, e: SyntheticEvent<any, Event>) => {
     setStartDate(date);
   }, []);
 
