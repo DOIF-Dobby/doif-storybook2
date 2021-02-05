@@ -4,6 +4,7 @@ import React, {
   forwardRef,
   SyntheticEvent,
   useCallback,
+  useEffect,
   useState,
 } from 'react';
 import { Story } from '@storybook/react/types-6-0';
@@ -13,7 +14,7 @@ import Page from '../common/Page';
 import Box from '../common/Box';
 import Input from '../input/Input';
 import Icon from '../icon/Icon';
-import { setHours, setMinutes } from 'date-fns';
+import { setHours, setMinutes, addDays, addMonths } from 'date-fns';
 
 export default {
   title: 'Components/Datepicker',
@@ -32,9 +33,16 @@ export default {
 const Template: Story<ComponentProps<typeof Datepicker>> = (args) => {
   const [startDate, setStartDate] = useState(new Date());
 
-  const onChange = useCallback((date: Date, e: SyntheticEvent<any, Event>) => {
-    setStartDate(date);
-  }, []);
+  const onChange = useCallback(
+    (
+      date: Date | null,
+      e: SyntheticEvent<any, Event> | undefined,
+      name: string | undefined,
+    ) => {
+      setStartDate(date);
+    },
+    [],
+  );
 
   return <Datepicker {...args} selected={startDate} onChange={onChange} />;
 };
@@ -130,7 +138,11 @@ export const monthPicker = () => {
 
   /** datepicker Change 함수 */
   const onChangeDate = useCallback(
-    (date: Date, e: SyntheticEvent<any, Event>, name: string) => {
+    (
+      date: Date | null,
+      e: SyntheticEvent<any, Event> | undefined,
+      name: string | undefined,
+    ) => {
       setMonths((dates) => ({
         ...dates,
         [name]: date,
@@ -156,14 +168,18 @@ export const monthPicker = () => {
 export const rangeMonthPicker = () => {
   const [months, setMonths] = useState({
     startMonth: new Date(),
-    endMonth: new Date(),
+    endMonth: addMonths(new Date(), 1),
   });
 
   const { startMonth, endMonth } = months;
 
   /** datepicker Change 함수 */
   const onChangeDate = useCallback(
-    (date: Date, e: SyntheticEvent<any, Event>, name: string) => {
+    (
+      date: Date | null,
+      e: SyntheticEvent<any, Event> | undefined,
+      name: string | undefined,
+    ) => {
       setMonths((dates) => ({
         ...dates,
         [name]: date,
@@ -204,7 +220,11 @@ export const timePicker = () => {
 
   /** datepicker Change 함수 */
   const onChangeDate = useCallback(
-    (date: Date, e: SyntheticEvent<any, Event>, name: string) => {
+    (
+      date: Date | null,
+      e: SyntheticEvent<any, Event> | undefined,
+      name: string | undefined,
+    ) => {
       setTimes((dates) => ({
         ...dates,
         [name]: date,
@@ -239,7 +259,11 @@ export const dateTimePicker = () => {
 
   /** datepicker Change 함수 */
   const onChangeDate = useCallback(
-    (date: Date, e: SyntheticEvent<any, Event>, name: string) => {
+    (
+      date: Date | null,
+      e: SyntheticEvent<any, Event> | undefined,
+      name: string | undefined,
+    ) => {
       setDates((dates) => ({
         ...dates,
         [name]: date,
@@ -255,6 +279,72 @@ export const dateTimePicker = () => {
       name="date"
       width="30%"
       showTimeSelect
+    />
+  );
+};
+
+export const Disable = () => {
+  const [dates, setDates] = useState({
+    startDate: new Date(),
+  });
+
+  const { startDate } = dates;
+
+  /** datepicker Change 함수 */
+  const onChangeDate = useCallback(
+    (
+      date: Date | null,
+      e: SyntheticEvent<any, Event> | undefined,
+      name: string | undefined,
+    ) => {
+      setDates((dates) => ({
+        ...dates,
+        [name]: date,
+      }));
+    },
+    [],
+  );
+
+  return (
+    <Datepicker
+      selected={startDate}
+      onChange={onChangeDate}
+      name="startDate"
+      width="30%"
+      disabled
+    />
+  );
+};
+
+export const readOnly = () => {
+  const [dates, setDates] = useState({
+    startDate: new Date(),
+  });
+
+  const { startDate } = dates;
+
+  /** datepicker Change 함수 */
+  const onChangeDate = useCallback(
+    (
+      date: Date | null,
+      e: SyntheticEvent<any, Event> | undefined,
+      name: string | undefined,
+    ) => {
+      setDates((dates) => ({
+        ...dates,
+        [name]: date,
+      }));
+    },
+    [],
+  );
+
+  return (
+    <Datepicker
+      selected={startDate}
+      onChange={onChangeDate}
+      name="startDate"
+      width="30%"
+      readOnly
     />
   );
 };
