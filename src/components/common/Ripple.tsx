@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useState } from 'react';
+import React, { useEffect, useLayoutEffect, useState } from 'react';
 import styled from 'styled-components';
 
 interface RippleProps {
@@ -40,6 +40,10 @@ const Ripple = ({ duration, disabled }: RippleProps) => {
   const [rippleArray, setRippleArray] = useState<
     Array<{ x: number; y: number; size: number }>
   >([]);
+
+  useEffect(() => {
+    return () => setRippleArray([]);
+  }, []);
 
   useDebouncedRippleCleanUp(rippleArray.length, duration, () => {
     setRippleArray([]);

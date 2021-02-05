@@ -33,7 +33,7 @@ registerLocale('ko', ko);
 /**
  * `Datepicker` 컴포넌트는 날짜 혹은 시간을 선택할 때 사용합니다.
  * https://reactdatepicker.com/ 더 자세한 사용법은 여기를 참조하세요
- * `Range Month Picker` 는 약간의 버그가 있습니다.
+ * `Range Month Picker` 는 약간의 버그가 있습니다. https://github.com/Hacker0x01/react-datepicker/issues/2715 그래서 여기에 issue를 등록했습니다.
  */
 const Datepicker = (props: DatepickerProps) => {
   const nameOnChange = (
@@ -42,8 +42,6 @@ const Datepicker = (props: DatepickerProps) => {
   ) => {
     props.onChange(date, event, props.name);
   };
-
-  console.log(props.selected);
 
   const dateFormat = props.dateFormat
     ? props.dateFormat
