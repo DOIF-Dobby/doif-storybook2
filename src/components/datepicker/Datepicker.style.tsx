@@ -112,6 +112,11 @@ export const StyledDatepicker = styled.div<StyledDatepickerContainerProps>`
     }
 
     /** Month Picker */
+    .react-datepicker__month {
+      margin: 0;
+      padding: 0.4rem;
+    }
+
     .react-datepicker__month-container {
       & .react-datepicker__month {
         background-color: ${(props) => props.theme.subColors.content};
