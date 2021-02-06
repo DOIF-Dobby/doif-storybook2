@@ -14,7 +14,7 @@ import Page from '../common/Page';
 import Box from '../common/Box';
 import Input from '../input/Input';
 import Icon from '../icon/Icon';
-import { setHours, setMinutes, addDays, addMonths } from 'date-fns';
+import { setHours, setMinutes, addMonths, startOfMonth, endOfMonth} from 'date-fns';
 
 export default {
   title: 'Components/Datepicker',
@@ -195,14 +195,14 @@ export const rangeMonthPicker = () => {
         onChange={onChangeDate}
         name="startMonth"
         showMonthYearPicker
-        maxDate={endMonth}
+        maxDate={endMonth ? endOfMonth(endMonth) : endMonth}
       />
       <Datepicker
         selected={endMonth}
         onChange={onChangeDate}
         name="endMonth"
         showMonthYearPicker
-        minDate={startMonth}
+        minDate={startMonth ? startOfMonth(startMonth) : startMonth}
       />
     </Container>
   );
