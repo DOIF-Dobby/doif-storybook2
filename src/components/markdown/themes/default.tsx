@@ -58,7 +58,7 @@ export const Default = styled(BaseTheme)`
 
   :not(pre) > code[class*='language-'],
   pre[class*='language-'] {
-    background: #f5f2f0;
+    background: #f5f6fa;
   }
 
   /* Inline code */

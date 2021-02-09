@@ -7,6 +7,7 @@ export interface DoifThemeProps {
   mainColors: DoifThemeMainColorProps;
   subColors: DoifThemeSubColorProps;
   variants: DoifThemeVariantProps;
+  markdown: DoifThemeMarkdownProps;
 }
 
 /**
@@ -47,6 +48,19 @@ export interface DoifThemeSubColorProps {
 export interface DoifThemeVariantProps {
   borderRadius: string;
   borderWidth: string;
+}
+
+/**
+ * 마크다운 props
+ */
+export interface DoifThemeMarkdownProps {
+  bgColor: string;
+  boxBgColor: string;
+  lineColor: string;
+  textColor: string;
+  borderRadius: string;
+  blockquoteLine: string;
+  tableBorderColor: string;
 }
 
 /** 컬러 type */

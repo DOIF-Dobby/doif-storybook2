@@ -4,6 +4,9 @@ export const BaseTheme = styled.div`
   & {
     width: 100%;
     line-height: 1.6;
+    padding: 0.5rem;
+    color: ${(props) => props.theme.markdown.textColor};
+    background-color: ${(props) => props.theme.markdown.bgColor};
 
     /* 제목 스타일 */
     h1,
@@ -19,8 +22,7 @@ export const BaseTheme = styled.div`
 
     h1,
     h2 {
-      border-bottom: 1px solid
-        ${(props) => props.theme.mainColors.primary.light};
+      border-bottom: 1px solid ${(props) => props.theme.markdown.lineColor};
     }
 
     h1 {
@@ -45,35 +47,38 @@ export const BaseTheme = styled.div`
       font-size: 0.85rem;
     }
 
-    /* p {
-      line-height: 1.6;
-    } */
-
     /* 블럭 인용문구 '> ' */
     blockquote {
       margin-top: 2rem;
       margin-bottom: 2rem;
-      border-top-right-radius: 4px;
-      border-bottom-right-radius: 4px;
+      border-top-right-radius: ${(props) => props.theme.markdown.borderRadius};
+      border-bottom-right-radius: ${(props) =>
+        props.theme.markdown.borderRadius};
       margin-left: 0px;
       margin-right: 0px;
-      border-left: 4px solid ${(props) => props.theme.mainColors.primary.base};
-      background: rgb(248, 249, 250, 0.8);
-      padding: 1rem 1rem 1rem 2rem;
+      border-left: 4px solid ${(props) => props.theme.markdown.blockquoteLine};
+      background: ${(props) => props.theme.markdown.boxBgColor};
+      padding: 1rem 1rem 1rem 1rem;
+    }
+
+    blockquote blockquote {
+      margin-bottom: -1rem;
     }
 
     /* 코드 블럭 */
     pre,
     code {
-      background-color: ${(props) => props.theme.mainColors.primary.light};
-      border-radius: ${(props) => props.theme.variants.borderRadius};
+      background-color: ${(props) => props.theme.markdown.boxBgColor};
+      border-radius: ${(props) => props.theme.markdown.borderRadius};
       font-size: 0.85rem;
       padding: 0.1rem 0.2rem 0.1rem 0.2rem;
-      color: ${(props) => props.theme.subColors.text};
     }
 
     pre > code {
       padding: 0;
+      display: block;
+      width: 100%;
+      overflow: auto;
     }
 
     pre {
@@ -85,13 +90,13 @@ export const BaseTheme = styled.div`
 
     :not(pre) > code[class*='language-'],
     pre[class*='language-'] {
-      border-radius: 4px;
+      border-radius: ${(props) => props.theme.markdown.borderRadius};
     }
 
     /* 수평선 */
     hr {
-      height: 2px;
-      background-color: ${(props) => props.theme.mainColors.primary.light};
+      height: 1px;
+      background-color: ${(props) => props.theme.markdown.lineColor};
     }
 
     /* 강조 */
@@ -148,6 +153,27 @@ export const BaseTheme = styled.div`
     ul ul {
       list-style-type: circle;
       margin-bottom: 0;
+    }
+
+    /* 테이블 */
+    table th {
+      font-weight: 600;
+      padding: 6px 13px;
+    }
+
+    table tr {
+      background-color: ${(props) => props.theme.markdown.bgColor};
+      border-top: 1px solid ${(props) => props.theme.markdown.tableBorderColor};
+    }
+
+    table tr:nth-child(2n) {
+      background-color: ${(props) => props.theme.markdown.boxBgColor};
+    }
+
+    table th,
+    table td {
+      padding: 6px 13px;
+      border: 1px solid ${(props) => props.theme.markdown.tableBorderColor};
     }
   }
 `;

@@ -32,8 +32,4 @@ const MarkdownPreview = ({ content, prismTheme }: MarkdownPreviewProps) => {
   );
 };
 
-MarkdownPreview.defaultProps = {
-  prismTheme: 'default',
-};
-
 export default React.memo(MarkdownPreview);

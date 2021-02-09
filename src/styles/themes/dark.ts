@@ -22,8 +22,8 @@ const Dark: DefaultTheme = {
     error: '#ff5a4a',
     info: '#fafafa',
     content: '#424141',
-    text: '#ff00ff',
-    border: '#ff0000',
+    text: '#fafafa',
+    border: '#fafafa',
     disabled: '#e0e0df',
     pageBackground: '#424141',
     boxBackground: '#5c5c5c',
@@ -31,6 +31,15 @@ const Dark: DefaultTheme = {
   variants: {
     borderRadius: '4px',
     borderWidth: '1px',
+  },
+  markdown: {
+    bgColor: '#ffffff',
+    boxBgColor: '#fafafa',
+    lineColor: '#f7f7f8',
+    borderRadius: '6px',
+    textColor: '#2b2a2a',
+    blockquoteLine: '#34558b',
+    tableBorderColor: '#dfe2e5',
   },
 };
 

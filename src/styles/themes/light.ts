@@ -32,6 +32,15 @@ const Light: DefaultTheme = {
     borderRadius: '4px',
     borderWidth: '1px',
   },
+  markdown: {
+    bgColor: '#ffffff',
+    boxBgColor: '#f5f6fa',
+    lineColor: '#e9e9ec',
+    borderRadius: '6px',
+    textColor: '#2b2a2a',
+    blockquoteLine: '#34558b',
+    tableBorderColor: '#dfe2e5',
+  },
 };
 
 export default Light;
