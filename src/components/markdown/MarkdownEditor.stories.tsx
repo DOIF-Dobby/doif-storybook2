@@ -25,8 +25,10 @@ const Template: Story<ComponentProps<typeof MarkdownEditor>> = (args) => {
     setContent(e.target.value);
   }, []);
 
-  return <MarkdownEditor content={content} onChange={onChange} />;
+  return <MarkdownEditor content={content} onChange={onChange} {...args} />;
 };
 
 export const Default = Template.bind({});
-Default.args = {};
+Default.args = {
+  prismTheme: 'default',
+};
