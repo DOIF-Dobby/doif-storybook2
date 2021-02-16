@@ -38,7 +38,6 @@ const Dark: DefaultTheme = {
     lineColor: '#f7f7f8',
     borderRadius: '6px',
     textColor: '#2b2a2a',
-    blockquoteLine: '#34558b',
     tableBorderColor: '#dfe2e5',
   },
 };

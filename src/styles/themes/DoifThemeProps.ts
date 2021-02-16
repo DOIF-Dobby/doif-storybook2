@@ -59,7 +59,6 @@ export interface DoifThemeMarkdownProps {
   lineColor: string;
   textColor: string;
   borderRadius: string;
-  blockquoteLine: string;
   tableBorderColor: string;
 }
 

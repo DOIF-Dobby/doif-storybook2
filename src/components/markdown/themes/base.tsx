@@ -1,12 +1,38 @@
 import styled, { css } from 'styled-components';
+import { DoifColorType } from '../../../styles/themes/DoifThemeProps';
 
-export const BaseTheme = styled.div`
+export interface StyleBaseThemeProps {
+  color: DoifColorType;
+}
+
+export const BaseTheme = styled.div<StyleBaseThemeProps>`
   & {
     width: 100%;
+    height: 100%;
+    position: relative;
+    overflow-y: auto;
     line-height: 1.6;
     padding: 0.5rem;
     color: ${(props) => props.theme.markdown.textColor};
     background-color: ${(props) => props.theme.markdown.bgColor};
+
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background-color: transparent;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      border-radius: 3px;
+      background-color: ${(props) => props.theme.mainColors[props.color].base};
+    }
+
+    ::-webkit-scrollbar-button {
+      width: 0;
+      height: 0;
+    }
 
     /* 제목 스타일 */
     h1,
@@ -56,7 +82,8 @@ export const BaseTheme = styled.div`
         props.theme.markdown.borderRadius};
       margin-left: 0px;
       margin-right: 0px;
-      border-left: 4px solid ${(props) => props.theme.markdown.blockquoteLine};
+      border-left: 4px solid
+        ${(props) => props.theme.mainColors[props.color].base};
       background: ${(props) => props.theme.markdown.boxBgColor};
       padding: 1rem 1rem 1rem 1rem;
     }

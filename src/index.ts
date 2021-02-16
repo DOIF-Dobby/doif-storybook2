@@ -10,6 +10,7 @@ export { default as Tab } from './components/tab/Tab';
 export { default as Loading } from './components/loading/Loading';
 export { default as Datepicker } from './components/datepicker/Datepicker';
 export { default as Textarea } from './components/textarea/Textarea';
+export { default as MarkdownPreview } from './components/markdown/MarkdownPreview';
 
 export { default as Page } from './components/common/Page';
 export { default as Box } from './components/common/Box';
