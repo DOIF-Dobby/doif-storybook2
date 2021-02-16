@@ -1,6 +1,7 @@
 import React, { ComponentProps, useCallback, useRef, useState } from 'react';
 import { Story } from '@storybook/react/types-6-0';
 import MarkdownPreview from './MarkdownPreview';
+import MarkdownEditor from './MarkdownEditor';
 import Container from '../container/Container';
 import Textarea from '../textarea/Textarea';
 import Tab from '../tab/Tab';
@@ -32,6 +33,10 @@ const Template: Story<ComponentProps<typeof MarkdownPreview>> = (args) => {
     [],
   );
 
+  const onChangeMarkdown2 = useCallback((markdown: string) => {
+    setContent(markdown);
+  }, []);
+
   const onChangeTab = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     setSelected(e.target.value);
   }, []);
@@ -42,9 +47,13 @@ const Template: Story<ComponentProps<typeof MarkdownPreview>> = (args) => {
       name: 'Write',
       disabled: false,
       content: (
-        <Textarea value={content} onChange={onChangeMarkdown}>
-          탭 1입니다.
-        </Textarea>
+        // <Textarea value={content} onChange={onChangeMarkdown}>
+        //   탭 1입니다.
+        // </Textarea>
+        <MarkdownEditor
+          onChangeMarkdown={onChangeMarkdown2}
+          initialMarkdown={content}
+        />
       ),
     },
     {
@@ -52,7 +61,7 @@ const Template: Story<ComponentProps<typeof MarkdownPreview>> = (args) => {
       name: 'Preview',
       disabled: false,
       content: (
-        <Container style={{ maxHeight: '300px' }}>
+        <Container>
           <MarkdownPreview {...args} markdown={marked(content)} />
         </Container>
       ),
