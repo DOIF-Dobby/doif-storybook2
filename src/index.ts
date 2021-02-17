@@ -11,6 +11,7 @@ export { default as Loading } from './components/loading/Loading';
 export { default as Datepicker } from './components/datepicker/Datepicker';
 export { default as Textarea } from './components/textarea/Textarea';
 export { default as MarkdownPreview } from './components/markdown/MarkdownPreview';
+export { default as MarkdownEditor } from './components/markdown/MarkdownEditor';
 
 export { default as Page } from './components/common/Page';
 export { default as Box } from './components/common/Box';
