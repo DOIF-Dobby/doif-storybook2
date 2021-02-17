@@ -39,6 +39,12 @@ const Light: DefaultTheme = {
     borderRadius: '6px',
     textColor: '#2b2a2a',
     tableBorderColor: '#dfe2e5',
+    quoteColor: '#9e9e9e',
+    commentColor: '#9e9e9e',
+    attributeColor: '#e88282',
+    linkColor: '#1ea7fd',
+    urlColor: '#1ea7fd',
+    disableBgColor: '#cfcfcf',
   },
 };
 

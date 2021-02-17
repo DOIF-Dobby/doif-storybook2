@@ -60,6 +60,12 @@ export interface DoifThemeMarkdownProps {
   textColor: string;
   borderRadius: string;
   tableBorderColor: string;
+  quoteColor: string;
+  commentColor: string;
+  attributeColor: string;
+  linkColor: string;
+  urlColor: string;
+  disableBgColor: string;
 }
 
 /** 컬러 type */
