@@ -20,6 +20,9 @@ interface MarkdownEditorProps {
   onChangeMarkdown: (markdown: string) => void;
 }
 
+/**
+ * `MarkdownEditor` 컴포넌트는 마크다운을 작성할 때 사용하는 컴포넌트입니다.
+ */
 const MarkdownEditor = ({
   color,
   width,
