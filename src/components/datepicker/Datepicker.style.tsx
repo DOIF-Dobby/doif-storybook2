@@ -22,6 +22,10 @@ export const StyledDatepicker = styled.div<StyledDatepickerContainerProps>`
     }
   }
 
+  .react-datepicker-popper {
+    z-index: 100;
+  }
+
   & .custom-calendar {
     border: none;
     box-shadow: 0 1px 8px 0 rgba(0, 0, 0, 0.2);
