@@ -12,6 +12,7 @@ export { default as Datepicker } from './components/datepicker/Datepicker';
 export { default as Textarea } from './components/textarea/Textarea';
 export { default as MarkdownPreview } from './components/markdown/MarkdownPreview';
 export { default as MarkdownEditor } from './components/markdown/MarkdownEditor';
+export { default as SideMenu } from './components/menu/SideMenu';
 
 export { default as Page } from './components/common/Page';
 export { default as Box } from './components/common/Box';
@@ -27,3 +28,6 @@ export {
 
 // 스타일 export
 export { GlobalStyle } from './styles/global-style';
+
+// interface
+export { MenuProps } from './components/menu/SideMenu';

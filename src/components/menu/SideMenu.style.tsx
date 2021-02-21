@@ -5,15 +5,15 @@ interface StyledSideMenuProps {
   color: DoifColorType;
 }
 
-/** SideMenu 컴포넌트의 스타일 */
-export const StyledSideMenu = styled.div<StyledSideMenuProps>`
+/** SpreadMenu 컴포넌트의 스타일 */
+export const StyledSpreadMenu = styled.div<StyledSideMenuProps>`
   display: flex;
   flex-direction: column;
   position: fixed;
   left: 0;
   top: 0;
   height: 100%;
-  width: 20%;
+  width: 15rem;
 
   background-color: ${(props) => props.theme.mainColors[props.color].base};
 
@@ -23,27 +23,17 @@ export const StyledSideMenu = styled.div<StyledSideMenuProps>`
     position: relative;
     justify-content: space-around;
     padding: 1rem;
+    padding-top: 2rem;
     width: 100%;
 
-    div.big-logo {
+    a.big-logo {
       display: flex;
       flex-direction: column;
       align-items: center;
-      width: 100%;
+      width: 80%;
 
       img {
-        /* height: 2rem; */
         width: 100%;
-      }
-    }
-
-    div.fold {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-
-      svg {
-        fill: ${(props) => props.theme.mainColors[props.color].dark};
       }
     }
   }
@@ -53,7 +43,7 @@ export const StyledSideMenu = styled.div<StyledSideMenuProps>`
     padding: 1rem;
   }
 
-  /** 카테고리-메뉴 */
+  /** 카테고리-메뉴 컨테이너 */
   div.menu-container {
     display: flex;
     flex-direction: column;
@@ -79,12 +69,73 @@ export const StyledSideMenu = styled.div<StyledSideMenuProps>`
       height: 0;
     }
 
-    div.category,
-    div.menu {
+    /** 자식 카테고리-메뉴들 */
+    div.children-items {
+      /* border-top: 1px solid
+        ${(props) => props.theme.mainColors[props.color].dark};
+      border-bottom: 1px solid
+        ${(props) => props.theme.mainColors[props.color].dark}; */
+    }
+
+    /** 카테고리 - 메뉴 둘 다 */
+    a.category,
+    a.menu {
       display: flex;
+      height: 2.5rem;
+      cursor: pointer;
+      color: ${(props) => props.theme.mainColors[props.color].light};
+      text-decoration: none;
+
+      span.menu-name {
+        font-size: 0.8rem;
+      }
 
       svg {
         fill: ${(props) => props.theme.mainColors[props.color].light};
+      }
+
+      &:hover {
+        background-color: ${(props) =>
+          props.theme.mainColors[props.color].dark};
+      }
+    }
+
+    /** 카테고리 */
+    a.category {
+      > div:first-of-type {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-basis: 15%;
+      }
+
+      > div:nth-of-type(2) {
+        display: flex;
+        align-items: center;
+        flex-basis: 70%;
+      }
+
+      > div:last-of-type {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-basis: 15%;
+      }
+    }
+
+    /** 메뉴 */
+    a.menu {
+      > div:first-of-type {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-basis: 15%;
+      }
+
+      > div:last-of-type {
+        display: flex;
+        align-items: center;
+        flex-basis: 80%;
       }
     }
   }
