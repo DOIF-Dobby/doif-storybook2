@@ -71,10 +71,21 @@ export const StyledSpreadMenu = styled.div<StyledSideMenuProps>`
 
     /** 자식 카테고리-메뉴들 */
     div.children-items {
-      /* border-top: 1px solid
-        ${(props) => props.theme.mainColors[props.color].dark};
-      border-bottom: 1px solid
-        ${(props) => props.theme.mainColors[props.color].dark}; */
+      /* position: relative;
+
+      animation-name: ani;
+      animation-duration: 1s;
+
+      @keyframes ani {
+        from {
+          max-height: 0;
+          opacity: 0;
+        }
+        to {
+          max-height: 800px;
+          opacity: 1;
+        }
+      } */
     }
 
     /** 카테고리 - 메뉴 둘 다 */

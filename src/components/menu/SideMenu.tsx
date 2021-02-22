@@ -4,7 +4,8 @@ import { DoifColorType } from '../../styles/themes/DoifThemeProps';
 import Icon, { IconType, iconTypes } from '../icon/Icon';
 import Input from '../input/Input';
 import { StyledSpreadMenu } from './SideMenu.style';
-import { chnageToMenuProps } from './menuUtil';
+import { changeToMenuProps, getDepthItems } from './menuUtil';
+import { useSpring, animated } from 'react-spring';
 
 interface SideMenuProps {
   /** 메뉴가 펼쳐졌을 때 보여줄 logo 입니다. */
@@ -71,6 +72,22 @@ SideMenu.defaultProps = {
  * 펼쳐진 메뉴
  */
 const SpreadMenu = ({ bigLogo, homeUrl, color, items }: SideMenuProps) => {
+  const [openItemCodes, setOpenItmeCoeds] = useState<string[]>([]);
+  const depthItems = getDepthItems(items);
+
+  const onClickCategory = useCallback(
+    (depth: number | undefined, code: string) => {
+      setOpenItmeCoeds((openItemCodes) => {
+        const existingCode = openItemCodes[depth ? depth - 1 : 0];
+        const newItems = openItemCodes
+          ?.slice(0, depth ? depth - 1 : 0)
+          .concat(code === existingCode ? '' : code);
+        return newItems;
+      });
+    },
+    [],
+  );
+
   return (
     <StyledSpreadMenu color={color}>
       <div className="title-container">
@@ -82,7 +99,19 @@ const SpreadMenu = ({ bigLogo, homeUrl, color, items }: SideMenuProps) => {
         <Input placeholder="Search..." color={color} />
       </div>
       <div className="menu-container">
-        {items.map((item) => renderMenuOrCategory(item))}
+        {depthItems.map((item) => {
+          const isOpen =
+            openItemCodes && item.depth
+              ? openItemCodes[item.depth - 1] === item.code
+              : false;
+
+          return renderMenuOrCategory(
+            item,
+            isOpen,
+            openItemCodes,
+            onClickCategory,
+          );
+        })}
       </div>
     </StyledSpreadMenu>
   );
@@ -91,36 +120,68 @@ const SpreadMenu = ({ bigLogo, homeUrl, color, items }: SideMenuProps) => {
 /**
  * 카테고리 or 메뉴 렌더링
  */
-const renderMenuOrCategory = (item: CategoryProps | MenuProps) => {
+const renderMenuOrCategory = (
+  item: CategoryProps | MenuProps,
+  isOpen: boolean,
+  openItemCodes: string[] | undefined,
+  onClickCategory?: (depth: number | undefined, code: string) => void,
+) => {
   const isMenu = item.hasOwnProperty('url');
   if (isMenu) {
-    const menu: MenuProps = chnageToMenuProps(item);
-    return <Menu {...menu} />;
+    const menu: MenuProps = changeToMenuProps(item);
+    return <Menu key={item.code} {...menu} />;
   } else {
-    return <Category {...item} />;
+    return (
+      <Category
+        key={item.code}
+        {...item}
+        onClickCategory={onClickCategory}
+        openItemCodes={openItemCodes}
+        isOpen={isOpen}
+      />
+    );
   }
 };
 
 export interface CategoryProps {
   code: string;
   name: string;
-  sort: number;
-  depth: number;
+  depth?: number;
   icon?: string;
   childrenItems?: Array<CategoryProps | MenuProps>;
+  isOpen?: boolean;
+  openItemCodes?: string[];
+  onClickCategory?: (depth: number | undefined, code: string) => void;
 }
 
 /**
  * 카테고리 컴포넌트
  */
-const Category = ({ name, icon, childrenItems }: CategoryProps) => {
-  const [visible, setVisible] = useState(false);
+const Category = ({
+  name,
+  code,
+  depth,
+  icon,
+  childrenItems,
+  isOpen,
+  openItemCodes,
+  onClickCategory,
+}: CategoryProps) => {
+  const props = useSpring({
+    from: { height: 0, opacity: 0, transform: 'translate3d(20px,0,0)' },
+    to: {
+      height: isOpen ? childrenItems && childrenItems.length * 40 : 0,
+      opacity: isOpen ? 1 : 0,
+      transform: `translate3d(${isOpen ? 0 : 20}px,0,0)`,
+    },
+  });
 
-  const onCategoryClick = useCallback(
-    (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
-      e.preventDefault();
-
-      setVisible((visible) => !visible);
+  const onClick = useCallback(
+    (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
+      if (onClickCategory) {
+        onClickCategory(depth, code);
+        event.preventDefault();
+      }
     },
     [],
   );
@@ -129,19 +190,34 @@ const Category = ({ name, icon, childrenItems }: CategoryProps) => {
 
   return (
     <>
-      <a onClick={onCategoryClick} className="category" href="/">
+      <a onClick={onClick} className="category" href="/">
         <div>{findIcon && <Icon icon={findIcon} />}</div>
         <div>
-          <span className="menu-name">{name}</span>
+          <span className="menu-name">
+            {name}
+            {depth}
+          </span>
         </div>
         <div>
           <Icon icon="downArrow" size="small" />
         </div>
       </a>
-      {visible && (
-        <div className="children-items">
-          {childrenItems?.map((subItem) => renderMenuOrCategory(subItem))}
-        </div>
+      {isOpen && (
+        <animated.div style={props} className="children-items">
+          {childrenItems?.map((item) => {
+            const isOpen =
+              openItemCodes && item.depth
+                ? openItemCodes[item.depth - 1] === item.code
+                : false;
+
+            return renderMenuOrCategory(
+              item,
+              isOpen,
+              openItemCodes,
+              onClickCategory,
+            );
+          })}
+        </animated.div>
       )}
     </>
   );
@@ -150,8 +226,7 @@ const Category = ({ name, icon, childrenItems }: CategoryProps) => {
 export interface MenuProps {
   code: string;
   name: string;
-  sort: number;
-  depth: number;
+  depth?: number;
   icon?: string;
   url: string;
 }
@@ -159,14 +234,17 @@ export interface MenuProps {
 /**
  * 메뉴 컴포넌트
  */
-const Menu = ({ name, icon, url }: MenuProps) => {
+const Menu = ({ name, icon, depth, url }: MenuProps) => {
   const findIcon: IconType | undefined = iconTypes.find((el) => el === icon);
 
   return (
     <Link className="menu" to={url ? url : window.location.href}>
       <div>{findIcon && <Icon icon={findIcon} />}</div>
       <div>
-        <span className="menu-name">{name}</span>
+        <span className="menu-name">
+          {name}
+          {depth}
+        </span>
       </div>
     </Link>
   );

@@ -25,28 +25,20 @@ const Template: Story<ComponentProps<typeof SideMenu>> = (args) => {
     {
       code: 'CATEGORY_01',
       name: '기본정보 관리',
-      sort: 1,
-      depth: 1,
       icon: 'heart',
       childrenItems: [
         {
           code: 'CATEGORY_01_01',
           name: '가맹점 정보',
-          sort: 1,
-          depth: 2,
           childrenItems: [
             {
               code: 'MENU_01',
               name: '가맹점 정보 관리',
-              sort: 1,
-              depth: 3,
               url: '/entp1',
             },
             {
               code: 'MENU_02',
               name: '계약승인처리',
-              sort: 2,
-              depth: 3,
               url: '/entp2',
             },
           ],
@@ -54,15 +46,11 @@ const Template: Story<ComponentProps<typeof SideMenu>> = (args) => {
         {
           code: 'CATEGORY_01_02',
           name: '원천사업자 정보',
-          sort: 2,
-          depth: 2,
           icon: '',
           childrenItems: [
             {
               code: 'MENU_03',
               name: '원천사업자 정보 관리',
-              sort: 1,
-              depth: 3,
               url: '/optr1',
             },
           ],
@@ -72,22 +60,16 @@ const Template: Story<ComponentProps<typeof SideMenu>> = (args) => {
     {
       code: 'CATEGORY_02',
       name: '개발자 메뉴',
-      sort: 2,
-      depth: 1,
       icon: 'pencil',
       childrenItems: [
         {
           code: 'MENU_DEV_01',
           name: '시스템캐시리로드',
-          sort: 1,
-          depth: 2,
           url: '/dev1',
         },
         {
           code: 'MENU_DEV_02',
           name: '메뉴 관리',
-          sort: 2,
-          depth: 2,
           url: '/dev2',
         },
       ],
@@ -95,8 +77,6 @@ const Template: Story<ComponentProps<typeof SideMenu>> = (args) => {
     {
       code: 'MENU_04',
       name: '테스트 메뉴',
-      sort: 3,
-      depth: 1,
       icon: 'exit',
       url: '/test',
     },
