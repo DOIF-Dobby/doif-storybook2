@@ -43,17 +43,7 @@ const SideMenu = ({
   color,
   items,
 }: SideMenuProps) => {
-  // 타입에 따라 다른 컴포넌트 렌더링
-  return isFold ? (
-    <SpreadMenu
-      bigLogo={bigLogo}
-      smallLogo={smallLogo}
-      isFold={isFold}
-      homeUrl={homeUrl}
-      color={color}
-      items={items}
-    />
-  ) : (
+  return (
     <SpreadMenu
       bigLogo={bigLogo}
       smallLogo={smallLogo}
@@ -74,9 +64,18 @@ SideMenu.defaultProps = {
 /**
  * 펼쳐진 메뉴
  */
-const SpreadMenu = ({ bigLogo, homeUrl, color, items }: SideMenuProps) => {
+const SpreadMenu = ({
+  isFold,
+  smallLogo,
+  bigLogo,
+  homeUrl,
+  color,
+  items,
+}: SideMenuProps) => {
   const [openItemCodes, setOpenItmeCoeds] = useState<string[]>([]);
   const [selectedMenu, setSelectedMenu] = useState('');
+  const [isFold2, setIsFold2] = useState(isFold);
+
   const depthItems = getDepthItems(items);
 
   const onClickCategory = useCallback(
@@ -96,14 +95,30 @@ const SpreadMenu = ({ bigLogo, homeUrl, color, items }: SideMenuProps) => {
     setSelectedMenu(menu);
   }, []);
 
+  const onMouseEnter = useCallback(() => {
+    if (isFold2) {
+      setIsFold2(false);
+    }
+  }, []);
+
+  const onMouseLeave = useCallback(() => {
+    if (isFold) {
+      setIsFold2(true);
+    }
+  }, []);
+
   return (
-    <StyledSpreadMenu color={color}>
+    <StyledSpreadMenu color={color} isFold={isFold2}>
       <div className="title-container">
-        <Link className="big-logo" to={homeUrl}>
-          {bigLogo}
+        <Link className="logo" to={homeUrl}>
+          {isFold2 ? smallLogo : bigLogo}
         </Link>
       </div>
-      <div className="menu-container">
+      <div
+        className="menu-container"
+        onMouseEnter={onMouseEnter}
+        onMouseLeave={onMouseLeave}
+      >
         <ul className="menu-ul">
           {depthItems.map((item) => {
             const isOpen =
@@ -119,6 +134,7 @@ const SpreadMenu = ({ bigLogo, homeUrl, color, items }: SideMenuProps) => {
               onClickMenu,
               color,
               selectedMenu,
+              isFold2,
             );
           })}
         </ul>
@@ -138,6 +154,7 @@ const renderMenuOrCategory = (
   onClickMenu?: (menu: string) => void,
   color?: DoifColorType,
   selectedMenu?: string,
+  isFold?: boolean,
 ) => {
   const isMenu = item.hasOwnProperty('url');
   if (isMenu) {
@@ -148,6 +165,7 @@ const renderMenuOrCategory = (
         {...menu}
         onClickMenu={onClickMenu}
         selectedMenu={selectedMenu}
+        isFold={isFold}
       />
     );
   } else {
@@ -161,6 +179,7 @@ const renderMenuOrCategory = (
         isOpen={isOpen}
         onClickMenu={onClickMenu}
         selectedMenu={selectedMenu}
+        isFold={isFold}
       />
     );
   }
@@ -178,6 +197,7 @@ export interface CategoryProps {
   onClickMenu?: (menu: string) => void;
   color?: DoifColorType;
   selectedMenu?: string;
+  isFold?: boolean;
 }
 
 /**
@@ -195,6 +215,7 @@ const Category = ({
   onClickMenu,
   color,
   selectedMenu,
+  isFold,
 }: CategoryProps) => {
   const onClick = useCallback(
     (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
@@ -215,6 +236,8 @@ const Category = ({
     ? 'depth' + ((depth + 1) % 4)
     : 'depth1';
 
+  const classNameOpen = isOpen ? 'open' : 'close';
+
   return (
     <li>
       <a onClick={onClick} className="category" href="/">
@@ -225,15 +248,16 @@ const Category = ({
             {depth}
           </span>
         </div>
-        <div className={isOpen ? 'open' : 'close'}>
+        <div className={classNameOpen}>
           <Icon icon="rightArrow" size="small" />
         </div>
       </a>
       <ChlidrenItems
         itemCount={childrenItems ? count : 0}
         color={color}
-        className={isOpen ? 'open' : 'close'}
+        className={classNameOpen}
         backgroundColor={backgroundDepth}
+        isFold={isFold}
       >
         {childrenItems?.map((item) => {
           const isOpen =
@@ -249,6 +273,7 @@ const Category = ({
             onClickMenu,
             color,
             selectedMenu,
+            isFold,
           );
         })}
       </ChlidrenItems>
@@ -264,6 +289,7 @@ export interface MenuProps {
   url: string;
   onClickMenu?: (menu: string) => void;
   selectedMenu?: string;
+  isFold?: boolean;
 }
 
 /**
@@ -277,6 +303,7 @@ const Menu = ({
   url,
   onClickMenu,
   selectedMenu,
+  isFold,
 }: MenuProps) => {
   const findIcon: IconType | undefined = iconTypes.find((el) => el === icon);
   const onClick = useCallback(() => {

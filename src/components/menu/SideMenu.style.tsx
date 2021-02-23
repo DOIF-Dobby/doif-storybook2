@@ -3,6 +3,7 @@ import { DoifColorType } from '../../styles/themes/DoifThemeProps';
 
 interface StyledSideMenuProps {
   color: DoifColorType;
+  isFold: boolean;
 }
 
 /** SpreadMenu 컴포넌트의 스타일 */
@@ -13,7 +14,7 @@ export const StyledSpreadMenu = styled.div<StyledSideMenuProps>`
   left: 0;
   top: 0;
   height: 100%;
-  width: 15rem;
+  width: ${(props) => (props.isFold ? `3rem` : `15rem`)};
 
   background-color: ${(props) =>
     props.theme.sideMenuColors[props.color].depth1};
@@ -23,10 +24,12 @@ export const StyledSpreadMenu = styled.div<StyledSideMenuProps>`
     display: flex;
     position: relative;
     justify-content: space-around;
-    padding: 2rem 1rem 2rem;
+    padding: ${(props) =>
+      props.isFold ? `2rem 0.2rem 2rem 0.2rem` : `2rem 1rem 2rem 1rem`};
     width: 100%;
+    height: 6rem;
 
-    a.big-logo {
+    a.logo {
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -104,20 +107,20 @@ export const StyledSpreadMenu = styled.div<StyledSideMenuProps>`
         display: flex;
         justify-content: center;
         align-items: center;
-        flex-basis: 15%;
+        flex-basis: 3rem;
       }
 
       > div:nth-of-type(2) {
-        display: flex;
+        display: ${(props) => (props.isFold ? 'none' : 'flex')};
         align-items: center;
-        flex-basis: 70%;
+        flex-basis: 10rem;
       }
 
       > div:last-of-type {
-        display: flex;
+        display: ${(props) => (props.isFold ? 'none' : 'flex')};
         justify-content: center;
         align-items: center;
-        flex-basis: 15%;
+        flex-basis: 2rem;
 
         transition: transform 0.15s linear;
 
@@ -137,13 +140,13 @@ export const StyledSpreadMenu = styled.div<StyledSideMenuProps>`
         display: flex;
         justify-content: center;
         align-items: center;
-        flex-basis: 15%;
+        flex-basis: 3rem;
       }
 
       > div:last-of-type {
-        display: flex;
+        display: ${(props) => (props.isFold ? 'none' : 'flex')};
         align-items: center;
-        flex-basis: 80%;
+        flex-basis: 12rem;
       }
 
       &.selected {
@@ -158,6 +161,7 @@ interface ChildrenItemsProps {
   itemCount: number;
   color: DoifColorType | undefined;
   backgroundColor: 'depth1' | 'depth2' | 'depth3' | 'depth4';
+  isFold: boolean | undefined;
 }
 
 export const ChlidrenItems = styled.ul<ChildrenItemsProps>`
@@ -168,7 +172,9 @@ export const ChlidrenItems = styled.ul<ChildrenItemsProps>`
     ]};
 
   &.open {
-    max-height: calc(2.5rem * ${(props) => props.itemCount});
+    max-height: calc(
+      2.5rem * ${(props) => (props.isFold ? 0 : props.itemCount)}
+    );
   }
 
   &.close {
