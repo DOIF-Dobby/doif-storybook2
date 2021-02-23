@@ -15,7 +15,7 @@ const Page = ({ children }: PageProps) => {
 
 const StyledPage = styled.div`
   background-color: ${(props) => props.theme.subColors.pageBackground};
-  padding: 0.5rem;
+  padding: 0.75rem;
 `;
 
 export default React.memo(Page);

@@ -1,8 +1,7 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { DoifColorType } from '../../styles/themes/DoifThemeProps';
 import Icon, { IconType, iconTypes } from '../icon/Icon';
-import Input from '../input/Input';
 import { ChlidrenItems, StyledSpreadMenu } from './SideMenu.style';
 import {
   changeToMenuProps,
@@ -45,9 +44,13 @@ const SideMenu = ({
 }: SideMenuProps) => {
   const [openItemCodes, setOpenItmeCoeds] = useState<string[]>([]);
   const [selectedMenu, setSelectedMenu] = useState('');
-  const [isFold2, setIsFold2] = useState(isFold);
+  const [isInternalFold, setIsInternalFold] = useState(isFold);
 
   const depthItems = getDepthItems(items);
+
+  useEffect(() => {
+    setIsInternalFold(isFold);
+  }, [isFold]);
 
   const onClickCategory = useCallback(
     (depth: number | undefined, code: string) => {
@@ -66,23 +69,28 @@ const SideMenu = ({
     setSelectedMenu(menu);
   }, []);
 
-  const onMouseEnter = useCallback(() => {
-    if (isFold2) {
-      setIsFold2(false);
-    }
+  const onClickHome = useCallback(() => {
+    setSelectedMenu('');
+    setOpenItmeCoeds([]);
   }, []);
+
+  const onMouseEnter = useCallback(() => {
+    if (isFold) {
+      setIsInternalFold(false);
+    }
+  }, [isFold]);
 
   const onMouseLeave = useCallback(() => {
     if (isFold) {
-      setIsFold2(true);
+      setIsInternalFold(true);
     }
-  }, []);
+  }, [isFold]);
 
   return (
-    <StyledSpreadMenu color={color} isFold={isFold2}>
+    <StyledSpreadMenu color={color} isFold={isInternalFold}>
       <div className="title-container">
-        <Link className="logo" to={homeUrl}>
-          {isFold2 ? smallLogo : bigLogo}
+        <Link className="logo" to={homeUrl} onClick={onClickHome}>
+          {isInternalFold ? smallLogo : bigLogo}
         </Link>
       </div>
       <div
@@ -105,7 +113,7 @@ const SideMenu = ({
               onClickMenu,
               color,
               selectedMenu,
-              isFold2,
+              isInternalFold,
             );
           })}
         </ul>
