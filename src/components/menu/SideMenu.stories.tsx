@@ -95,5 +95,5 @@ const Template: Story<ComponentProps<typeof SideMenu>> = (args) => {
 export const Default = Template.bind({});
 Default.args = {
   color: 'primary',
-  isFold: true,
+  isFold: false,
 };

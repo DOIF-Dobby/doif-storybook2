@@ -1,4 +1,3 @@
-import { result } from 'lodash';
 import { CategoryProps, MenuProps } from './SideMenu';
 
 /**

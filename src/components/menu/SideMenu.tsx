@@ -43,35 +43,6 @@ const SideMenu = ({
   color,
   items,
 }: SideMenuProps) => {
-  return (
-    <SpreadMenu
-      bigLogo={bigLogo}
-      smallLogo={smallLogo}
-      isFold={isFold}
-      homeUrl={homeUrl}
-      color={color}
-      items={items}
-    />
-  );
-};
-
-SideMenu.defaultProps = {
-  color: 'primary',
-  isFold: false,
-  homeUrl: '/',
-};
-
-/**
- * 펼쳐진 메뉴
- */
-const SpreadMenu = ({
-  isFold,
-  smallLogo,
-  bigLogo,
-  homeUrl,
-  color,
-  items,
-}: SideMenuProps) => {
   const [openItemCodes, setOpenItmeCoeds] = useState<string[]>([]);
   const [selectedMenu, setSelectedMenu] = useState('');
   const [isFold2, setIsFold2] = useState(isFold);
@@ -141,6 +112,12 @@ const SpreadMenu = ({
       </div>
     </StyledSpreadMenu>
   );
+};
+
+SideMenu.defaultProps = {
+  color: 'primary',
+  isFold: false,
+  homeUrl: '/',
 };
 
 /**
