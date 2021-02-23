@@ -225,7 +225,7 @@ const Category = ({
             {depth}
           </span>
         </div>
-        <div>
+        <div className={isOpen ? 'open' : 'close'}>
           <Icon icon="downArrow" size="small" />
         </div>
       </a>

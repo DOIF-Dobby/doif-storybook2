@@ -118,6 +118,16 @@ export const StyledSpreadMenu = styled.div<StyledSideMenuProps>`
         justify-content: center;
         align-items: center;
         flex-basis: 15%;
+
+        transition: transform 0.15s linear;
+
+        &.open {
+          transform: rotate(-180deg);
+        }
+
+        &.close {
+          transform: rotate(0);
+        }
       }
     }
 
