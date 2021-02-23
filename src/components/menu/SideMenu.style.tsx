@@ -8,6 +8,7 @@ interface StyledSideMenuProps {
 
 /** SpreadMenu 컴포넌트의 스타일 */
 export const StyledSpreadMenu = styled.div<StyledSideMenuProps>`
+  z-index: 999;
   display: flex;
   flex-direction: column;
   position: fixed;
