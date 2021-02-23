@@ -122,7 +122,7 @@ export const StyledSpreadMenu = styled.div<StyledSideMenuProps>`
         transition: transform 0.15s linear;
 
         &.open {
-          transform: rotate(-180deg);
+          transform: rotate(90deg);
         }
 
         &.close {

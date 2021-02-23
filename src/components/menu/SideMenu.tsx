@@ -226,7 +226,7 @@ const Category = ({
           </span>
         </div>
         <div className={isOpen ? 'open' : 'close'}>
-          <Icon icon="downArrow" size="small" />
+          <Icon icon="rightArrow" size="small" />
         </div>
       </a>
       <ChlidrenItems
