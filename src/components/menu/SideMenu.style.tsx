@@ -15,15 +15,15 @@ export const StyledSpreadMenu = styled.div<StyledSideMenuProps>`
   height: 100%;
   width: 15rem;
 
-  background-color: ${(props) => props.theme.mainColors[props.color].base};
+  background-color: ${(props) =>
+    props.theme.sideMenuColors[props.color].depth1};
 
   /** 제목 */
   div.title-container {
     display: flex;
     position: relative;
     justify-content: space-around;
-    padding: 1rem;
-    padding-top: 2rem;
+    padding: 2rem 1rem 2rem;
     width: 100%;
 
     a.big-logo {
@@ -38,17 +38,12 @@ export const StyledSpreadMenu = styled.div<StyledSideMenuProps>`
     }
   }
 
-  /** 검색창 */
-  div.search-container {
-    padding: 1rem;
-  }
-
   /** 카테고리-메뉴 컨테이너 */
   div.menu-container {
-    /* display: flex; */
-    /* flex-direction: column; */
+    display: flex;
+    flex-direction: column;
     height: 100%;
-    color: ${(props) => props.theme.mainColors[props.color].light};
+    color: ${(props) => props.theme.sideMenuColors[props.color].text};
     overflow-y: auto;
 
     ::-webkit-scrollbar {
@@ -61,7 +56,8 @@ export const StyledSpreadMenu = styled.div<StyledSideMenuProps>`
 
     ::-webkit-scrollbar-thumb {
       border-radius: 3px;
-      background-color: ${(props) => props.theme.mainColors[props.color].light};
+      background-color: ${(props) =>
+        props.theme.sideMenuColors[props.color].depth4};
     }
 
     ::-webkit-scrollbar-button {
@@ -85,7 +81,7 @@ export const StyledSpreadMenu = styled.div<StyledSideMenuProps>`
       display: flex;
       height: 2.5rem;
       cursor: pointer;
-      color: ${(props) => props.theme.mainColors[props.color].light};
+      color: ${(props) => props.theme.sideMenuColors[props.color].text};
       text-decoration: none;
 
       span.menu-name {
@@ -93,12 +89,12 @@ export const StyledSpreadMenu = styled.div<StyledSideMenuProps>`
       }
 
       svg {
-        fill: ${(props) => props.theme.mainColors[props.color].light};
+        fill: ${(props) => props.theme.sideMenuColors[props.color].text};
       }
 
       &:hover {
-        background-color: ${(props) =>
-          props.theme.mainColors[props.color].dark};
+        border-left: 5px solid
+          ${(props) => props.theme.sideMenuColors[props.color].borderLeft};
       }
     }
 
@@ -139,16 +135,27 @@ export const StyledSpreadMenu = styled.div<StyledSideMenuProps>`
         align-items: center;
         flex-basis: 80%;
       }
+
+      &.selected {
+        border-left: 5px solid
+          ${(props) => props.theme.sideMenuColors[props.color].selected};
+      }
     }
   }
 `;
 
 interface ChildrenItemsProps {
   itemCount: number;
+  color: DoifColorType | undefined;
+  backgroundColor: 'depth1' | 'depth2' | 'depth3' | 'depth4';
 }
 
 export const ChlidrenItems = styled.ul<ChildrenItemsProps>`
-  transition: ease 0.2s;
+  transition: ease 0.15s;
+  background-color: ${(props) =>
+    props.theme.sideMenuColors[props.color ? props.color : 'primary'][
+      props.backgroundColor
+    ]};
 
   &.open {
     max-height: calc(2.5rem * ${(props) => props.itemCount});

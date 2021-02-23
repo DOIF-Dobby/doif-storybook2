@@ -9,7 +9,6 @@ import {
   getDepthItems,
   getOpenChildrenItemsCount,
 } from './menuUtil';
-import { useSpring, animated } from 'react-spring';
 
 interface SideMenuProps {
   /** 메뉴가 펼쳐졌을 때 보여줄 logo 입니다. */
@@ -77,6 +76,7 @@ SideMenu.defaultProps = {
  */
 const SpreadMenu = ({ bigLogo, homeUrl, color, items }: SideMenuProps) => {
   const [openItemCodes, setOpenItmeCoeds] = useState<string[]>([]);
+  const [selectedMenu, setSelectedMenu] = useState('');
   const depthItems = getDepthItems(items);
 
   const onClickCategory = useCallback(
@@ -92,15 +92,16 @@ const SpreadMenu = ({ bigLogo, homeUrl, color, items }: SideMenuProps) => {
     [],
   );
 
+  const onClickMenu = useCallback((menu: string) => {
+    setSelectedMenu(menu);
+  }, []);
+
   return (
     <StyledSpreadMenu color={color}>
       <div className="title-container">
         <Link className="big-logo" to={homeUrl}>
           {bigLogo}
         </Link>
-      </div>
-      <div className="search-container">
-        <Input placeholder="Search..." color={color} />
       </div>
       <div className="menu-container">
         <ul className="menu-ul">
@@ -115,6 +116,9 @@ const SpreadMenu = ({ bigLogo, homeUrl, color, items }: SideMenuProps) => {
               isOpen,
               openItemCodes,
               onClickCategory,
+              onClickMenu,
+              color,
+              selectedMenu,
             );
           })}
         </ul>
@@ -131,19 +135,32 @@ const renderMenuOrCategory = (
   isOpen: boolean,
   openItemCodes: string[] | undefined,
   onClickCategory?: (depth: number | undefined, code: string) => void,
+  onClickMenu?: (menu: string) => void,
+  color?: DoifColorType,
+  selectedMenu?: string,
 ) => {
   const isMenu = item.hasOwnProperty('url');
   if (isMenu) {
     const menu: MenuProps = changeToMenuProps(item);
-    return <Menu key={item.code} {...menu} />;
+    return (
+      <Menu
+        key={item.code}
+        {...menu}
+        onClickMenu={onClickMenu}
+        selectedMenu={selectedMenu}
+      />
+    );
   } else {
     return (
       <Category
+        color={color}
         key={item.code}
         {...item}
         onClickCategory={onClickCategory}
         openItemCodes={openItemCodes}
         isOpen={isOpen}
+        onClickMenu={onClickMenu}
+        selectedMenu={selectedMenu}
       />
     );
   }
@@ -158,6 +175,9 @@ export interface CategoryProps {
   isOpen?: boolean;
   openItemCodes?: string[];
   onClickCategory?: (depth: number | undefined, code: string) => void;
+  onClickMenu?: (menu: string) => void;
+  color?: DoifColorType;
+  selectedMenu?: string;
 }
 
 /**
@@ -172,6 +192,9 @@ const Category = ({
   isOpen,
   openItemCodes,
   onClickCategory,
+  onClickMenu,
+  color,
+  selectedMenu,
 }: CategoryProps) => {
   const onClick = useCallback(
     (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
@@ -186,6 +209,11 @@ const Category = ({
   const count = getOpenChildrenItemsCount(childrenItems, openItemCodes, isOpen);
 
   const findIcon: IconType | undefined = iconTypes.find((el) => el === icon);
+
+  // @ts-ignore
+  const backgroundDepth: 'depth1' | 'depth2' | 'depth3' | 'depth4' = depth
+    ? 'depth' + ((depth + 1) % 4)
+    : 'depth1';
 
   return (
     <li>
@@ -203,7 +231,9 @@ const Category = ({
       </a>
       <ChlidrenItems
         itemCount={childrenItems ? count : 0}
+        color={color}
         className={isOpen ? 'open' : 'close'}
+        backgroundColor={backgroundDepth}
       >
         {childrenItems?.map((item) => {
           const isOpen =
@@ -216,6 +246,9 @@ const Category = ({
             isOpen,
             openItemCodes,
             onClickCategory,
+            onClickMenu,
+            color,
+            selectedMenu,
           );
         })}
       </ChlidrenItems>
@@ -229,17 +262,35 @@ export interface MenuProps {
   depth?: number;
   icon?: string;
   url: string;
+  onClickMenu?: (menu: string) => void;
+  selectedMenu?: string;
 }
 
 /**
  * 메뉴 컴포넌트
  */
-const Menu = ({ name, icon, depth, url }: MenuProps) => {
+const Menu = ({
+  code,
+  name,
+  icon,
+  depth,
+  url,
+  onClickMenu,
+  selectedMenu,
+}: MenuProps) => {
   const findIcon: IconType | undefined = iconTypes.find((el) => el === icon);
+  const onClick = useCallback(() => {
+    if (onClickMenu) {
+      onClickMenu(code);
+    }
+  }, []);
 
   return (
-    <li>
-      <Link className="menu" to={url ? url : window.location.href}>
+    <li onClick={onClick}>
+      <Link
+        className={`menu ${code === selectedMenu ? 'selected' : ''}`}
+        to={url ? url : window.location.href}
+      >
         <div>{findIcon && <Icon icon={findIcon} />}</div>
         <div>
           <span className="menu-name">

@@ -8,6 +8,7 @@ export interface DoifThemeProps {
   subColors: DoifThemeSubColorProps;
   variants: DoifThemeVariantProps;
   markdown: DoifThemeMarkdownProps;
+  sideMenuColors: DoifThemeSideMenuColorProps;
 }
 
 /**
@@ -66,6 +67,27 @@ export interface DoifThemeMarkdownProps {
   linkColor: string;
   urlColor: string;
   disableBgColor: string;
+}
+
+export interface DoifThemeSideMenuColorProps {
+  primary: {
+    depth1: string;
+    depth2: string;
+    depth3: string;
+    depth4: string;
+    borderLeft: string;
+    selected: string;
+    text: string;
+  };
+  secondary: {
+    depth1: string;
+    depth2: string;
+    depth3: string;
+    depth4: string;
+    borderLeft: string;
+    selected: string;
+    text: string;
+  };
 }
 
 /** 컬러 type */

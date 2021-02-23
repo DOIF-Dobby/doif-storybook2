@@ -46,6 +46,26 @@ const Dark: DefaultTheme = {
     urlColor: '#1ea7fd',
     disableBgColor: '#f5f6fa',
   },
+  sideMenuColors: {
+    primary: {
+      depth1: '#535150',
+      depth2: '#6B6969',
+      depth3: '#848282',
+      depth4: '#9c9B9B',
+      borderLeft: '#dcca6f',
+      selected: '#F5dF4D',
+      text: '#ffffff',
+    },
+    secondary: {
+      depth1: '#34558b',
+      depth2: '#516D9B',
+      depth3: '#6E85AC',
+      depth4: '#8B9DBC',
+      borderLeft: '#e19454',
+      selected: '#FF922B',
+      text: '#ffffff',
+    },
+  },
 };
 
 export default Dark;
