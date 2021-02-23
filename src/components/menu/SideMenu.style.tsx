@@ -45,8 +45,8 @@ export const StyledSpreadMenu = styled.div<StyledSideMenuProps>`
 
   /** 카테고리-메뉴 컨테이너 */
   div.menu-container {
-    display: flex;
-    flex-direction: column;
+    /* display: flex; */
+    /* flex-direction: column; */
     height: 100%;
     color: ${(props) => props.theme.mainColors[props.color].light};
     overflow-y: auto;
@@ -69,23 +69,14 @@ export const StyledSpreadMenu = styled.div<StyledSideMenuProps>`
       height: 0;
     }
 
-    /** 자식 카테고리-메뉴들 */
-    div.children-items {
-      /* position: relative;
+    ul {
+      list-style: none;
 
-      animation-name: ani;
-      animation-duration: 1s;
-
-      @keyframes ani {
-        from {
-          max-height: 0;
-          opacity: 0;
-        }
-        to {
-          max-height: 800px;
-          opacity: 1;
-        }
-      } */
+      > li {
+        display: list-item;
+        user-select: none;
+        overflow: hidden;
+      }
     }
 
     /** 카테고리 - 메뉴 둘 다 */
@@ -149,5 +140,21 @@ export const StyledSpreadMenu = styled.div<StyledSideMenuProps>`
         flex-basis: 80%;
       }
     }
+  }
+`;
+
+interface ChildrenItemsProps {
+  itemCount: number;
+}
+
+export const ChlidrenItems = styled.ul<ChildrenItemsProps>`
+  transition: ease 0.2s;
+
+  &.open {
+    max-height: calc(2.5rem * ${(props) => props.itemCount});
+  }
+
+  &.close {
+    max-height: 0;
   }
 `;

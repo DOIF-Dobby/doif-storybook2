@@ -3,8 +3,12 @@ import { Link } from 'react-router-dom';
 import { DoifColorType } from '../../styles/themes/DoifThemeProps';
 import Icon, { IconType, iconTypes } from '../icon/Icon';
 import Input from '../input/Input';
-import { StyledSpreadMenu } from './SideMenu.style';
-import { changeToMenuProps, getDepthItems } from './menuUtil';
+import { ChlidrenItems, StyledSpreadMenu } from './SideMenu.style';
+import {
+  changeToMenuProps,
+  getDepthItems,
+  getOpenChildrenItemsCount,
+} from './menuUtil';
 import { useSpring, animated } from 'react-spring';
 
 interface SideMenuProps {
@@ -99,19 +103,21 @@ const SpreadMenu = ({ bigLogo, homeUrl, color, items }: SideMenuProps) => {
         <Input placeholder="Search..." color={color} />
       </div>
       <div className="menu-container">
-        {depthItems.map((item) => {
-          const isOpen =
-            openItemCodes && item.depth
-              ? openItemCodes[item.depth - 1] === item.code
-              : false;
+        <ul className="menu-ul">
+          {depthItems.map((item) => {
+            const isOpen =
+              openItemCodes && item.depth
+                ? openItemCodes[item.depth - 1] === item.code
+                : false;
 
-          return renderMenuOrCategory(
-            item,
-            isOpen,
-            openItemCodes,
-            onClickCategory,
-          );
-        })}
+            return renderMenuOrCategory(
+              item,
+              isOpen,
+              openItemCodes,
+              onClickCategory,
+            );
+          })}
+        </ul>
       </div>
     </StyledSpreadMenu>
   );
@@ -167,15 +173,6 @@ const Category = ({
   openItemCodes,
   onClickCategory,
 }: CategoryProps) => {
-  const props = useSpring({
-    from: { height: 0, opacity: 0, transform: 'translate3d(20px,0,0)' },
-    to: {
-      height: isOpen ? childrenItems && childrenItems.length * 40 : 0,
-      opacity: isOpen ? 1 : 0,
-      transform: `translate3d(${isOpen ? 0 : 20}px,0,0)`,
-    },
-  });
-
   const onClick = useCallback(
     (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
       if (onClickCategory) {
@@ -186,10 +183,12 @@ const Category = ({
     [],
   );
 
+  const count = getOpenChildrenItemsCount(childrenItems, openItemCodes, isOpen);
+
   const findIcon: IconType | undefined = iconTypes.find((el) => el === icon);
 
   return (
-    <>
+    <li>
       <a onClick={onClick} className="category" href="/">
         <div>{findIcon && <Icon icon={findIcon} />}</div>
         <div>
@@ -202,24 +201,25 @@ const Category = ({
           <Icon icon="downArrow" size="small" />
         </div>
       </a>
-      {isOpen && (
-        <animated.div style={props} className="children-items">
-          {childrenItems?.map((item) => {
-            const isOpen =
-              openItemCodes && item.depth
-                ? openItemCodes[item.depth - 1] === item.code
-                : false;
+      <ChlidrenItems
+        itemCount={childrenItems ? count : 0}
+        className={isOpen ? 'open' : 'close'}
+      >
+        {childrenItems?.map((item) => {
+          const isOpen =
+            openItemCodes && item.depth
+              ? openItemCodes[item.depth - 1] === item.code
+              : false;
 
-            return renderMenuOrCategory(
-              item,
-              isOpen,
-              openItemCodes,
-              onClickCategory,
-            );
-          })}
-        </animated.div>
-      )}
-    </>
+          return renderMenuOrCategory(
+            item,
+            isOpen,
+            openItemCodes,
+            onClickCategory,
+          );
+        })}
+      </ChlidrenItems>
+    </li>
   );
 };
 
@@ -238,15 +238,17 @@ const Menu = ({ name, icon, depth, url }: MenuProps) => {
   const findIcon: IconType | undefined = iconTypes.find((el) => el === icon);
 
   return (
-    <Link className="menu" to={url ? url : window.location.href}>
-      <div>{findIcon && <Icon icon={findIcon} />}</div>
-      <div>
-        <span className="menu-name">
-          {name}
-          {depth}
-        </span>
-      </div>
-    </Link>
+    <li>
+      <Link className="menu" to={url ? url : window.location.href}>
+        <div>{findIcon && <Icon icon={findIcon} />}</div>
+        <div>
+          <span className="menu-name">
+            {name}
+            {depth}
+          </span>
+        </div>
+      </Link>
+    </li>
   );
 };
 
