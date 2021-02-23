@@ -228,10 +228,7 @@ const Category = ({
       <a onClick={onClick} className="category" href="/">
         <div>{findIcon && <Icon icon={findIcon} />}</div>
         <div>
-          <span className="menu-name">
-            {name}
-            {depth}
-          </span>
+          <span className="menu-name">{name}</span>
         </div>
         <div className={classNameOpen}>
           <Icon icon="rightArrow" size="small" />
@@ -305,10 +302,7 @@ const Menu = ({
       >
         <div>{findIcon && <Icon icon={findIcon} />}</div>
         <div>
-          <span className="menu-name">
-            {name}
-            {depth}
-          </span>
+          <span className="menu-name">{name}</span>
         </div>
       </Link>
     </li>
