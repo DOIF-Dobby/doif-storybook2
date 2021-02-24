@@ -1,4 +1,4 @@
-import { CategoryProps, MenuProps } from './SideMenu';
+import { CategoryProps, MenuProps } from './menu.model';
 
 /**
  * Menu 아이템 반환

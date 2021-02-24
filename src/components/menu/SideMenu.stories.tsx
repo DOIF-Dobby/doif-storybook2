@@ -1,7 +1,8 @@
 import React, { ComponentProps, useCallback, useState } from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { Story } from '@storybook/react/types-6-0';
-import SideMenu, { CategoryProps, MenuProps } from './SideMenu';
+import SideMenu from './SideMenu';
+import { CategoryProps, MenuProps } from './menu.model';
 import Container from '../container/Container';
 // @ts-ignore
 import smallLogo from '../../images/v-logo-small.png';

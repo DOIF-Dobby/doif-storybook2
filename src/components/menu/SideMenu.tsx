@@ -8,6 +8,7 @@ import {
   getDepthItems,
   getOpenChildrenItemsCount,
 } from './menuUtil';
+import { CategoryProps, MenuProps } from './menu.model';
 
 interface SideMenuProps {
   /** 메뉴가 펼쳐졌을 때 보여줄 logo 입니다. */
@@ -170,21 +171,6 @@ const renderMenuOrCategory = (
   }
 };
 
-export interface CategoryProps {
-  code: string;
-  name: string;
-  depth?: number;
-  icon?: string;
-  childrenItems?: Array<CategoryProps | MenuProps>;
-  isOpen?: boolean;
-  openItemCodes?: string[];
-  onClickCategory?: (depth: number | undefined, code: string) => void;
-  onClickMenu?: (menu: string) => void;
-  color?: DoifColorType;
-  selectedMenu?: string;
-  isFold?: boolean;
-}
-
 /**
  * 카테고리 컴포넌트
  */
@@ -262,17 +248,6 @@ const Category = ({
     </li>
   );
 };
-
-export interface MenuProps {
-  code: string;
-  name: string;
-  depth?: number;
-  icon?: string;
-  url: string;
-  onClickMenu?: (menu: string) => void;
-  selectedMenu?: string;
-  isFold?: boolean;
-}
 
 /**
  * 메뉴 컴포넌트

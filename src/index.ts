@@ -30,4 +30,4 @@ export {
 export { GlobalStyle } from './styles/global-style';
 
 // interface
-export { MenuProps, CategoryProps } from './components/menu/SideMenu';
+export { MenuProps, CategoryProps } from './components/menu/menu.model';
