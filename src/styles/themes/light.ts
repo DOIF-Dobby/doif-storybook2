@@ -66,6 +66,9 @@ const Light: DefaultTheme = {
       text: '#ffffff',
     },
   },
+  headerColors: {
+    background: '#ffffff',
+  },
 };
 
 export default Light;

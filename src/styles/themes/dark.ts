@@ -66,6 +66,9 @@ const Dark: DefaultTheme = {
       text: '#ffffff',
     },
   },
+  headerColors: {
+    background: '#5c5c5c',
+  },
 };
 
 export default Dark;

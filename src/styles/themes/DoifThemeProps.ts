@@ -9,6 +9,7 @@ export interface DoifThemeProps {
   variants: DoifThemeVariantProps;
   markdown: DoifThemeMarkdownProps;
   sideMenuColors: DoifThemeSideMenuColorProps;
+  headerColors: DoifThemeHeaderColorProps;
 }
 
 /**
@@ -88,6 +89,10 @@ export interface DoifThemeSideMenuColorProps {
     selected: string;
     text: string;
   };
+}
+
+export interface DoifThemeHeaderColorProps {
+  background: string;
 }
 
 /** 컬러 type */

@@ -12,3 +12,5 @@ export { ReactComponent as warning } from './svg/warning.svg';
 export { ReactComponent as error } from './svg/error.svg';
 export { ReactComponent as info } from './svg/info.svg';
 export { ReactComponent as hamburger } from './svg/hamburger.svg';
+export { ReactComponent as search } from './svg/search.svg';
+export { ReactComponent as gear } from './svg/gear.svg';
