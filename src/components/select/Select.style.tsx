@@ -12,6 +12,7 @@ export const StyledSelectContainer = styled.div<StyledSelectContainerProps>`
   & {
     position: relative;
     width: ${(props) => props.width};
+    min-width: 100px;
   }
 
   .back-icon {
