@@ -16,6 +16,7 @@ const StyledBox = styled.div`
   background-color: ${(props) => props.theme.subColors.boxBackground};
   border-radius: ${(props) => props.theme.variants.borderRadius};
   padding: 1rem;
+  overflow: hidden;
 `;
 
 export default React.memo(Box);

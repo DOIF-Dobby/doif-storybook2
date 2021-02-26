@@ -16,6 +16,7 @@ const Page = ({ children }: PageProps) => {
 const StyledPage = styled.div`
   background-color: ${(props) => props.theme.subColors.pageBackground};
   padding: 0.75rem;
+  overflow-x: auto;
 `;
 
 export default React.memo(Page);
