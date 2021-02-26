@@ -7,6 +7,7 @@ interface StyledDatepickerContainerProps {
 }
 
 export const StyledDatepicker = styled.div<StyledDatepickerContainerProps>`
+  min-width: 100px;
   & {
     width: ${(props) => props.width};
   }
