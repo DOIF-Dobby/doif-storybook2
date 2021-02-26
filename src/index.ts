@@ -13,6 +13,7 @@ export { default as Textarea } from './components/textarea/Textarea';
 export { default as MarkdownPreview } from './components/markdown/MarkdownPreview';
 export { default as MarkdownEditor } from './components/markdown/MarkdownEditor';
 export { default as SideMenu } from './components/menu/SideMenu';
+export { default as Header } from './components/header/Header';
 
 export { default as Page } from './components/common/Page';
 export { default as Box } from './components/common/Box';
@@ -31,3 +32,6 @@ export { GlobalStyle } from './styles/global-style';
 
 // interface
 export { MenuProps, CategoryProps } from './components/menu/menu.model';
+
+// hooks
+export { default as useOutsideAlerter } from './hooks/useOutsideAlerter';
