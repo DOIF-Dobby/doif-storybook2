@@ -9,7 +9,7 @@ interface StyledDatepickerContainerProps {
 export const StyledDatepicker = styled.div<StyledDatepickerContainerProps>`
   & {
     width: ${(props) => props.width};
-    min-width: 100px;
+    min-width: 8rem;
   }
 
   & input:not(.search-input) {

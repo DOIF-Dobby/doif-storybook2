@@ -16,7 +16,6 @@ export const StyledContainer = styled.div<StyledContainerProps>`
     display: flex;
     flex-direction: ${(props) => props.direction};
     justify-content: ${(props) => props.align};
-    overflow: hidden;
 
     // 내용들 스타일
     & > div + div {
