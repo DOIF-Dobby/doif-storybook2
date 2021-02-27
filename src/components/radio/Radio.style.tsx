@@ -10,6 +10,7 @@ interface StyledRadioContainerProps {
 export const StyledRadioContainer = styled.div<StyledRadioContainerProps>`
   & {
     display: flex;
+    user-select: none;
   }
 
   & > label {

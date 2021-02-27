@@ -10,6 +10,7 @@ interface StyledCheckContainerProps {
 export const StyledCheckContainer = styled.div<StyledCheckContainerProps>`
   & {
     display: flex;
+    user-select: none;
   }
 
   & > label {

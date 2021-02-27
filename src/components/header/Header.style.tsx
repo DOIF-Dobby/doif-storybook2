@@ -20,6 +20,7 @@ export const StyledHeader = styled.div<StyledHeaderProps>`
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
   box-shadow: 0 2px 4px 4px rgba(0, 0, 0, 0.05);
+  user-select: none;
 
   > div.left {
     display: flex;
@@ -75,6 +76,9 @@ export const StyledHeader = styled.div<StyledHeaderProps>`
         img {
           width: 100%;
         }
+      }
+
+      > div.profile-name {
       }
 
       > div.profile-field {

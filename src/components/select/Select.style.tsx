@@ -19,6 +19,15 @@ export const StyledSelectContainer = styled.div<StyledSelectContainerProps>`
     cursor: ${(props) => !props.disabled && 'pointer'};
   }
 
+  & input:not(.search-input) {
+    color: transparent;
+    text-shadow: 0 0 0 ${(props) => props.theme.subColors.text};
+
+    &:focus {
+      outline: none;
+    }
+  }
+
   & > select {
     display: none;
     position: absolute;

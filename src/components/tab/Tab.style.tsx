@@ -28,6 +28,7 @@ export const StyledTabContainer = styled.div<StyledTabContainerProps>`
     border-bottom: none;
     border-top-left-radius: ${(props) => props.theme.variants.borderRadius};
     border-top-right-radius: ${(props) => props.theme.variants.borderRadius};
+    user-select: none;
 
     ::-webkit-scrollbar {
       width: 6px;

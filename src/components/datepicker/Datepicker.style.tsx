@@ -7,9 +7,18 @@ interface StyledDatepickerContainerProps {
 }
 
 export const StyledDatepicker = styled.div<StyledDatepickerContainerProps>`
-  min-width: 100px;
   & {
     width: ${(props) => props.width};
+    min-width: 100px;
+  }
+
+  & input:not(.search-input) {
+    color: transparent;
+    text-shadow: 0 0 0 ${(props) => props.theme.subColors.text};
+
+    &:focus {
+      outline: none;
+    }
   }
 
   /** wrapper class */

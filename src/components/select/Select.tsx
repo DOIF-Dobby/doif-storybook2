@@ -140,6 +140,7 @@ const Select = ({
               placeholder="Search..."
               value={searchValue}
               onChange={onChangeData}
+              className="search-input"
             />
           </div>
           <div className="list-container">
