@@ -1,4 +1,5 @@
 import { DefaultTheme } from 'styled-components';
+import Label from '../../components/form/Label';
 
 /**
  * 밝은 테마이다.
@@ -23,7 +24,7 @@ const Light: DefaultTheme = {
     info: '#005baf',
     content: '#ffffff',
     text: '#2b2a2a',
-    border: '#a5a4a3',
+    border: '#c3c3c3',
     disabled: '#e0e0df',
     pageBackground: '#ebeced',
     boxBackground: '#ffffff',
@@ -68,6 +69,11 @@ const Light: DefaultTheme = {
   },
   headerColors: {
     background: '#ffffff',
+  },
+  formColors: {
+    required: '#fa5252',
+    border: '#cacaca',
+    labelBackground: '#f5f3f3',
   },
 };
 

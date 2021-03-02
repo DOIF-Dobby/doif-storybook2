@@ -10,6 +10,7 @@ export interface DoifThemeProps {
   markdown: DoifThemeMarkdownProps;
   sideMenuColors: DoifThemeSideMenuColorProps;
   headerColors: DoifThemeHeaderColorProps;
+  formColors: DoifFormColorProps;
 }
 
 /**
@@ -93,6 +94,12 @@ export interface DoifThemeSideMenuColorProps {
 
 export interface DoifThemeHeaderColorProps {
   background: string;
+}
+
+export interface DoifFormColorProps {
+  required: string;
+  border: string;
+  labelBackground: string;
 }
 
 /** 컬러 type */

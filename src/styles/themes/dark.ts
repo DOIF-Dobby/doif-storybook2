@@ -69,6 +69,11 @@ const Dark: DefaultTheme = {
   headerColors: {
     background: '#5c5c5c',
   },
+  formColors: {
+    required: '#fa5252',
+    border: '#fab',
+    labelBackground: '#fab',
+  },
 };
 
 export default Dark;
