@@ -2,7 +2,7 @@ import React from 'react';
 import { DoifColorType } from '../../styles/themes/DoifThemeProps';
 import { StyledInputContainer } from './Input.style';
 
-interface InputProps
+export interface InputProps
   extends React.DetailedHTMLProps<
     React.InputHTMLAttributes<HTMLInputElement>,
     HTMLInputElement

@@ -19,7 +19,7 @@ interface LabelProps
 const Label = ({ required, children, ...props }: LabelProps) => {
   return (
     <StyledLabel className="label">
-      <div>{required && <Icon icon="check" />}</div>
+      <div>{required && <Icon icon="check" size="small" />}</div>
       <label {...props}>{children}</label>
     </StyledLabel>
   );
@@ -32,15 +32,16 @@ Label.defaultProps = {
 const StyledLabel = styled.div`
   display: flex;
   min-width: 10rem;
-  height: 100%;
+  max-width: 10rem;
   min-height: 2.5rem;
   background-color: ${(props) => props.theme.formColors.labelBackground};
   border-right: 1px solid ${(props) => props.theme.formColors.border};
+  height: 100%;
 
   > div:first-of-type {
     display: flex;
     justify-content: center;
-    width: 2rem;
+    width: 1.5rem;
 
     & svg {
       fill: ${(props) => props.theme.formColors.required};
@@ -50,6 +51,7 @@ const StyledLabel = styled.div`
   > label {
     display: flex;
     align-items: center;
+    font-size: 0.875rem;
   }
 `;
 

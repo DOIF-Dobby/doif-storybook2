@@ -11,6 +11,7 @@ export const StyledCheckContainer = styled.div<StyledCheckContainerProps>`
   & {
     display: flex;
     user-select: none;
+    flex-wrap: wrap;
   }
 
   & > label {
@@ -65,6 +66,7 @@ export const StyledCheckContainer = styled.div<StyledCheckContainerProps>`
     }
 
     & > div > div.checkbox {
+      width: 1rem;
       border: ${(props) =>
         `2px solid ${props.theme.mainColors[props.color].base}`};
       border-radius: ${(props) => props.theme.variants.borderRadius};
@@ -90,7 +92,7 @@ export const StyledCheckContainer = styled.div<StyledCheckContainerProps>`
     }
 
     & > span {
-      width: max-content;
+      /* width: max-content; */
       margin-left: 0.1rem;
       color: ${(props) =>
         props.disabled

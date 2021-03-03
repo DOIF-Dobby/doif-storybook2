@@ -29,10 +29,13 @@ interface StyledRowProps {
 }
 
 const StyledRow = styled.div<StyledRowProps>`
+  display: flex;
+
   & > div {
     display: flex;
     min-height: 2.5rem;
     align-items: center;
+    width: 100%;
 
     & > div.column {
       flex-basis: ${(props) => props.flexBasis};
@@ -41,6 +44,14 @@ const StyledRow = styled.div<StyledRowProps>`
     & > div.column + div.column {
       div.label {
         border-left: 1px solid ${(props) => props.theme.formColors.border};
+      }
+    }
+
+    & > div.column:first-of-type {
+      div.label {
+        border-top-left-radius: ${(props) => props.theme.variants.borderRadius};
+        border-bottom-left-radius: ${(props) =>
+          props.theme.variants.borderRadius};
       }
     }
   }

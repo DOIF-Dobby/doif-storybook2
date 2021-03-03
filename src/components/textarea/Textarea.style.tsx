@@ -12,7 +12,7 @@ interface StyledTextareaProps {
 export const StyledTextarea = styled.div<StyledTextareaProps>`
   & {
     width: ${(props) => props.width};
-    min-width: 8rem;
+    /* min-width: 8rem; */
   }
 
   & > textarea {

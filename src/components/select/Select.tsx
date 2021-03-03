@@ -13,7 +13,7 @@ import Input from '../input/Input';
 import { StyledSelectContainer } from './Select.style';
 import _ from 'lodash';
 
-interface SelectProps {
+export interface SelectProps {
   /** 보여줄 데이터 배열입니다. { code: string, name: string } */
   data: Array<DoifDataProps>;
   /** 선택할 데이터 code 값입니다. */
@@ -32,6 +32,8 @@ interface SelectProps {
   disabled: boolean;
   /** Selectbox의 defaultValue를 설정합니다. */
   defaultValue?: DoifDataProps;
+  /** id 속성입니다. */
+  id?: string;
   /** Selectbox의 값이 바뀔 때 실행되는 콜백 함수입니다. */
   onChange?: (e: React.ChangeEvent<HTMLSelectElement>) => void;
 }
@@ -49,8 +51,8 @@ const Select = ({
   height,
   disabled,
   defaultValue,
+  id,
   onChange,
-  ...props
 }: SelectProps) => {
   // input 스타일 설정
   const inputStyle = {
@@ -159,7 +161,7 @@ const Select = ({
           </div>
         </div>
       )}
-      <select onChange={onChange} ref={selectedRef} title={placeholder}>
+      <select onChange={onChange} ref={selectedRef} title={placeholder} id={id}>
         {dataList.map((d) => {
           return (
             <option key={d.code} value={d.code} title={d.name}>

@@ -2,7 +2,7 @@ import React from 'react';
 import { DoifColorType } from '../../styles/themes/DoifThemeProps';
 import { StyledTextarea } from './Textarea.style';
 
-interface TextareaProps
+export interface TextareaProps
   extends React.DetailedHTMLProps<
     React.TextareaHTMLAttributes<HTMLTextAreaElement>,
     HTMLTextAreaElement

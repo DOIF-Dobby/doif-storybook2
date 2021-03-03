@@ -5,7 +5,7 @@ import { DoifDataProps } from '../../props/DoifCommonProps';
 import Icon, { IconType } from '../icon/Icon';
 import { StyledCheckContainer } from './Check.style';
 
-interface CheckProps {
+export interface CheckProps {
   /** 보여줄 체크박스의 배열입니다. { code: string, name: string} */
   data: Array<DoifDataProps>;
   /** 선택할 체크박스 code의 배열입니다. */

@@ -17,21 +17,18 @@ interface ColumnProps
  */
 const Column = ({ width, children, ...props }: ColumnProps) => {
   return (
-    <StyledColumn className="column" width={width}>
+    <StyledColumn className="column" style={{ flexBasis: width }}>
       <div {...props}>{children}</div>
     </StyledColumn>
   );
 };
 
-interface StyledColumnProps {
-  width?: string;
-}
-
-const StyledColumn = styled.div<StyledColumnProps>`
-  flex-basis: ${(props) => props.width && props.width + ' !important'};
+const StyledColumn = styled.div`
+  display: flex;
   height: 100%;
 
   & > div {
+    width: 100%;
     display: flex;
     align-items: center;
   }

@@ -23,15 +23,15 @@ const Field = ({ children, ...props }: FieldProps) => {
 
 const StyledField = styled.div`
   width: 100%;
-  /* width: 100%; */
-  display: flex;
-  align-items: center;
 
   & > div {
+    display: flex;
+    align-items: center;
     flex-basis: 100%;
-    height: 100%;
     padding-left: 0.2rem;
     padding-right: 0.5rem;
+    padding-top: 0.2rem;
+    padding-bottom: 0.2rem;
   }
 `;
 

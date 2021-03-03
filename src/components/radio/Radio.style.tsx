@@ -11,6 +11,7 @@ export const StyledRadioContainer = styled.div<StyledRadioContainerProps>`
   & {
     display: flex;
     user-select: none;
+    flex-wrap: wrap;
   }
 
   & > label {
@@ -88,7 +89,7 @@ export const StyledRadioContainer = styled.div<StyledRadioContainerProps>`
     }
 
     & > span {
-      width: max-content;
+      /* width: max-content; */
       margin-left: 0.1rem;
       color: ${(props) =>
         props.disabled

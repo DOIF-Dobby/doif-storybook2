@@ -19,10 +19,12 @@ const Form = (props: FormProps) => {
 };
 
 const StyledForm = styled.div`
+  min-width: 50rem;
+
   & > form {
     display: flex;
     flex-direction: column;
-    /* border-radius: ${(props) => props.theme.variants.borderRadius}; */
+    border-radius: ${(props) => props.theme.variants.borderRadius};
     border: 1px solid ${(props) => props.theme.formColors.border};
 
     & > div.row + div.row {

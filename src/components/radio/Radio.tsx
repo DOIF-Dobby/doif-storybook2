@@ -4,7 +4,7 @@ import { DoifColorType } from '../../styles/themes/DoifThemeProps';
 import { DoifDataProps } from '../../props/DoifCommonProps';
 import { StyledRadioContainer } from './Radio.style';
 
-interface RadioProps {
+export interface RadioProps {
   /** 보여줄 라디오박스의 배열입니다. { code: string, name: string} */
   data: Array<DoifDataProps>;
   /** 선택할 라디오박스 code 값입니다. */

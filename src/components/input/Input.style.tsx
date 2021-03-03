@@ -17,7 +17,7 @@ export const StyledInputContainer = styled.div<StyledInputContainerProps>`
     height: 2rem;
     width: ${(props) => props.width};
     position: relative;
-    min-width: 8rem;
+    /* min-width: 8rem; */
   }
 
   & > input {

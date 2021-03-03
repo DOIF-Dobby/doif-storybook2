@@ -13,7 +13,7 @@ import Button from '../button/Button';
 import 'react-datepicker/dist/react-datepicker.min.css';
 import { DoifColorType } from '../../styles/themes/DoifThemeProps';
 
-interface DatepickerProps extends ReactDatePickerProps {
+export interface DatepickerProps extends ReactDatePickerProps {
   /** datepicker의 넓이를 설정합니다. */
   width: number | string;
   /** datepicker의 색상을 설정합니다. */
