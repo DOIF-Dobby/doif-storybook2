@@ -8,10 +8,11 @@ import { LabelXXXProps } from './LabelXXX';
 const LabelCheck = ({
   required,
   label,
+  columnWidth,
   ...checkProps
 }: LabelXXXProps & ComponentProps<typeof Check>) => {
   return (
-    <Column>
+    <Column width={columnWidth}>
       <Label required={required}>{label}</Label>
       <Field>
         <Check {...checkProps} />

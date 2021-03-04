@@ -19,6 +19,7 @@ import LabelSelect from './labelXXX/LabelSelect';
 import LabelCheck from './labelXXX/LabelCheck';
 import LabelRadio from './labelXXX/LabelRadio';
 import LabelDatepicker from './labelXXX/LabelDatepicker';
+import LabelTextarea from './labelXXX/LabelTextarea';
 import Select from '../select/Select';
 import Check from '../check/Check';
 import Radio from '../radio/Radio';
@@ -31,7 +32,7 @@ export default {
   decorators: [
     (Story) => (
       <Page>
-        <Box style={{ height: '300px' }}>{Story()}</Box>
+        <Box style={{ height: '400px' }}>{Story()}</Box>
       </Page>
     ),
   ],
@@ -140,9 +141,17 @@ const Template: Story<ComponentProps<typeof Form>> = (args) => {
           </Field>
         </Column>
         <Column width="33.33%">
-          <Label>비고</Label>
+          <Label>Input입니다</Label>
           <Field>
             <Input />
+          </Field>
+        </Column>
+      </Row>
+      <Row>
+        <Column>
+          <Label>Textarea입니다.</Label>
+          <Field>
+            <Textarea />
           </Field>
         </Column>
       </Row>
@@ -202,8 +211,9 @@ export const LabelXXX = () => {
   return (
     <Form>
       <Row>
-        <LabelInput label="Input입니다." />
+        <LabelInput required label="Input입니다." />
         <LabelSelect
+          required
           label="Select입니다."
           data={data}
           onChange={onChangeSelect}
@@ -218,6 +228,7 @@ export const LabelXXX = () => {
         />
       </Row>
       <Row>
+        <LabelInput label="Input입니다." />
         <LabelRadio
           label="Radio입니다"
           data={data}
@@ -230,6 +241,17 @@ export const LabelXXX = () => {
           selected={startDate}
           onChange={onChangeDate}
         />
+      </Row>
+      <Row>
+        <LabelInput
+          label="넓이를 조정할 수 있습니다."
+          columnWidth="66.66%"
+          placeholder="넓이를 조정할 수 있습니다."
+        />
+        <LabelInput label="Input입니다." columnWidth="33.33%" />
+      </Row>
+      <Row>
+        <LabelTextarea label="Textarea입니다." />
       </Row>
     </Form>
   );

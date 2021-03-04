@@ -2,16 +2,16 @@ import React, { ComponentProps } from 'react';
 import Column from '../Column';
 import Label from '../Label';
 import Field from '../Field';
-import Input from '../../input/Input';
+import Textarea from '../../textarea/Textarea';
 import { LabelXXXProps } from './LabelXXX';
 import { v4 as uuidv4 } from 'uuid';
 
-const LabelInput = ({
+const LabelTextarea = ({
   required,
   label,
   columnWidth,
-  ...inputProps
-}: LabelXXXProps & ComponentProps<typeof Input>) => {
+  ...textareaProps
+}: LabelXXXProps & ComponentProps<typeof Textarea>) => {
   const randomId = uuidv4();
 
   return (
@@ -20,18 +20,19 @@ const LabelInput = ({
         {label}
       </Label>
       <Field>
-        <Input id={randomId} {...inputProps} />
+        <Textarea id={randomId} {...textareaProps} />
       </Field>
     </Column>
   );
 };
 
-LabelInput.defaultProps = {
+LabelTextarea.defaultProps = {
   required: false,
-  variant: 'outline',
   color: 'primary',
   width: '100%',
   disabled: false,
+  resize: 'none',
+  rows: 10,
 };
 
-export default React.memo(LabelInput);
+export default React.memo(LabelTextarea);

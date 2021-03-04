@@ -9,12 +9,13 @@ import { v4 as uuidv4 } from 'uuid';
 const LabelSelect = ({
   required,
   label,
+  columnWidth,
   ...selectProps
 }: LabelXXXProps & ComponentProps<typeof Select>) => {
   const randomId = uuidv4();
 
   return (
-    <Column>
+    <Column width={columnWidth}>
       <Label htmlFor={randomId} required={required}>
         {label}
       </Label>

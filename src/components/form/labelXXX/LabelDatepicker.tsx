@@ -9,12 +9,13 @@ import { v4 as uuidv4 } from 'uuid';
 const LabelInput = ({
   required,
   label,
+  columnWidth,
   ...datepickerProps
 }: LabelXXXProps & ComponentProps<typeof Datepicker>) => {
   const randomId = uuidv4();
 
   return (
-    <Column>
+    <Column width={columnWidth}>
       <Label htmlFor={randomId} required={required}>
         {label}
       </Label>

@@ -8,10 +8,11 @@ import { LabelXXXProps } from './LabelXXX';
 const LabelRadio = ({
   required,
   label,
+  columnWidth,
   ...radioProps
 }: LabelXXXProps & ComponentProps<typeof Radio>) => {
   return (
-    <Column>
+    <Column width={columnWidth}>
       <Label required={required}>{label}</Label>
       <Field>
         <Radio {...radioProps} />
