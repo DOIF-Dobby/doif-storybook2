@@ -9,6 +9,7 @@ interface StyledContainerProps {
 export const StyledContainer = styled.div<StyledContainerProps>`
   & {
     display: flex;
+    width: 100%;
   }
 
   & > div {

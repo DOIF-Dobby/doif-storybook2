@@ -73,7 +73,7 @@ const Button = ({
       iconLocation={iconLocation}
       iconOnly={iconOnly}
     >
-      <button disabled={disabled} {...props}>
+      <button disabled={disabled} type="button" {...props}>
         {children}
         <Ripple disabled={disabled} />
       </button>

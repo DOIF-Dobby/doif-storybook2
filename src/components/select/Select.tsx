@@ -34,6 +34,8 @@ export interface SelectProps {
   defaultValue?: DoifDataProps;
   /** id 속성입니다. */
   id?: string;
+  /** name 속성입니다. */
+  name?: string;
   /** Selectbox의 값이 바뀔 때 실행되는 콜백 함수입니다. */
   onChange?: (e: React.ChangeEvent<HTMLSelectElement>) => void;
 }
@@ -52,6 +54,7 @@ const Select = ({
   disabled,
   defaultValue,
   id,
+  name,
   onChange,
 }: SelectProps) => {
   // input 스타일 설정
@@ -161,7 +164,13 @@ const Select = ({
           </div>
         </div>
       )}
-      <select onChange={onChange} ref={selectedRef} title={placeholder} id={id}>
+      <select
+        onChange={onChange}
+        ref={selectedRef}
+        title={placeholder}
+        id={id}
+        name={name}
+      >
         {dataList.map((d) => {
           return (
             <option key={d.code} value={d.code} title={d.name}>
