@@ -47,13 +47,13 @@ const StyledRow = styled.div<StyledRowProps>`
       }
     }
 
-    & > div.column:first-of-type {
+    /* & > div.column:first-of-type {
       div.label {
         border-top-left-radius: ${(props) => props.theme.variants.borderRadius};
         border-bottom-left-radius: ${(props) =>
           props.theme.variants.borderRadius};
       }
-    }
+    } */
   }
 `;
 

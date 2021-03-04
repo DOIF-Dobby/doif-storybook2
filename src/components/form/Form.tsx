@@ -24,8 +24,41 @@ const StyledForm = styled.div`
   & > form {
     display: flex;
     flex-direction: column;
-    border-radius: ${(props) => props.theme.variants.borderRadius};
-    border: 1px solid ${(props) => props.theme.formColors.border};
+    /* border-radius: ${(props) => props.theme.variants.borderRadius}; */
+    /* border: 1px solid ${(props) => props.theme.formColors.border}; */
+
+    & > div.row {
+      border-left: 1px solid ${(props) => props.theme.formColors.border};
+      border-right: 1px solid ${(props) => props.theme.formColors.border};
+    }
+
+    & > div.row:first-of-type {
+      border-top: 1px solid ${(props) => props.theme.formColors.border};
+      border-top-left-radius: ${(props) => props.theme.variants.borderRadius};
+      border-top-right-radius: ${(props) => props.theme.variants.borderRadius};
+
+      div.column:first-of-type  {
+        div.label {
+          border-top-left-radius: ${(props) =>
+            props.theme.variants.borderRadius};
+        }
+      }
+    }
+
+    & > div.row:last-of-type {
+      border-bottom: 1px solid ${(props) => props.theme.formColors.border};
+      border-bottom-left-radius: ${(props) =>
+        props.theme.variants.borderRadius};
+      border-bottom-right-radius: ${(props) =>
+        props.theme.variants.borderRadius};
+
+      div.column:first-of-type  {
+        div.label {
+          border-bottom-left-radius: ${(props) =>
+            props.theme.variants.borderRadius};
+        }
+      }
+    }
 
     & > div.row + div.row {
       border-top: 1px solid ${(props) => props.theme.formColors.border};

@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyledContainer } from './Container.style';
 
-interface ContainerProps
+export interface ContainerProps
   extends React.DetailedHTMLProps<
     React.HTMLAttributes<HTMLDivElement>,
     HTMLDivElement

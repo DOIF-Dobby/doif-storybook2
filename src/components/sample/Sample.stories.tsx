@@ -12,7 +12,7 @@ import LabelSelect from '../form/labelXXX/LabelSelect';
 import LabelDatepicker from '../form/labelXXX/LabelDatepicker';
 import LabelCheck from '../form/labelXXX/LabelCheck';
 import LabelRadio from '../form/labelXXX/LabelRadio';
-import Container from '../container/Container';
+import InFormContainer from '../container/InFormContainer';
 import Button from '../button/Button';
 import DateUtils from '../../libs/DateUtils';
 
@@ -194,14 +194,12 @@ export const UseCustomHookSample = () => {
           onChange={onChange}
         />
       </Row>
-      {/* <Row> */}
-      <Container align="center">
+      <InFormContainer align="center">
         <Button type="submit">호잇</Button>
         <Button variant="outline" onClick={onReset}>
           초기화
         </Button>
-      </Container>
-      {/* </Row> */}
+      </InFormContainer>
     </Form>
   );
 };
