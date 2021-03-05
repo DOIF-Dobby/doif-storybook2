@@ -12,6 +12,7 @@ import LabelSelect from '../form/labelXXX/LabelSelect';
 import LabelDatepicker from '../form/labelXXX/LabelDatepicker';
 import LabelCheck from '../form/labelXXX/LabelCheck';
 import LabelRadio from '../form/labelXXX/LabelRadio';
+import LabelTextarea from '../form/labelXXX/LabelTextarea';
 import InFormContainer from '../container/InFormContainer';
 import Button from '../button/Button';
 import DateUtils from '../../libs/DateUtils';
@@ -21,7 +22,7 @@ export default {
   decorators: [
     (Story) => (
       <Page>
-        <Box style={{ height: '400px' }}>{Story()}</Box>
+        <Box style={{ height: '600px' }}>{Story()}</Box>
       </Page>
     ),
   ],
@@ -45,6 +46,7 @@ export const UseCustomHookSample = () => {
     selectValue2: '',
     radioValue1: '',
     radioValue2: '',
+    textareaValue1: '',
   });
 
   const [dateForm, onChangeDate, resetDate] = useChangeDate({
@@ -66,6 +68,7 @@ export const UseCustomHookSample = () => {
     selectValue2,
     radioValue1,
     radioValue2,
+    textareaValue1,
   } = inputForm;
 
   const { startDate, endDate, month, time } = dateForm;
@@ -101,12 +104,14 @@ export const UseCustomHookSample = () => {
     <Form onSubmit={onSubmit}>
       <Row>
         <LabelInput
+          required
           label="Input 1"
           value={inputValue1}
           name="inputValue1"
           onChange={onChange}
         />
         <LabelInput
+          required
           label="Input 2"
           value={inputValue2}
           name="inputValue2"
@@ -192,6 +197,14 @@ export const UseCustomHookSample = () => {
           value={radioValue2}
           name="radioValue2"
           onChange={onChange}
+        />
+      </Row>
+      <Row>
+        <LabelTextarea
+          label="Textarea 1"
+          value={textareaValue1}
+          onChange={onChange}
+          name="textareaValue1"
         />
       </Row>
       <InFormContainer align="center">

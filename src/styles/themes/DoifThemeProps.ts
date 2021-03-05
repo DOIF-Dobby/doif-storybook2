@@ -100,6 +100,8 @@ export interface DoifFormColorProps {
   required: string;
   border: string;
   labelBackground: string;
+  fieldBackground: string;
+  labelText: string;
 }
 
 /** 컬러 type */

@@ -74,6 +74,8 @@ const Light: DefaultTheme = {
     required: '#fa5252',
     border: '#cacaca',
     labelBackground: '#f5f3f3',
+    fieldBackground: '#ffffff',
+    labelText: '#2b2a2a',
   },
 };
 

@@ -35,6 +35,7 @@ const StyledLabel = styled.div`
   max-width: 10rem;
   min-height: 2.5rem;
   background-color: ${(props) => props.theme.formColors.labelBackground};
+  color: ${(props) => props.theme.formColors.labelText};
   border-right: 1px solid ${(props) => props.theme.formColors.border};
   height: 100%;
 

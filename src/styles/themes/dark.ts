@@ -73,6 +73,8 @@ const Dark: DefaultTheme = {
     required: '#fa5252',
     border: '#fab',
     labelBackground: '#fab',
+    fieldBackground: '#ffffff',
+    labelText: '#ffffff',
   },
 };
 

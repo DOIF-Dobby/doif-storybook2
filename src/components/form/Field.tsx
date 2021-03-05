@@ -23,6 +23,7 @@ const Field = ({ children, ...props }: FieldProps) => {
 
 const StyledField = styled.div`
   width: 100%;
+  background-color: ${(props) => props.theme.formColors.fieldBackground};
 
   & > div {
     display: flex;
