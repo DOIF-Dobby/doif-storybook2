@@ -11,6 +11,7 @@ export interface DoifThemeProps {
   sideMenuColors: DoifThemeSideMenuColorProps;
   headerColors: DoifThemeHeaderColorProps;
   formColors: DoifFormColorProps;
+  tableColors: DoifTableColorProps;
 }
 
 /**
@@ -102,6 +103,16 @@ export interface DoifFormColorProps {
   labelBackground: string;
   fieldBackground: string;
   labelText: string;
+}
+
+export interface DoifTableColorProps {
+  border: string;
+  text: string;
+  captionBackground: string;
+  buttonBackground: string;
+  headerBackground: string;
+  columnBackground: string;
+  footerBackground: string;
 }
 
 /** 컬러 type */

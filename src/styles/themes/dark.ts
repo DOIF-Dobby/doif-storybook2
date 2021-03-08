@@ -76,6 +76,15 @@ const Dark: DefaultTheme = {
     fieldBackground: '#ffffff',
     labelText: '#ffffff',
   },
+  tableColors: {
+    border: '#c3c3c3',
+    text: '#2b2a2a',
+    captionBackground: '#f1f3f5',
+    buttonBackground: '#ffffff',
+    headerBackground: '#f1f3f5',
+    columnBackground: '#ffffff',
+    footerBackground: '#f1f3f5',
+  },
 };
 
 export default Dark;

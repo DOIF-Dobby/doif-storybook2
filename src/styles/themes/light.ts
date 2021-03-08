@@ -72,10 +72,19 @@ const Light: DefaultTheme = {
   },
   formColors: {
     required: '#fa5252',
-    border: '#cacaca',
-    labelBackground: '#f5f3f3',
+    border: '#c3c3c3',
+    labelBackground: '#f1f3f5',
     fieldBackground: '#ffffff',
     labelText: '#2b2a2a',
+  },
+  tableColors: {
+    border: '#c3c3c3',
+    text: '#2b2a2a',
+    captionBackground: '#f1f3f5',
+    buttonBackground: '#ffffff',
+    headerBackground: '#f1f3f5',
+    columnBackground: '#ffffff',
+    footerBackground: '#f1f3f5',
   },
 };
 
