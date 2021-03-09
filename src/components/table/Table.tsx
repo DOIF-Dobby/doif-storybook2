@@ -1,20 +1,41 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { StyledTable } from './Table.style';
 import { Column, useTable, usePagination } from 'react-table';
+import Pagination from './Pagination';
 
 interface TableProps {
   /** Table Header 배열 */
-  columns: Column<Object>[];
+  // columns: Column<Object>[];
   /** Table Data 배열 */
   data: Object[];
-  /** caption */
+  /** Table 모델 */
+  model: TableModelProps[];
+  /** caption을 설정합니다. */
   caption: string;
+  /** `Table`컴포넌트의 높이를 설정합니다. */
+  height: string;
+}
+
+export interface TableModelProps {
+  label: string;
+  name: string;
+  width: number;
+  align: 'left' | 'center' | 'right';
 }
 
 /**
  * `Table` 컴포넌트는 기존의 `JqGrid`와 같은 컴포넌트입니다. 자세한 내용은 https://react-table.tanstack.com/ 이곳을 참조하세요.
  */
-const Table = ({ columns, data, caption }: TableProps) => {
+const Table = ({ model, data, caption, height }: TableProps) => {
+  const columns: Column<Object>[] = useMemo(() => {
+    return model.map((m) => ({
+      Header: m.label,
+      accessor: m.name,
+      width: m.width,
+      align: m.align,
+    })) as Column<Object>[];
+  }, [model]);
+
   const {
     getTableProps,
     getTableBodyProps,
@@ -37,79 +58,73 @@ const Table = ({ columns, data, caption }: TableProps) => {
   );
 
   return (
-    <StyledTable>
+    <StyledTable height={height}>
+      <caption>{caption}</caption>
       <table {...getTableProps()}>
-        <caption>{caption}</caption>
-        <thead>
-          {headerGroups.map((headerGroup) => (
-            <tr {...headerGroup.getHeaderGroupProps()}>
-              {headerGroup.headers.map((column) => (
-                <th {...column.getHeaderProps()}>{column.render('Header')}</th>
-              ))}
-            </tr>
-          ))}
-        </thead>
-        <tbody {...getTableBodyProps()}>
-          {page.map((row, i) => {
-            prepareRow(row);
-            return (
-              <tr {...row.getRowProps()}>
-                {row.cells.map((cell) => {
-                  return (
-                    <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
-                  );
-                })}
+        <div className="thead-tbody-container">
+          <thead>
+            {headerGroups.map((headerGroup) => (
+              <tr {...headerGroup.getHeaderGroupProps()}>
+                {headerGroup.headers.map((column) => (
+                  <th
+                    {...column.getHeaderProps()}
+                    style={{
+                      width: column.width,
+                      maxWidth: column.width,
+                      minWidth: column.width,
+                    }}
+                  >
+                    {column.render('Header')}
+                  </th>
+                ))}
               </tr>
-            );
-          })}
-        </tbody>
+            ))}
+          </thead>
+          <tbody {...getTableBodyProps()}>
+            {page.map((row, i) => {
+              prepareRow(row);
+              return (
+                <tr {...row.getRowProps()}>
+                  {row.cells.map((cell) => {
+                    console.log(cell);
+                    return (
+                      <td
+                        {...cell.getCellProps()}
+                        style={{
+                          width: cell.column.width,
+                          maxWidth: cell.column.width,
+                          minWidth: cell.column.width,
+                          textAlign: cell.column.align,
+                        }}
+                      >
+                        {cell.render('Cell')}
+                      </td>
+                    );
+                  })}
+                </tr>
+              );
+            })}
+          </tbody>
+        </div>
       </table>
-      <div className="pagination">
-        <button onClick={() => gotoPage(0)} disabled={!canPreviousPage}>
-          {'<<'}
-        </button>{' '}
-        <button onClick={() => previousPage()} disabled={!canPreviousPage}>
-          {'<'}
-        </button>{' '}
-        <button onClick={() => nextPage()} disabled={!canNextPage}>
-          {'>'}
-        </button>{' '}
-        <button onClick={() => gotoPage(pageCount - 1)} disabled={!canNextPage}>
-          {'>>'}
-        </button>{' '}
-        <span>
-          Page{' '}
-          <strong>
-            {pageIndex + 1} of {pageOptions.length}
-          </strong>{' '}
-        </span>
-        <span>
-          | Go to page:{' '}
-          <input
-            type="number"
-            defaultValue={pageIndex + 1}
-            onChange={(e) => {
-              const page = e.target.value ? Number(e.target.value) - 1 : 0;
-              gotoPage(page);
-            }}
-            style={{ width: '100px' }}
-          />
-        </span>{' '}
-        <select
-          value={pageSize}
-          onChange={(e) => {
-            setPageSize(Number(e.target.value));
-          }}
-        >
-          {[10, 20, 30, 40, 50].map((pageSize) => (
-            <option key={pageSize} value={pageSize}>
-              Show {pageSize}
-            </option>
-          ))}
-        </select>
-      </div>
+      <Pagination
+        canPreviousPage={canPreviousPage}
+        canNextPage={canNextPage}
+        pageOptions={pageOptions}
+        pageCount={pageCount}
+        gotoPage={gotoPage}
+        nextPage={nextPage}
+        previousPage={previousPage}
+        setPageSize={setPageSize}
+        pageIndex={pageIndex}
+        pageSize={pageSize}
+      />
     </StyledTable>
   );
+};
+
+Table.defaultProps = {
+  height: '400px',
 };
 
 export default React.memo(Table);

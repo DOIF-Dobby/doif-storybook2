@@ -116,7 +116,9 @@ declare module 'react-table' {
     extends UseFiltersColumnProps<D>,
       UseGroupByColumnProps<D>,
       UseResizeColumnsColumnProps<D>,
-      UseSortByColumnProps<D> {}
+      UseSortByColumnProps<D> {
+    align: 'left' | 'center' | 'right';
+  }
 
   export interface Cell<
     D extends Record<string, unknown> = Record<string, unknown>,

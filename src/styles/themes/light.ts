@@ -85,6 +85,7 @@ const Light: DefaultTheme = {
     headerBackground: '#f1f3f5',
     columnBackground: '#ffffff',
     footerBackground: '#f1f3f5',
+    paginationBackground: '#f1f3f5',
   },
 };
 

@@ -113,6 +113,7 @@ export interface DoifTableColorProps {
   headerBackground: string;
   columnBackground: string;
   footerBackground: string;
+  paginationBackground: string;
 }
 
 /** 컬러 type */
