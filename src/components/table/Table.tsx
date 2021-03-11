@@ -50,6 +50,7 @@ const Table = ({ model, data, caption, height }: TableProps) => {
     nextPage,
     previousPage,
     setPageSize,
+    totalColumnsWidth,
     state: { pageIndex, pageSize },
   } = useTable(
     { columns, data, initialState: { pageIndex: 0 } },
@@ -63,7 +64,10 @@ const Table = ({ model, data, caption, height }: TableProps) => {
   }, []);
 
   return (
-    <StyledTable height={height}>
+    <StyledTable height={height} totalWidth={totalColumnsWidth + 'px'}>
+      <div className="caption-container">
+        <span>{caption}</span>
+      </div>
       <div className="table-container">
         <div className="thead-container" ref={theadRef}>
           <table {...getTableProps()} summary={caption}>

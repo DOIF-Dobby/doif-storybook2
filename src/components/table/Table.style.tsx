@@ -2,9 +2,28 @@ import styled from 'styled-components';
 
 interface StyledTableProps {
   height: string;
+  totalWidth: string;
 }
 
 export const StyledTable = styled.div<StyledTableProps>`
+  color: ${(props) => props.theme.tableColors.text};
+
+  /** caption */
+  div.caption-container {
+    border: 1px solid ${(props) => props.theme.tableColors.border};
+    border-bottom: none;
+    height: 2rem;
+    line-height: 2rem;
+    padding-left: 1rem;
+    background-color: ${(props) => props.theme.tableColors.captionBackground};
+    border-top-left-radius: ${(props) => props.theme.variants.borderRadius};
+    border-top-right-radius: ${(props) => props.theme.variants.borderRadius};
+
+    span {
+      font-weight: 600;
+    }
+  }
+
   div.table-container {
     border: 1px solid ${(props) => props.theme.tableColors.border};
 
@@ -41,7 +60,7 @@ export const StyledTable = styled.div<StyledTableProps>`
           }
 
           th:last-of-type {
-            min-width: 6px;
+            width: ${(props) => props.totalWidth};
             border-right: 1px solid ${(props) => props.theme.tableColors.border};
           }
         }
