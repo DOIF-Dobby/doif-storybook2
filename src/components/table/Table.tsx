@@ -1,6 +1,13 @@
 import React, { RefObject, useCallback, useMemo, useRef } from 'react';
 import { StyledTable } from './Table.style';
-import { Column, useTable, usePagination } from 'react-table';
+import {
+  Column,
+  useTable,
+  usePagination,
+  useBlockLayout,
+  useResizeColumns,
+  useRowSelect,
+} from 'react-table';
 import Pagination from './Pagination';
 import Scroll from '../common/Scroll';
 
@@ -40,6 +47,7 @@ const Table = ({ model, data, caption, height }: TableProps) => {
     getTableBodyProps,
     headerGroups,
     prepareRow,
+    selectedFlatRows,
     footerGroups,
     page,
     canPreviousPage,
@@ -51,13 +59,41 @@ const Table = ({ model, data, caption, height }: TableProps) => {
     previousPage,
     setPageSize,
     totalColumnsWidth,
-    state: { pageIndex, pageSize },
+    state: { pageIndex, pageSize, selectedRowIds },
   } = useTable(
     { columns, data, initialState: { pageIndex: 0 } },
     usePagination,
+    // useBlockLayout,
+    useResizeColumns,
+    useRowSelect,
+    (hooks) => {
+      hooks.visibleColumns.push((columns) => [
+        // Let's make a column for selection
+        {
+          id: 'selection',
+          // The header can use the table's getToggleAllRowsSelectedProps method
+          // to render a checkbox
+          Header: ({ getToggleAllRowsSelectedProps }) => (
+            <div>
+              <IndeterminateCheckbox {...getToggleAllRowsSelectedProps()} />
+            </div>
+          ),
+          // The cell can use the individual row's getToggleRowSelectedProps method
+          // to the render a checkbox
+          Cell: ({ row }) => (
+            <div>
+              <IndeterminateCheckbox {...row.getToggleRowSelectedProps()} />
+            </div>
+          ),
+        },
+        ...columns,
+      ]);
+    },
   );
 
   const theadRef: RefObject<HTMLDivElement> = useRef(null);
+
+  console.log(selectedRowIds);
 
   const onScroll = useCallback((e) => {
     theadRef.current?.scrollTo({ left: e.target.scrollLeft });
@@ -82,6 +118,12 @@ const Table = ({ model, data, caption, height }: TableProps) => {
                       }}
                     >
                       {column.render('Header')}
+                      <div
+                        {...column.getResizerProps()}
+                        className={`resizer ${
+                          column.isResizing ? 'isResizing' : ''
+                        }`}
+                      />
                     </th>
                   ))}
                   <th></th>
@@ -132,9 +174,42 @@ const Table = ({ model, data, caption, height }: TableProps) => {
         pageIndex={pageIndex}
         pageSize={pageSize}
       />
+
+      <p>Selected Rows: {Object.keys(selectedRowIds).length}</p>
+      <pre>
+        <code>
+          {JSON.stringify(
+            {
+              selectedRowIds: selectedRowIds,
+              'selectedFlatRows[].original': selectedFlatRows.map(
+                (d) => d.original,
+              ),
+            },
+            null,
+            2,
+          )}
+        </code>
+      </pre>
     </StyledTable>
   );
 };
+
+const IndeterminateCheckbox = React.forwardRef(
+  ({ indeterminate, ...rest }, ref) => {
+    const defaultRef = React.useRef();
+    const resolvedRef = ref || defaultRef;
+
+    React.useEffect(() => {
+      resolvedRef.current.indeterminate = indeterminate;
+    }, [resolvedRef, indeterminate]);
+
+    return (
+      <>
+        <input type="checkbox" ref={resolvedRef} {...rest} />
+      </>
+    );
+  },
+);
 
 Table.defaultProps = {
   height: '400px',

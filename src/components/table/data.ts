@@ -8,7 +8,7 @@ export const data1 = [
     batchConfTypeNm: '영업점 정산',
     crt_user: 'ENC전혜수',
     crtdt: '2020-11-30 18:50:15',
-    pPageId: '',
+    pPageId: 'zzzz',
     pageId: '',
     procCmd: '',
     procOrder: '1',
