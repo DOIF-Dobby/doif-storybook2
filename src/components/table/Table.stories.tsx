@@ -12,7 +12,7 @@ export default {
   decorators: [
     (Story) => (
       <Page>
-        <Box style={{ height: '600px' }}>{Story()}</Box>
+        <Box style={{ height: '700px' }}>{Story()}</Box>
       </Page>
     ),
   ],

@@ -2,13 +2,12 @@ import React, { RefObject, useCallback, useMemo, useRef } from 'react';
 import { StyledTable } from './Table.style';
 import { Column, useTable, usePagination } from 'react-table';
 import Pagination from './Pagination';
+import Scroll from '../common/Scroll';
 
 interface TableProps {
-  /** Table Header 배열 */
-  // columns: Column<Object>[];
   /** Table Data 배열 */
   data: Object[];
-  /** Table 모델 */
+  /** Table 모델 배열 */
   model: TableModelProps[];
   /** caption을 설정합니다. */
   caption: string;
@@ -81,37 +80,40 @@ const Table = ({ model, data, caption, height }: TableProps) => {
                       {column.render('Header')}
                     </th>
                   ))}
+                  <th></th>
                 </tr>
               ))}
             </thead>
           </table>
         </div>
-        <div className="tbody-container" onScroll={onScroll}>
-          <table {...getTableProps()} summary={caption}>
-            <tbody {...getTableBodyProps()}>
-              {page.map((row, i) => {
-                prepareRow(row);
-                return (
-                  <tr {...row.getRowProps()}>
-                    {row.cells.map((cell) => {
-                      return (
-                        <td
-                          {...cell.getCellProps()}
-                          style={{
-                            width: cell.column.width,
-                            textAlign: cell.column.align,
-                          }}
-                        >
-                          {cell.render('Cell')}
-                        </td>
-                      );
-                    })}
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
-        </div>
+        <Scroll onScroll={onScroll}>
+          <div className="tbody-container">
+            <table {...getTableProps()} summary={caption}>
+              <tbody {...getTableBodyProps()}>
+                {page.map((row, i) => {
+                  prepareRow(row);
+                  return (
+                    <tr {...row.getRowProps()}>
+                      {row.cells.map((cell) => {
+                        return (
+                          <td
+                            {...cell.getCellProps()}
+                            style={{
+                              width: cell.column.width,
+                              textAlign: cell.column.align,
+                            }}
+                          >
+                            {cell.render('Cell')}
+                          </td>
+                        );
+                      })}
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
+        </Scroll>
       </div>
 
       <Pagination

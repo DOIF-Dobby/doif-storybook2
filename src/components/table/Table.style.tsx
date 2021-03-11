@@ -8,10 +8,9 @@ export const StyledTable = styled.div<StyledTableProps>`
   div.table-container {
     border: 1px solid ${(props) => props.theme.tableColors.border};
 
-    /** 테이블 공통 */
     table {
       width: max-content;
-      user-select: text;
+      table-layout: fixed;
     }
 
     /** thead 테이블 */
@@ -22,7 +21,6 @@ export const StyledTable = styled.div<StyledTableProps>`
       table {
         tr {
           th {
-            display: inline-block;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
@@ -43,8 +41,8 @@ export const StyledTable = styled.div<StyledTableProps>`
           }
 
           th:last-of-type {
-            border-right: 1px solid ${(props) =>
-              props.theme.tableColors.border};
+            min-width: 6px;
+            border-right: 1px solid ${(props) => props.theme.tableColors.border};
           }
         }
       }
@@ -52,35 +50,11 @@ export const StyledTable = styled.div<StyledTableProps>`
 
     /** tbody 테이블 */
     div.tbody-container {
-      overflow: auto;
-      user-select: none;
       height: ${(props) => props.height};
-
-      /* ::-webkit-scrollbar {
-        width: 6px;
-        height: 6px;
-      }
-
-      ::-webkit-scrollbar-track {
-        background-color: transparent;
-        border: 1px solid ${(props) => props.theme.tableColors.border};
-        padding: 1px;
-      }
-
-      ::-webkit-scrollbar-thumb {
-        border-radius: 3px;
-        background-color: #fab;
-      }
-
-      ::-webkit-scrollbar-button {
-        width: 0;
-        height: 0;
-      } */
 
       table {
         tr {
           td {
-            display: inline-block;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
@@ -97,8 +71,7 @@ export const StyledTable = styled.div<StyledTableProps>`
           }
 
           td:last-of-type {
-            border-right: 1px solid ${(props) =>
-              props.theme.tableColors.border};
+            border-right: 1px solid ${(props) => props.theme.tableColors.border};
           }
         }
 
