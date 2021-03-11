@@ -5,96 +5,108 @@ interface StyledTableProps {
 }
 
 export const StyledTable = styled.div<StyledTableProps>`
-  max-height: ${(props) => props.height};
-  height: ${(props) => props.height};
-  position: relative;
-
-  > caption {
-    text-align: left;
-    padding: 0.5rem;
-    font-weight: 600;
-    background-color: ${(props) => props.theme.tableColors.captionBackground};
-    border-top-left-radius: ${(props) => props.theme.variants.borderRadius};
-    border-top-right-radius: ${(props) => props.theme.variants.borderRadius};
+  div.table-container {
     border: 1px solid ${(props) => props.theme.tableColors.border};
-    width: 100%;
-    position: absolute;
-    z-index: 2;
-  }
 
-  > table {
-    height: 100%;
-    border-collapse: collapse;
-    width: 100%;
-    border: 1px solid ${(props) => props.theme.tableColors.border};
-    display: flex;
-    flex-direction: column;
-    position: relative;
+    /** 테이블 공통 */
+    table {
+      width: max-content;
+      user-select: text;
+    }
 
-    > div.thead-tbody-container {
-      padding-top: 2rem;
+    /** thead 테이블 */
+    div.thead-container {
+      overflow: hidden;
+      user-select: none;
 
-      > thead {
-        > tr {
-          background-color: ${(props) =>
-            props.theme.tableColors.headerBackground};
+      table {
+        tr {
+          th {
+            display: inline-block;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            vertical-align: middle;
 
-          > th {
-            padding: 0.2rem;
+            height: 2rem;
+            line-height: 2rem;
+            padding-left: 3px;
+            padding-right: 3px;
             border-bottom: 1px solid
               ${(props) => props.theme.tableColors.border};
-            overflow: hidden;
-            white-space: pre;
-
-            &:last-of-type {
-              border-right: 1px solid
-                ${(props) => props.theme.tableColors.border};
-            }
+            background-color: ${(props) =>
+              props.theme.tableColors.headerBackground};
           }
 
-          > th + th {
+          th + th {
             border-left: 1px solid ${(props) => props.theme.tableColors.border};
+          }
+
+          th:last-of-type {
+            border-right: 1px solid ${(props) =>
+              props.theme.tableColors.border};
           }
         }
       }
+    }
 
-      > tbody {
-        overflow: auto;
-        height: 100%;
+    /** tbody 테이블 */
+    div.tbody-container {
+      overflow: auto;
+      user-select: none;
+      height: ${(props) => props.height};
 
-        > tr {
-          background-color: ${(props) =>
-            props.theme.tableColors.columnBackground};
+      /* ::-webkit-scrollbar {
+        width: 6px;
+        height: 6px;
+      }
 
-          > td {
-            font-size: 0.875rem;
+      ::-webkit-scrollbar-track {
+        background-color: transparent;
+        border: 1px solid ${(props) => props.theme.tableColors.border};
+        padding: 1px;
+      }
+
+      ::-webkit-scrollbar-thumb {
+        border-radius: 3px;
+        background-color: #fab;
+      }
+
+      ::-webkit-scrollbar-button {
+        width: 0;
+        height: 0;
+      } */
+
+      table {
+        tr {
+          td {
+            display: inline-block;
+            white-space: nowrap;
             overflow: hidden;
-            white-space: pre;
+            text-overflow: ellipsis;
+            vertical-align: middle;
+
             height: 1.5rem;
             line-height: 1.5rem;
-            padding-left: 0.2rem;
-            padding-right: 0.2rem;
-
-            &:last-of-type {
-              border-right: 1px solid
-                ${(props) => props.theme.tableColors.border};
-            }
+            padding-left: 3px;
+            padding-right: 3px;
           }
 
-          > td + td {
+          td + td {
             border-left: 1px solid ${(props) => props.theme.tableColors.border};
           }
-        }
 
-        &:last-of-type {
-          td {
-            border-bottom: 1px solid
-              ${(props) => props.theme.tableColors.border};
+          td:last-of-type {
+            border-right: 1px solid ${(props) =>
+              props.theme.tableColors.border};
           }
         }
 
-        > tr + tr {
+        tr + tr {
           border-top: 1px solid ${(props) => props.theme.tableColors.border};
+        }
+        tr:last-of-type {
+          border-bottom: 1px solid ${(props) => props.theme.tableColors.border};
         }
       }
     }

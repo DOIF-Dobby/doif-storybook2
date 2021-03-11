@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { RefObject, useCallback, useMemo, useRef } from 'react';
 import { StyledTable } from './Table.style';
 import { Column, useTable, usePagination } from 'react-table';
 import Pagination from './Pagination';
@@ -57,56 +57,63 @@ const Table = ({ model, data, caption, height }: TableProps) => {
     usePagination,
   );
 
+  const theadRef: RefObject<HTMLDivElement> = useRef(null);
+
+  const onScroll = useCallback((e) => {
+    theadRef.current?.scrollTo({ left: e.target.scrollLeft });
+  }, []);
+
   return (
     <StyledTable height={height}>
-      <caption>{caption}</caption>
-      <table {...getTableProps()}>
-        <div className="thead-tbody-container">
-          <thead>
-            {headerGroups.map((headerGroup) => (
-              <tr {...headerGroup.getHeaderGroupProps()}>
-                {headerGroup.headers.map((column) => (
-                  <th
-                    {...column.getHeaderProps()}
-                    style={{
-                      width: column.width,
-                      maxWidth: column.width,
-                      minWidth: column.width,
-                    }}
-                  >
-                    {column.render('Header')}
-                  </th>
-                ))}
-              </tr>
-            ))}
-          </thead>
-          <tbody {...getTableBodyProps()}>
-            {page.map((row, i) => {
-              prepareRow(row);
-              return (
-                <tr {...row.getRowProps()}>
-                  {row.cells.map((cell) => {
-                    console.log(cell);
-                    return (
-                      <td
-                        {...cell.getCellProps()}
-                        style={{
-                          width: cell.column.width,
-                          maxWidth: cell.column.width,
-                          minWidth: cell.column.width,
-                          textAlign: cell.column.align,
-                        }}
-                      >
-                        {cell.render('Cell')}
-                      </td>
-                    );
-                  })}
+      <div className="table-container">
+        <div className="thead-container" ref={theadRef}>
+          <table {...getTableProps()} summary={caption}>
+            <thead>
+              {headerGroups.map((headerGroup) => (
+                <tr {...headerGroup.getHeaderGroupProps()}>
+                  {headerGroup.headers.map((column) => (
+                    <th
+                      {...column.getHeaderProps()}
+                      style={{
+                        width: column.width,
+                      }}
+                    >
+                      {column.render('Header')}
+                    </th>
+                  ))}
                 </tr>
-              );
-            })}
-          </tbody>
+              ))}
+            </thead>
+          </table>
         </div>
-      </table>
+        <div className="tbody-container" onScroll={onScroll}>
+          <table {...getTableProps()} summary={caption}>
+            <tbody {...getTableBodyProps()}>
+              {page.map((row, i) => {
+                prepareRow(row);
+                return (
+                  <tr {...row.getRowProps()}>
+                    {row.cells.map((cell) => {
+                      return (
+                        <td
+                          {...cell.getCellProps()}
+                          style={{
+                            width: cell.column.width,
+                            textAlign: cell.column.align,
+                          }}
+                        >
+                          {cell.render('Cell')}
+                        </td>
+                      );
+                    })}
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
       <Pagination
         canPreviousPage={canPreviousPage}
         canNextPage={canNextPage}
