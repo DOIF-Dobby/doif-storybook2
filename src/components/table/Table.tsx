@@ -63,7 +63,6 @@ const Table = ({ model, data, caption, height }: TableProps) => {
   } = useTable(
     { columns, data, initialState: { pageIndex: 0 } },
     usePagination,
-    // useBlockLayout,
     useResizeColumns,
     useRowSelect,
     (hooks) => {
@@ -73,9 +72,9 @@ const Table = ({ model, data, caption, height }: TableProps) => {
           id: 'selection',
           // The header can use the table's getToggleAllRowsSelectedProps method
           // to render a checkbox
-          Header: ({ getToggleAllRowsSelectedProps }) => (
+          Header: ({ getToggleAllPageRowsSelectedProps }) => (
             <div>
-              <IndeterminateCheckbox {...getToggleAllRowsSelectedProps()} />
+              <IndeterminateCheckbox {...getToggleAllPageRowsSelectedProps()} />
             </div>
           ),
           // The cell can use the individual row's getToggleRowSelectedProps method
@@ -175,8 +174,8 @@ const Table = ({ model, data, caption, height }: TableProps) => {
         pageSize={pageSize}
       />
 
-      <p>Selected Rows: {Object.keys(selectedRowIds).length}</p>
-      <pre>
+      {/* <p>Selected Rows: {Object.keys(selectedRowIds).length}</p> */}
+      {/* <pre>
         <code>
           {JSON.stringify(
             {
@@ -189,7 +188,7 @@ const Table = ({ model, data, caption, height }: TableProps) => {
             2,
           )}
         </code>
-      </pre>
+      </pre> */}
     </StyledTable>
   );
 };

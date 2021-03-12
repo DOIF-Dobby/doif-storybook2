@@ -45,6 +45,7 @@ export const StyledTable = styled.div<StyledTableProps>`
             overflow: hidden;
             text-overflow: ellipsis;
             vertical-align: middle;
+            display: inline-block;
 
             height: 2rem;
             line-height: 2rem;
@@ -90,11 +91,16 @@ export const StyledTable = styled.div<StyledTableProps>`
 
       table {
         tr {
+          &:hover {
+            background-color: ${(props) => props.theme.tableColors.hoverRow};
+          }
+
           td {
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
             vertical-align: middle;
+            display: inline-block;
 
             height: 1.5rem;
             line-height: 1.5rem;
