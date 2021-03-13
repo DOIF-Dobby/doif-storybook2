@@ -24,8 +24,12 @@ const Template: Story<ComponentProps<typeof Table>> = (args) => {
   const model = useMemo(() => model1, []);
   const data = useMemo(() => data1, []);
   const onSelectRow = useCallback((id: string, rowValue: Object) => {
-    console.log(id);
+    // console.log(id);
     console.log(rowValue);
+  }, []);
+
+  const onMultiSelectRow = useCallback((rowValues: Object[]) => {
+    console.log(rowValues);
   }, []);
 
   const buttons = useMemo(
@@ -54,6 +58,7 @@ const Template: Story<ComponentProps<typeof Table>> = (args) => {
       caption="테이블 1"
       buttons={buttons}
       onSelectRow={onSelectRow}
+      onMultiSelectRow={onMultiSelectRow}
     />
   );
 };

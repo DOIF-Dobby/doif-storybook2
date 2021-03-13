@@ -1,6 +1,13 @@
-import React, { RefObject, useCallback, useMemo, useRef } from 'react';
+import React, {
+  RefObject,
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+} from 'react';
 import {
   Column,
+  PluginHook,
   Row,
   usePagination,
   useResizeColumns,
@@ -9,6 +16,7 @@ import {
   useTable,
 } from 'react-table';
 import Scroll from '../common/Scroll';
+import useMultiRowSelect from './hooks/useMultiRowSelect';
 import Pagination from './Pagination';
 import { StyledTable } from './Table.style';
 
@@ -23,8 +31,12 @@ interface TableProps {
   height: string;
   /** `Button` 배열입니다. */
   buttons?: React.ReactNode[];
+  /** multi select 여부입니다. */
+  enableMultiSelectRow: boolean;
   /** row를 선택했을 때 실행되는 콜백함수입니다. */
   onSelectRow?: (id: string, rowValue: Object) => void;
+  /** mulit row를 선택했을 때 실행되는 콜백함수입니다. */
+  onMultiSelectRow?: (rowValues: Object[]) => void;
 }
 
 export interface TableModelProps {
@@ -44,7 +56,9 @@ const Table = ({
   caption,
   height,
   buttons,
+  enableMultiSelectRow,
   onSelectRow,
+  onMultiSelectRow,
 }: TableProps) => {
   const columns: Column<Object>[] = useMemo(() => {
     return model.map((m) => ({
@@ -55,6 +69,16 @@ const Table = ({
       formatter: m.formatter,
     })) as Column<Object>[];
   }, [model]);
+
+  /** react-table hooks */
+  const hooks: PluginHook<Object>[] = [
+    usePagination,
+    useResizeColumns,
+    useRowSelect,
+  ];
+
+  /** enableMultiSelectRow가 true라면 useMultiRowSelect 추가 */
+  enableMultiSelectRow && hooks.push(useMultiRowSelect);
 
   const {
     getTableProps,
@@ -75,13 +99,18 @@ const Table = ({
     totalColumnsWidth,
     toggleAllRowsSelected,
     state: { pageIndex, pageSize, selectedRowIds },
-  } = useTable(
-    { columns, data, initialState: { pageIndex: 0 } },
-    usePagination,
-    useResizeColumns,
-    useRowSelect,
-    useRowState,
-  );
+  } = useTable({ columns, data, initialState: { pageIndex: 0 } }, ...hooks);
+
+  /** mulit row Select 시 enableMultiSelectRow가 ture면 콜백실행 */
+  useEffect(() => {
+    if (enableMultiSelectRow && onMultiSelectRow) {
+      onMultiSelectRow(
+        selectedFlatRows.map((row) => {
+          return { _id: row.id, ...row.original };
+        }),
+      );
+    }
+  }, [selectedFlatRows]);
 
   /** thead 스크롤을 움직이기 위한 ref */
   const theadRef: RefObject<HTMLDivElement> = useRef(null);
@@ -93,7 +122,9 @@ const Table = ({
 
   /** row 선택했을 때 실행되는 함수 */
   const handleSelectRow = useCallback((row: Row) => {
-    toggleAllRowsSelected(false);
+    if (!enableMultiSelectRow) {
+      toggleAllRowsSelected(false);
+    }
     row.toggleRowSelected();
 
     if (onSelectRow) {
@@ -211,6 +242,7 @@ const Table = ({
 
 Table.defaultProps = {
   height: '400px',
+  enableMultiSelectRow: false,
 };
 
 export default React.memo(Table);
