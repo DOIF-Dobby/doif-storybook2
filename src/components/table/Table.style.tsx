@@ -24,6 +24,15 @@ export const StyledTable = styled.div<StyledTableProps>`
     }
   }
 
+  /** buttons */
+  div.button-container {
+    display: flex;
+    border: 1px solid ${(props) => props.theme.tableColors.border};
+    border-bottom: none;
+    padding: 1px;
+  }
+
+  /** thead, tbody */
   div.table-container {
     border: 1px solid ${(props) => props.theme.tableColors.border};
 

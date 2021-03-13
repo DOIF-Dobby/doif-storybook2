@@ -21,6 +21,8 @@ interface TableProps {
   caption: string;
   /** `Table`컴포넌트의 높이를 설정합니다. */
   height: string;
+  /** `Button` 배열입니다. */
+  buttons?: React.ReactNode[];
   /** row를 선택했을 때 실행되는 콜백함수입니다. */
   onSelectRow?: (id: string, rowValue: Object) => void;
 }
@@ -36,7 +38,14 @@ export interface TableModelProps {
 /**
  * `Table` 컴포넌트는 기존의 `JqGrid`와 같은 컴포넌트입니다. 자세한 내용은 https://react-table.tanstack.com/ 이곳을 참조하세요.
  */
-const Table = ({ model, data, caption, height, onSelectRow }: TableProps) => {
+const Table = ({
+  model,
+  data,
+  caption,
+  height,
+  buttons,
+  onSelectRow,
+}: TableProps) => {
   const columns: Column<Object>[] = useMemo(() => {
     return model.map((m) => ({
       Header: m.label,
@@ -97,6 +106,13 @@ const Table = ({ model, data, caption, height, onSelectRow }: TableProps) => {
       <div className="caption-container">
         <span>{caption}</span>
       </div>
+      {buttons && (
+        <div className="button-container">
+          {buttons.map((button, i) => (
+            <div key={i}>{button}</div>
+          ))}
+        </div>
+      )}
       <div className="table-container">
         <div className="thead-container" ref={theadRef}>
           <table {...getTableProps()} summary={caption}>

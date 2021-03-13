@@ -5,6 +5,8 @@ import Page from '../common/Page';
 import Box from '../common/Box';
 import { data1 } from './data';
 import { useMemo } from '@storybook/client-api';
+import Button from '../button/Button';
+import Icon from '../icon/Icon';
 
 export default {
   title: 'Components/Table',
@@ -26,12 +28,31 @@ const Template: Story<ComponentProps<typeof Table>> = (args) => {
     console.log(rowValue);
   }, []);
 
+  const buttons = useMemo(
+    () => [
+      <Button variant="ghost">
+        <Icon icon="plus" />
+        추가
+      </Button>,
+      <Button variant="ghost">
+        <Icon icon="pencil" />
+        수정
+      </Button>,
+      <Button variant="ghost">
+        <Icon icon="trashCan" />
+        삭제
+      </Button>,
+    ],
+    [],
+  );
+
   return (
     <Table
       {...args}
       model={model}
       data={data}
       caption="테이블 1"
+      buttons={buttons}
       onSelectRow={onSelectRow}
     />
   );
@@ -85,7 +106,7 @@ const model1: TableModelProps[] = [
     width: 150,
     align: 'left',
     formatter: (cellValue: React.ReactNode) => (
-      <div style={{ backgroundColor: '#fab' }}>{cellValue}</div>
+      <div style={{ color: '#fab' }}>{cellValue}</div>
     ),
   },
   {
