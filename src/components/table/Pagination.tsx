@@ -68,15 +68,20 @@ const Pagination = ({
         >
           <Icon icon="leftArrow" />
         </Button>
-        <Input
-          type="number"
-          defaultValue={pageIndex + 1}
-          onChange={(e) => {
-            const page = e.target.value ? Number(e.target.value) - 1 : 0;
-            gotoPage(page);
-          }}
-        />
-        <div>/ {pageOptions.length}</div>
+        <div className="count-container">
+          <div>
+            <Input
+              type="number"
+              defaultValue={pageIndex + 1}
+              onChange={(e) => {
+                const page = e.target.value ? Number(e.target.value) - 1 : 0;
+                gotoPage(page);
+              }}
+            />
+          </div>
+          <div>/</div>
+          <div>{pageOptions.length}</div>
+        </div>
         <Button
           iconOnly
           onClick={() => nextPage()}
@@ -99,6 +104,7 @@ const Pagination = ({
         </Button>
         <Select
           value={String(pageSize)}
+          width="100px"
           onChange={(e) => {
             setPageSize(Number(e.target.value));
           }}

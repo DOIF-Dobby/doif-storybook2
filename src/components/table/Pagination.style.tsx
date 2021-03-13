@@ -12,8 +12,24 @@ export const StyledPagination = styled.div`
   padding: 0.5rem;
 
   & > div.page-container {
+    width: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
+
+    div.count-container {
+      width: 120px;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+
+      > div {
+        text-align: center;
+
+        &:first-of-type {
+          flex-basis: 50%;
+        }
+      }
+    }
   }
 `;

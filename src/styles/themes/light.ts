@@ -91,7 +91,7 @@ const Light: DefaultTheme = {
     rowBackground2: '#f8f9fa',
     footerBackground: '#f1f3f5',
     paginationBackground: '#e9ecef',
-    hoverRow: '#fff9db',
+    hoverRow: '#e9ecef',
     selectedRow: '#fff3bf',
   },
 };
