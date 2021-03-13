@@ -7,6 +7,7 @@ import {
   useBlockLayout,
   useResizeColumns,
   useRowSelect,
+  useRowState,
 } from 'react-table';
 import Pagination from './Pagination';
 import Scroll from '../common/Scroll';
@@ -59,35 +60,14 @@ const Table = ({ model, data, caption, height }: TableProps) => {
     previousPage,
     setPageSize,
     totalColumnsWidth,
+    toggleAllRowsSelected,
     state: { pageIndex, pageSize, selectedRowIds },
   } = useTable(
     { columns, data, initialState: { pageIndex: 0 } },
     usePagination,
     useResizeColumns,
     useRowSelect,
-    (hooks) => {
-      hooks.visibleColumns.push((columns) => [
-        // Let's make a column for selection
-        {
-          id: 'selection',
-          // The header can use the table's getToggleAllRowsSelectedProps method
-          // to render a checkbox
-          Header: ({ getToggleAllPageRowsSelectedProps }) => (
-            <div>
-              <IndeterminateCheckbox {...getToggleAllPageRowsSelectedProps()} />
-            </div>
-          ),
-          // The cell can use the individual row's getToggleRowSelectedProps method
-          // to the render a checkbox
-          Cell: ({ row }) => (
-            <div>
-              <IndeterminateCheckbox {...row.getToggleRowSelectedProps()} />
-            </div>
-          ),
-        },
-        ...columns,
-      ]);
-    },
+    useRowState,
   );
 
   const theadRef: RefObject<HTMLDivElement> = useRef(null);
@@ -138,7 +118,14 @@ const Table = ({ model, data, caption, height }: TableProps) => {
                 {page.map((row, i) => {
                   prepareRow(row);
                   return (
-                    <tr {...row.getRowProps()}>
+                    <tr
+                      {...row.getRowProps()}
+                      onClick={() => {
+                        toggleAllRowsSelected(false);
+                        row.toggleRowSelected();
+                      }}
+                      className={row.isSelected ? 'selected' : ''}
+                    >
                       {row.cells.map((cell) => {
                         return (
                           <td
@@ -174,8 +161,8 @@ const Table = ({ model, data, caption, height }: TableProps) => {
         pageSize={pageSize}
       />
 
-      {/* <p>Selected Rows: {Object.keys(selectedRowIds).length}</p> */}
-      {/* <pre>
+      {/* <p>Selected Rows: {Object.keys(selectedRowIds).length}</p>
+      <pre>
         <code>
           {JSON.stringify(
             {
@@ -192,23 +179,6 @@ const Table = ({ model, data, caption, height }: TableProps) => {
     </StyledTable>
   );
 };
-
-const IndeterminateCheckbox = React.forwardRef(
-  ({ indeterminate, ...rest }, ref) => {
-    const defaultRef = React.useRef();
-    const resolvedRef = ref || defaultRef;
-
-    React.useEffect(() => {
-      resolvedRef.current.indeterminate = indeterminate;
-    }, [resolvedRef, indeterminate]);
-
-    return (
-      <>
-        <input type="checkbox" ref={resolvedRef} {...rest} />
-      </>
-    );
-  },
-);
 
 Table.defaultProps = {
   height: '400px',

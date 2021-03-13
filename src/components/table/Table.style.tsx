@@ -40,12 +40,13 @@ export const StyledTable = styled.div<StyledTableProps>`
       table {
         tr {
           th {
+            user-select: text;
             position: relative;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
             vertical-align: middle;
-            display: inline-block;
+            /* display: inline-block; */
 
             height: 2rem;
             line-height: 2rem;
@@ -88,6 +89,7 @@ export const StyledTable = styled.div<StyledTableProps>`
     /** tbody 테이블 */
     div.tbody-container {
       height: ${(props) => props.height};
+      user-select: none;
 
       table {
         tr {
@@ -95,12 +97,17 @@ export const StyledTable = styled.div<StyledTableProps>`
             background-color: ${(props) => props.theme.tableColors.hoverRow};
           }
 
+          &.selected {
+            background-color: ${(props) => props.theme.tableColors.selectedRow};
+          }
+
           td {
+            user-select: text;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
             vertical-align: middle;
-            display: inline-block;
+            /* display: inline-block; */
 
             height: 1.5rem;
             line-height: 1.5rem;

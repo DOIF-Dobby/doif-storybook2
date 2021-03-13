@@ -86,6 +86,7 @@ const Dark: DefaultTheme = {
     footerBackground: '#f1f3f5',
     paginationBackground: '#f1f3f5',
     hoverRow: '#fcfdfd',
+    selectedRow: '#fab',
   },
 };
 

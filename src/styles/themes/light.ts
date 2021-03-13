@@ -87,6 +87,7 @@ const Light: DefaultTheme = {
     footerBackground: '#f1f3f5',
     paginationBackground: '#f1f3f5',
     hoverRow: '#e2e6ea',
+    selectedRow: '#fab',
   },
 };
 
