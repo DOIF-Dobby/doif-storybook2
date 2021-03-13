@@ -1,17 +1,16 @@
 import React, { RefObject, useCallback, useMemo, useRef } from 'react';
-import { StyledTable } from './Table.style';
 import {
   Column,
-  useTable,
+  Row,
   usePagination,
-  useBlockLayout,
   useResizeColumns,
   useRowSelect,
   useRowState,
+  useTable,
 } from 'react-table';
-import Pagination from './Pagination';
 import Scroll from '../common/Scroll';
-import { DoifColorType } from '../../styles/themes/DoifThemeProps';
+import Pagination from './Pagination';
+import { StyledTable } from './Table.style';
 
 interface TableProps {
   /** Table Data 배열 */
@@ -22,6 +21,8 @@ interface TableProps {
   caption: string;
   /** `Table`컴포넌트의 높이를 설정합니다. */
   height: string;
+  /** row를 선택했을 때 실행되는 콜백함수입니다. */
+  onSelectRow?: (id: string, rowValue: Object) => void;
 }
 
 export interface TableModelProps {
@@ -29,18 +30,20 @@ export interface TableModelProps {
   name: string;
   width: number;
   align: 'left' | 'center' | 'right';
+  formatter?: (cellValue: React.ReactNode) => React.ReactNode;
 }
 
 /**
  * `Table` 컴포넌트는 기존의 `JqGrid`와 같은 컴포넌트입니다. 자세한 내용은 https://react-table.tanstack.com/ 이곳을 참조하세요.
  */
-const Table = ({ model, data, caption, height }: TableProps) => {
+const Table = ({ model, data, caption, height, onSelectRow }: TableProps) => {
   const columns: Column<Object>[] = useMemo(() => {
     return model.map((m) => ({
       Header: m.label,
       accessor: m.name,
       width: m.width,
       align: m.align,
+      formatter: m.formatter,
     })) as Column<Object>[];
   }, [model]);
 
@@ -71,12 +74,22 @@ const Table = ({ model, data, caption, height }: TableProps) => {
     useRowState,
   );
 
+  /** thead 스크롤을 움직이기 위한 ref */
   const theadRef: RefObject<HTMLDivElement> = useRef(null);
 
-  console.log(selectedRowIds);
-
+  /** tbody 스크롤시 thead도 스크롤 되게끔 하는 함수 */
   const onScroll = useCallback((e) => {
     theadRef.current?.scrollTo({ left: e.target.scrollLeft });
+  }, []);
+
+  /** row 선택했을 때 실행되는 함수 */
+  const handleSelectRow = useCallback((row: Row) => {
+    toggleAllRowsSelected(false);
+    row.toggleRowSelected();
+
+    if (onSelectRow) {
+      onSelectRow(row.id, row.original);
+    }
   }, []);
 
   return (
@@ -116,15 +129,12 @@ const Table = ({ model, data, caption, height }: TableProps) => {
           <div className="tbody-container">
             <table {...getTableProps()} summary={caption}>
               <tbody {...getTableBodyProps()}>
-                {page.map((row, i) => {
+                {page.map((row: Row, i) => {
                   prepareRow(row);
                   return (
                     <tr
                       {...row.getRowProps()}
-                      onClick={() => {
-                        toggleAllRowsSelected(false);
-                        row.toggleRowSelected();
-                      }}
+                      onClick={() => handleSelectRow(row)}
                       className={row.isSelected ? 'selected' : ''}
                     >
                       {row.cells.map((cell) => {
@@ -136,7 +146,9 @@ const Table = ({ model, data, caption, height }: TableProps) => {
                               textAlign: cell.column.align,
                             }}
                           >
-                            {cell.render('Cell')}
+                            {cell.column.formatter
+                              ? cell.column.formatter(cell.render('Cell'))
+                              : cell.render('Cell')}
                           </td>
                         );
                       })}

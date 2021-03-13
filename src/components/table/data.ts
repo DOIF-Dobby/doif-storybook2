@@ -14,7 +14,7 @@ export const data1 = [
     procOrder: '1',
     procType: 'J',
     procTypeNm: '자바',
-    remark1: '',
+    remark1: '안녕하세요!',
     retryYn: 'Y',
     retryYnNm: '예',
     updt_user: '전혜수',
@@ -361,62 +361,5 @@ export const data1 = [
     retryYnNm: '예',
     updt_user: '김명진',
     updtdt: '2021-02-25 14:28:54',
-  },
-];
-
-export const model1: TableModelProps[] = [
-  {
-    label: '정산배치타입',
-    name: 'batchConfTypeNm',
-    width: 120,
-    align: 'center',
-  },
-  {
-    label: '정산배치설정ID',
-    name: 'batchConfId',
-    width: 150,
-    align: 'left',
-  },
-  {
-    label: '정산배치설정명',
-    name: 'batchConfNm',
-    width: 250,
-    align: 'left',
-  },
-  {
-    label: '실행순서',
-    name: 'procOrder',
-    width: 60,
-    align: 'center',
-  },
-  {
-    label: '실행타입',
-    name: 'procTypeNm',
-    width: 100,
-    align: 'center',
-  },
-  {
-    label: '실행커맨드',
-    name: 'procCmd',
-    width: 400,
-    align: 'left',
-  },
-  {
-    label: '비고',
-    name: 'remark1',
-    width: 150,
-    align: 'left',
-  },
-  {
-    label: '작업자',
-    name: 'updt_user',
-    width: 100,
-    align: 'center',
-  },
-  {
-    label: '작업일시',
-    name: 'updtdt',
-    width: 150,
-    align: 'center',
   },
 ];
