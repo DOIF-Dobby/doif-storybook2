@@ -11,6 +11,7 @@ import {
 } from 'react-table';
 import Pagination from './Pagination';
 import Scroll from '../common/Scroll';
+import { DoifColorType } from '../../styles/themes/DoifThemeProps';
 
 interface TableProps {
   /** Table Data 배열 */

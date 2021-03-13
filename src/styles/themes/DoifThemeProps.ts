@@ -107,11 +107,16 @@ export interface DoifFormColorProps {
 
 export interface DoifTableColorProps {
   border: string;
-  text: string;
+  captionText: string;
+  headerText: string;
+  rowText1: string;
+  rowText2: string;
+  tableBackground: string;
   captionBackground: string;
   buttonBackground: string;
   headerBackground: string;
-  columnBackground: string;
+  rowBackground1: string;
+  rowBackground2: string;
   footerBackground: string;
   paginationBackground: string;
   hoverRow: string;

@@ -1,4 +1,5 @@
 import React from 'react';
+import { DoifColorType } from '../../styles/themes/DoifThemeProps';
 import Button from '../button/Button';
 import Icon from '../icon/Icon';
 import Input from '../input/Input';
@@ -35,6 +36,12 @@ const Pagination = ({
     { code: '20', name: '20' },
   ];
 
+  const buttonStyle = {
+    borderRadius: '1rem',
+    width: '2rem',
+    height: '2rem',
+  };
+
   return (
     <StyledPagination>
       <div className="page-container">
@@ -43,6 +50,8 @@ const Pagination = ({
           onClick={() => gotoPage(0)}
           disabled={!canPreviousPage}
           size="small"
+          variant="ghost"
+          style={buttonStyle}
         >
           <Icon
             icon="rightDoubleArrow"
@@ -54,6 +63,8 @@ const Pagination = ({
           onClick={() => previousPage()}
           disabled={!canPreviousPage}
           size="small"
+          variant="ghost"
+          style={buttonStyle}
         >
           <Icon icon="leftArrow" />
         </Button>
@@ -71,6 +82,8 @@ const Pagination = ({
           onClick={() => nextPage()}
           disabled={!canNextPage}
           size="small"
+          variant="ghost"
+          style={buttonStyle}
         >
           <Icon icon="rightArrow" />
         </Button>
@@ -79,6 +92,8 @@ const Pagination = ({
           onClick={() => gotoPage(pageCount - 1)}
           disabled={!canNextPage}
           size="small"
+          variant="ghost"
+          style={buttonStyle}
         >
           <Icon icon="rightDoubleArrow" />
         </Button>

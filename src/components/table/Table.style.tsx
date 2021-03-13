@@ -6,8 +6,6 @@ interface StyledTableProps {
 }
 
 export const StyledTable = styled.div<StyledTableProps>`
-  color: ${(props) => props.theme.tableColors.text};
-
   /** caption */
   div.caption-container {
     border: 1px solid ${(props) => props.theme.tableColors.border};
@@ -18,6 +16,8 @@ export const StyledTable = styled.div<StyledTableProps>`
     background-color: ${(props) => props.theme.tableColors.captionBackground};
     border-top-left-radius: ${(props) => props.theme.variants.borderRadius};
     border-top-right-radius: ${(props) => props.theme.variants.borderRadius};
+    color: ${(props) => props.theme.tableColors.captionText};
+    background-color: ${(props) => props.theme.tableColors.captionBackground};
 
     span {
       font-weight: 600;
@@ -39,6 +39,10 @@ export const StyledTable = styled.div<StyledTableProps>`
 
       table {
         tr {
+          color: ${(props) => props.theme.tableColors.headerText};
+          background-color: ${(props) =>
+            props.theme.tableColors.headerBackground};
+
           th {
             user-select: text;
             position: relative;
@@ -54,8 +58,6 @@ export const StyledTable = styled.div<StyledTableProps>`
             padding-right: 3px;
             border-bottom: 1px solid
               ${(props) => props.theme.tableColors.border};
-            background-color: ${(props) =>
-              props.theme.tableColors.headerBackground};
 
             .resizer {
               display: inline-block;
@@ -90,9 +92,20 @@ export const StyledTable = styled.div<StyledTableProps>`
     div.tbody-container {
       height: ${(props) => props.height};
       user-select: none;
+      background-color: ${(props) => props.theme.tableColors.tableBackground};
 
       table {
         tr {
+          color: ${(props) => props.theme.tableColors.rowText1};
+          background-color: ${(props) =>
+            props.theme.tableColors.rowBackground1};
+
+          &:nth-of-type(2n) {
+            color: ${(props) => props.theme.tableColors.rowText2};
+            background-color: ${(props) =>
+              props.theme.tableColors.rowBackground2};
+          }
+
           &:hover {
             background-color: ${(props) => props.theme.tableColors.hoverRow};
           }

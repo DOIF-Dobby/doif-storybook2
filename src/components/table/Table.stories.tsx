@@ -22,8 +22,10 @@ const Template: Story<ComponentProps<typeof Table>> = (args) => {
   const model = useMemo(() => model1, []);
   const data = useMemo(() => data1, []);
 
-  return <Table model={model} data={data} caption="테이블 1" />;
+  return <Table model={model} data={data} caption="테이블 1" {...args} />;
 };
 
 export const Default = Template.bind({});
-Default.args = {};
+Default.args = {
+  color: 'primary',
+};
