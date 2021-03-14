@@ -1,5 +1,4 @@
 import React from 'react';
-import { DoifColorType } from '../../styles/themes/DoifThemeProps';
 import Button from '../button/Button';
 import Icon from '../icon/Icon';
 import Input from '../input/Input';

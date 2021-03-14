@@ -1,6 +1,7 @@
 import React, { ComponentProps, useCallback, useState } from 'react';
 import { Story } from '@storybook/react/types-6-0';
-import Table, { TableModelProps } from './Table';
+import Table from './Table';
+import { TableModelProps } from './table.model';
 import Page from '../common/Page';
 import Box from '../common/Box';
 import { data1 } from './data';

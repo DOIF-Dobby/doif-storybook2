@@ -1,5 +1,3 @@
-import { TableModelProps } from './Table';
-
 export const data1 = [
   {
     batchConfId: 'chkStatusStep',

@@ -12,13 +12,13 @@ import {
   usePagination,
   useResizeColumns,
   useRowSelect,
-  useRowState,
   useTable,
 } from 'react-table';
 import Scroll from '../common/Scroll';
 import useMultiRowSelect from './hooks/useMultiRowSelect';
 import Pagination from './Pagination';
 import { StyledTable } from './Table.style';
+import { TableModelProps } from './table.model';
 
 interface TableProps {
   /** Table Data 배열 */
@@ -37,14 +37,6 @@ interface TableProps {
   onSelectRow?: (id: string, rowValue: Object) => void;
   /** mulit row를 선택했을 때 실행되는 콜백함수입니다. */
   onMultiSelectRow?: (rowValues: Object[]) => void;
-}
-
-export interface TableModelProps {
-  label: string;
-  name: string;
-  width: number;
-  align: 'left' | 'center' | 'right';
-  formatter?: (cellValue: React.ReactNode) => React.ReactNode;
 }
 
 /**
@@ -121,16 +113,19 @@ const Table = ({
   }, []);
 
   /** row 선택했을 때 실행되는 함수 */
-  const handleSelectRow = useCallback((row: Row) => {
-    if (!enableMultiSelectRow) {
-      toggleAllRowsSelected(false);
-    }
-    row.toggleRowSelected();
+  const handleSelectRow = useCallback(
+    (row: Row) => {
+      if (!enableMultiSelectRow) {
+        toggleAllRowsSelected(false);
+      }
+      row.toggleRowSelected();
 
-    if (onSelectRow) {
-      onSelectRow(row.id, row.original);
-    }
-  }, []);
+      if (onSelectRow) {
+        onSelectRow(row.id, row.original);
+      }
+    },
+    [onSelectRow, enableMultiSelectRow],
+  );
 
   return (
     <StyledTable height={height} totalWidth={totalColumnsWidth + 'px'}>
@@ -172,40 +167,40 @@ const Table = ({
             </thead>
           </table>
         </div>
-        <Scroll onScroll={onScroll}>
-          <div className="tbody-container">
-            <table {...getTableProps()} summary={caption}>
-              <tbody {...getTableBodyProps()}>
-                {page.map((row: Row, i) => {
-                  prepareRow(row);
-                  return (
-                    <tr
-                      {...row.getRowProps()}
-                      onClick={() => handleSelectRow(row)}
-                      className={row.isSelected ? 'selected' : ''}
-                    >
-                      {row.cells.map((cell) => {
-                        return (
-                          <td
-                            {...cell.getCellProps()}
-                            style={{
-                              width: cell.column.width,
-                              textAlign: cell.column.align,
-                            }}
-                          >
-                            {cell.column.formatter
-                              ? cell.column.formatter(cell.render('Cell'))
-                              : cell.render('Cell')}
-                          </td>
-                        );
-                      })}
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </table>
-          </div>
-        </Scroll>
+        {/* <Scroll onScroll={onScroll}> */}
+        <div className="tbody-container">
+          <table {...getTableProps()} summary={caption}>
+            <tbody {...getTableBodyProps()}>
+              {page.map((row: Row, i) => {
+                prepareRow(row);
+                return (
+                  <tr
+                    {...row.getRowProps()}
+                    onClick={() => handleSelectRow(row)}
+                    className={row.isSelected ? 'selected' : ''}
+                  >
+                    {row.cells.map((cell) => {
+                      return (
+                        <td
+                          {...cell.getCellProps()}
+                          style={{
+                            width: cell.column.width,
+                            textAlign: cell.column.align,
+                          }}
+                        >
+                          {cell.column.formatter
+                            ? cell.column.formatter(cell.render('Cell'))
+                            : cell.render('Cell')}
+                        </td>
+                      );
+                    })}
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
+        {/* </Scroll> */}
       </div>
 
       <Pagination

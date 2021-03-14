@@ -26,9 +26,11 @@ export { default as LabelDatepicker } from './components/form/labelXXX/LabelDate
 export { default as LabelCheck } from './components/form/labelXXX/LabelCheck';
 export { default as LabelRadio } from './components/form/labelXXX/LabelRadio';
 export { default as LabelTextarea } from './components/form/labelXXX/LabelTextarea';
+export { default as Table } from './components/table/Table';
 
 export { default as Page } from './components/common/Page';
 export { default as Box } from './components/common/Box';
+export { default as Scroll } from './components/common/Scroll';
 
 // 테마 export
 export { theme } from './styles/themes';
@@ -51,6 +53,7 @@ export { GlobalStyle } from './styles/global-style';
 
 // interface
 export { MenuProps, CategoryProps } from './components/menu/menu.model';
+export { TableModelProps } from './components/table/table.model';
 
 // hooks
 export { default as useOutsideAlerter } from './hooks/useOutsideAlerter';

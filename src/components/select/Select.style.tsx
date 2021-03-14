@@ -84,6 +84,7 @@ export const StyledSelectContainer = styled.div<StyledSelectContainerProps>`
 
     & > div.list-container {
       font-size: 0.8rem;
+      text-align: left;
 
       & > div {
         padding: 0.5rem;

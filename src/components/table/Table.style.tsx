@@ -18,6 +18,7 @@ export const StyledTable = styled.div<StyledTableProps>`
     border-top-right-radius: ${(props) => props.theme.variants.borderRadius};
     color: ${(props) => props.theme.tableColors.captionText};
     background-color: ${(props) => props.theme.tableColors.captionBackground};
+    text-align: left;
 
     span {
       font-weight: 600;
@@ -30,6 +31,10 @@ export const StyledTable = styled.div<StyledTableProps>`
     border: 1px solid ${(props) => props.theme.tableColors.border};
     border-bottom: none;
     padding: 1px;
+
+    button {
+      font-size: 0.875rem;
+    }
   }
 
   /** thead, tbody */
@@ -38,7 +43,7 @@ export const StyledTable = styled.div<StyledTableProps>`
 
     table {
       width: max-content;
-      table-layout: fixed;
+      /* table-layout: fixed; */
     }
 
     /** thead 테이블 */
@@ -59,7 +64,7 @@ export const StyledTable = styled.div<StyledTableProps>`
             overflow: hidden;
             text-overflow: ellipsis;
             vertical-align: middle;
-            /* display: inline-block; */
+            display: inline-block;
 
             height: 2rem;
             line-height: 2rem;
@@ -129,7 +134,7 @@ export const StyledTable = styled.div<StyledTableProps>`
             overflow: hidden;
             text-overflow: ellipsis;
             vertical-align: middle;
-            /* display: inline-block; */
+            display: inline-block;
 
             height: 1.5rem;
             line-height: 1.5rem;
