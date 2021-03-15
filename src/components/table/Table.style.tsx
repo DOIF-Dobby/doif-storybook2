@@ -68,7 +68,7 @@ export const StyledTable = styled.div<StyledTableProps>`
 
             font-size: 0.875rem;
             height: 2rem;
-            line-height: 2rem;
+            line-height: 1.875rem;
             padding-left: 3px;
             padding-right: 3px;
             border-bottom: 1px solid
@@ -142,7 +142,7 @@ export const StyledTable = styled.div<StyledTableProps>`
 
             font-size: 0.875rem;
             height: 1.5rem;
-            line-height: 1.5rem;
+            line-height: 1.375rem;
             padding-left: 3px;
             padding-right: 3px;
           }

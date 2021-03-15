@@ -90,7 +90,7 @@ const Table = ({
     setPageSize,
     totalColumnsWidth,
     toggleAllRowsSelected,
-    state: { pageIndex, pageSize, selectedRowIds },
+    state: { pageIndex, pageSize, selectedRowIds, columnResizing },
   } = useTable({ columns, data, initialState: { pageIndex: 0 } }, ...hooks);
 
   /** mulit row Select 시 enableMultiSelectRow가 ture면 콜백실행 */
@@ -145,22 +145,24 @@ const Table = ({
             <thead>
               {headerGroups.map((headerGroup) => (
                 <tr {...headerGroup.getHeaderGroupProps()}>
-                  {headerGroup.headers.map((column) => (
-                    <th
-                      {...column.getHeaderProps()}
-                      style={{
-                        width: column.width,
-                      }}
-                    >
-                      {column.render('Header')}
-                      <div
-                        {...column.getResizerProps()}
-                        className={`resizer ${
-                          column.isResizing ? 'isResizing' : ''
-                        }`}
-                      />
-                    </th>
-                  ))}
+                  {headerGroup.headers.map((column) => {
+                    return (
+                      <th
+                        {...column.getHeaderProps()}
+                        style={{
+                          width: column.width,
+                        }}
+                      >
+                        {column.render('Header')}
+                        <div
+                          {...column.getResizerProps()}
+                          className={`resizer ${
+                            column.isResizing ? 'isResizing' : ''
+                          }`}
+                        />
+                      </th>
+                    );
+                  })}
                   <th></th>
                 </tr>
               ))}
