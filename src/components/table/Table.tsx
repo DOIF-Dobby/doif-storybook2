@@ -167,40 +167,41 @@ const Table = ({
             </thead>
           </table>
         </div>
-        {/* <Scroll onScroll={onScroll}> */}
-        <div className="tbody-container">
-          <table {...getTableProps()} summary={caption}>
-            <tbody {...getTableBodyProps()}>
-              {page.map((row: Row, i) => {
-                prepareRow(row);
-                return (
-                  <tr
-                    {...row.getRowProps()}
-                    onClick={() => handleSelectRow(row)}
-                    className={row.isSelected ? 'selected' : ''}
-                  >
-                    {row.cells.map((cell) => {
-                      return (
-                        <td
-                          {...cell.getCellProps()}
-                          style={{
-                            width: cell.column.width,
-                            textAlign: cell.column.align,
-                          }}
-                        >
-                          {cell.column.formatter
-                            ? cell.column.formatter(cell.render('Cell'))
-                            : cell.render('Cell')}
-                        </td>
-                      );
-                    })}
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
-        </div>
-        {/* </Scroll> */}
+        <Scroll onScroll={onScroll}>
+          <div className="tbody-container">
+            <table {...getTableProps()} summary={caption}>
+              <tbody {...getTableBodyProps()}>
+                {page.map((row: Row, i) => {
+                  prepareRow(row);
+                  return (
+                    <tr
+                      {...row.getRowProps()}
+                      onClick={() => handleSelectRow(row)}
+                      className={row.isSelected ? 'selected' : ''}
+                    >
+                      {row.cells.map((cell) => {
+                        return (
+                          <td
+                            {...cell.getCellProps()}
+                            style={{
+                              width: cell.column.width,
+                              textAlign: cell.column.align,
+                            }}
+                          >
+                            {cell.column.formatter
+                              ? cell.column.formatter(cell.render('Cell'))
+                              : cell.render('Cell')}
+                          </td>
+                        );
+                      })}
+                      <td></td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
+        </Scroll>
       </div>
 
       <Pagination
