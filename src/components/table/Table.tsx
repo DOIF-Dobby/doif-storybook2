@@ -14,6 +14,7 @@ import {
   useRowSelect,
   useTable,
   useSortBy,
+  useFilters,
 } from 'react-table';
 import Scroll from '../common/Scroll';
 import useMultiRowSelect from './hooks/useMultiRowSelect';
@@ -21,6 +22,8 @@ import Pagination from './Pagination';
 import { StyledTable } from './Table.style';
 import { TableModelProps } from './table.model';
 import Icon from '../icon/Icon';
+import DefaultFilter from './filter/DefaultFilter';
+import { fuzzyTextFilter } from './filter/fuzzyFilter';
 
 interface TableProps {
   /** Table Data 배열 */
@@ -37,11 +40,17 @@ interface TableProps {
   enableMultiSelectRow: boolean;
   /** 컬럼 sorting 여부입니다. */
   disableSortBy: boolean;
+  /** 필터링 헤더 여부입니다. */
+  disableFilters: boolean;
   /** row를 선택했을 때 실행되는 콜백함수입니다. */
   onSelectRow?: (id: string, rowValue: Object) => void;
   /** mulit row를 선택했을 때 실행되는 콜백함수입니다. */
   onMultiSelectRow?: (rowValues: Object[]) => void;
 }
+
+const filterTypes = {
+  fuzzyText: fuzzyTextFilter,
+};
 
 /**
  * `Table` 컴포넌트는 기존의 `JqGrid`와 같은 컴포넌트입니다. 자세한 내용은 https://react-table.tanstack.com/ 이곳을 참조하세요.
@@ -54,6 +63,7 @@ const Table = ({
   buttons,
   enableMultiSelectRow,
   disableSortBy,
+  disableFilters,
   onSelectRow,
   onMultiSelectRow,
 }: TableProps) => {
@@ -64,11 +74,13 @@ const Table = ({
       width: m.width,
       align: m.align,
       formatter: m.formatter,
+      Filter: DefaultFilter,
     })) as Column<Object>[];
   }, [model]);
 
   /** react-table hooks */
   const hooks: PluginHook<Object>[] = [
+    useFilters,
     useSortBy,
     usePagination,
     useResizeColumns,
@@ -98,7 +110,14 @@ const Table = ({
     toggleAllRowsSelected,
     state: { pageIndex, pageSize, selectedRowIds, columnResizing },
   } = useTable(
-    { columns, data, initialState: { pageIndex: 0 }, disableSortBy },
+    {
+      columns,
+      data,
+      filterTypes,
+      initialState: { pageIndex: 0 },
+      disableSortBy,
+      disableFilters,
+    },
     ...hooks,
   );
 
@@ -162,7 +181,9 @@ const Table = ({
                         )}
                         style={{
                           width: column.width,
+                          cursor: disableSortBy ? 'auto' : 'pointer',
                         }}
+                        title={column.id}
                       >
                         <span>{column.render('Header')}</span>
                         <span className="sort-icon-container">
@@ -188,6 +209,33 @@ const Table = ({
                   <th></th>
                 </tr>
               ))}
+              {!disableFilters &&
+                headerGroups.map((headerGroup) => (
+                  <tr {...headerGroup.getHeaderGroupProps()}>
+                    {headerGroup.headers.map((column) => {
+                      return (
+                        <th
+                          {...column.getHeaderProps()}
+                          style={{
+                            width: column.width,
+                          }}
+                          title={column.id}
+                        >
+                          <div>
+                            {column.canFilter ? column.render('Filter') : null}
+                          </div>
+                          <div
+                            {...column.getResizerProps()}
+                            className={`resizer ${
+                              column.isResizing ? 'isResizing' : ''
+                            }`}
+                          />
+                        </th>
+                      );
+                    })}
+                    <th></th>
+                  </tr>
+                ))}
             </thead>
           </table>
         </div>
@@ -264,6 +312,7 @@ Table.defaultProps = {
   height: '400px',
   enableMultiSelectRow: false,
   disableSortBy: false,
+  disableFilters: false,
 };
 
 export default React.memo(Table);

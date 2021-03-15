@@ -17,11 +17,13 @@ export const StyledInputContainer = styled.div<StyledInputContainerProps>`
     height: 2rem;
     width: ${(props) => props.width};
     position: relative;
+    align-items: center;
     /* min-width: 8rem; */
   }
 
   & > input {
     width: 100%;
+    height: 100%;
     border: ${(props) =>
       `${props.theme.variants.borderWidth} solid ${props.theme.subColors.border}`};
     border-radius: ${(props) => props.theme.variants.borderRadius};
