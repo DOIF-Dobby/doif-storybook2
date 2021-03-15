@@ -74,6 +74,11 @@ export const StyledTable = styled.div<StyledTableProps>`
             border-bottom: 1px solid
               ${(props) => props.theme.tableColors.border};
 
+            .sort-icon-container {
+              display: inline-block;
+              padding-left: 5px;
+            }
+
             .resizer {
               display: inline-block;
               width: 10px;

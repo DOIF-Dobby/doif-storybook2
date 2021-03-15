@@ -13,12 +13,14 @@ import {
   useResizeColumns,
   useRowSelect,
   useTable,
+  useSortBy,
 } from 'react-table';
 import Scroll from '../common/Scroll';
 import useMultiRowSelect from './hooks/useMultiRowSelect';
 import Pagination from './Pagination';
 import { StyledTable } from './Table.style';
 import { TableModelProps } from './table.model';
+import Icon from '../icon/Icon';
 
 interface TableProps {
   /** Table Data 배열 */
@@ -33,6 +35,8 @@ interface TableProps {
   buttons?: React.ReactNode[];
   /** multi select 여부입니다. */
   enableMultiSelectRow: boolean;
+  /** 컬럼 sorting 여부입니다. */
+  disableSortBy: boolean;
   /** row를 선택했을 때 실행되는 콜백함수입니다. */
   onSelectRow?: (id: string, rowValue: Object) => void;
   /** mulit row를 선택했을 때 실행되는 콜백함수입니다. */
@@ -49,6 +53,7 @@ const Table = ({
   height,
   buttons,
   enableMultiSelectRow,
+  disableSortBy,
   onSelectRow,
   onMultiSelectRow,
 }: TableProps) => {
@@ -64,6 +69,7 @@ const Table = ({
 
   /** react-table hooks */
   const hooks: PluginHook<Object>[] = [
+    useSortBy,
     usePagination,
     useResizeColumns,
     useRowSelect,
@@ -91,7 +97,10 @@ const Table = ({
     totalColumnsWidth,
     toggleAllRowsSelected,
     state: { pageIndex, pageSize, selectedRowIds, columnResizing },
-  } = useTable({ columns, data, initialState: { pageIndex: 0 } }, ...hooks);
+  } = useTable(
+    { columns, data, initialState: { pageIndex: 0 }, disableSortBy },
+    ...hooks,
+  );
 
   /** mulit row Select 시 enableMultiSelectRow가 ture면 콜백실행 */
   useEffect(() => {
@@ -148,12 +157,25 @@ const Table = ({
                   {headerGroup.headers.map((column) => {
                     return (
                       <th
-                        {...column.getHeaderProps()}
+                        {...column.getHeaderProps(
+                          column.getSortByToggleProps(),
+                        )}
                         style={{
                           width: column.width,
                         }}
                       >
-                        {column.render('Header')}
+                        <span>{column.render('Header')}</span>
+                        <span className="sort-icon-container">
+                          {column.isSorted ? (
+                            column.isSortedDesc ? (
+                              <Icon icon="downArrow" size="small" />
+                            ) : (
+                              <Icon icon="topArrow" size="small" />
+                            )
+                          ) : (
+                            ''
+                          )}
+                        </span>
                         <div
                           {...column.getResizerProps()}
                           className={`resizer ${
@@ -241,6 +263,7 @@ const Table = ({
 Table.defaultProps = {
   height: '400px',
   enableMultiSelectRow: false,
+  disableSortBy: false,
 };
 
 export default React.memo(Table);
