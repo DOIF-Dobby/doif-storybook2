@@ -43,7 +43,7 @@ export const StyledTable = styled.div<StyledTableProps>`
 
     table {
       width: max-content;
-      /* table-layout: fixed; */
+      table-layout: fixed;
     }
 
     /** thead 테이블 */
@@ -64,7 +64,7 @@ export const StyledTable = styled.div<StyledTableProps>`
             overflow: hidden;
             text-overflow: ellipsis;
             vertical-align: middle;
-            display: inline-block;
+            /* display: inline-block; */
 
             font-size: 0.875rem;
             height: 2rem;
@@ -103,7 +103,7 @@ export const StyledTable = styled.div<StyledTableProps>`
           }
 
           th:last-of-type {
-            width: ${(props) => props.totalWidth};
+            width: 510px;
             /* border-right: 1px solid ${(props) =>
               props.theme.tableColors.border}; */
           }
@@ -138,18 +138,21 @@ export const StyledTable = styled.div<StyledTableProps>`
           }
 
           td {
-            user-select: text;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            vertical-align: middle;
-            display: inline-block;
+            /* display: inline-block; */
 
             font-size: 0.875rem;
             height: 1.5rem;
             line-height: 1.375rem;
             padding-left: 3px;
             padding-right: 3px;
+
+            & > span {
+              user-select: text;
+              white-space: nowrap;
+              overflow: hidden;
+              text-overflow: ellipsis;
+              vertical-align: middle;
+            }
           }
 
           td + td {

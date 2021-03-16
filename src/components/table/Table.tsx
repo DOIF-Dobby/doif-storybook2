@@ -77,16 +77,9 @@ const Table = ({
   onSelectRow,
   onMultiSelectRow,
 }: TableProps) => {
-  const columns: Column<Object>[] = useMemo(() => {
-    return model.map((m) => ({
-      Header: m.label,
-      accessor: m.name,
-      width: m.width,
-      align: m.align,
-      formatter: m.formatter,
-      Filter: DefaultFilter,
-    })) as Column<Object>[];
-  }, [model]);
+  const initColumns: Column<Object>[] = useMemo(() => getColumns(model), [
+    model,
+  ]);
 
   /** react-table hooks */
   const hooks: PluginHook<Object>[] = [
@@ -109,6 +102,7 @@ const Table = ({
     footerGroups,
     rows,
     page,
+    columns,
     canPreviousPage,
     canNextPage,
     pageOptions,
@@ -122,7 +116,7 @@ const Table = ({
     state: { pageIndex, pageSize, selectedRowIds, columnResizing },
   } = useTable(
     {
-      columns,
+      columns: initColumns,
       data,
       filterTypes,
       initialState: { pageIndex: initPageIndex, pageSize: initPageSize },
@@ -131,6 +125,9 @@ const Table = ({
     },
     ...hooks,
   );
+
+  console.log(columns);
+  console.log(headerGroups);
 
   /** mulit row Select 시 enableMultiSelectRow가 ture면 콜백실행 */
   useEffect(() => {
@@ -191,7 +188,7 @@ const Table = ({
                           column.getSortByToggleProps(),
                         )}
                         style={{
-                          width: column.width,
+                          width: column.totalWidth,
                           cursor: disableSortBy ? 'auto' : 'pointer',
                         }}
                         title={column.id}
@@ -217,7 +214,7 @@ const Table = ({
                       </th>
                     );
                   })}
-                  <th></th>
+                  <th rowSpan={2}></th>
                 </tr>
               ))}
               {!disableFilters &&
@@ -244,7 +241,7 @@ const Table = ({
                         </th>
                       );
                     })}
-                    <th></th>
+                    {/* <th rowSpan={2}></th> */}
                   </tr>
                 ))}
             </thead>
@@ -271,9 +268,11 @@ const Table = ({
                               textAlign: cell.column.align,
                             }}
                           >
-                            {cell.column.formatter
-                              ? cell.column.formatter(cell.render('Cell'))
-                              : cell.render('Cell')}
+                            <span>
+                              {cell.column.formatter
+                                ? cell.column.formatter(cell.render('Cell'))
+                                : cell.render('Cell')}
+                            </span>
                           </td>
                         );
                       })}
@@ -302,22 +301,6 @@ const Table = ({
         pageSize={pageSize}
         pageSizeArray={pageSizeArray}
       />
-
-      {/* <p>Selected Rows: {Object.keys(selectedRowIds).length}</p>
-      <pre>
-        <code>
-          {JSON.stringify(
-            {
-              selectedRowIds: selectedRowIds,
-              'selectedFlatRows[].original': selectedFlatRows.map(
-                (d) => d.original,
-              ),
-            },
-            null,
-            2,
-          )}
-        </code>
-      </pre> */}
     </StyledTable>
   );
 };
@@ -340,3 +323,31 @@ Table.defaultProps = {
 };
 
 export default React.memo(Table);
+
+function getColumns(model: TableModelProps[]): Column<Object>[] {
+  return model.map((m) => {
+    if (m.groupHeader) {
+      const columns: Column<Object>[] = m.columns?.map((m) => {
+        return getColumn(m);
+      }) as Column<Object>[];
+
+      return {
+        Header: m.groupHeader,
+        columns: columns,
+      };
+    }
+
+    return getColumn(m);
+  }) as Column<Object>[];
+}
+
+function getColumn(m: TableModelProps): Column<Object> {
+  return {
+    Header: m.label,
+    accessor: m.name,
+    width: m.width,
+    align: m.align,
+    formatter: m.formatter,
+    Filter: DefaultFilter,
+  } as Column<Object>;
+}

@@ -69,6 +69,10 @@ Default.args = {
   color: 'primary',
 };
 
+export const GroupHeader = () => {
+  return <Table model={model2} data={[]} caption="그룹 헤더" disableFilters />;
+};
+
 const model1: TableModelProps[] = [
   {
     label: '정산배치타입',
@@ -126,5 +130,31 @@ const model1: TableModelProps[] = [
     name: 'updtdt',
     width: 150,
     align: 'center',
+  },
+];
+
+const model2: TableModelProps[] = [
+  {
+    groupHeader: '그룹 헤더 1',
+    columns: [
+      {
+        label: '정산배치타입',
+        name: 'batchConfTypeNm',
+        width: 120,
+        align: 'center',
+      },
+      {
+        label: '정산배치설정ID',
+        name: 'batchConfId',
+        width: 150,
+        align: 'left',
+      },
+    ],
+  },
+  {
+    label: '정산배치설정명',
+    name: 'batchConfNm',
+    width: 250,
+    align: 'left',
   },
 ];

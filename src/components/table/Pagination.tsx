@@ -114,8 +114,8 @@ const Pagination = ({
         ></Select>
       </div>
       <div className="count-container">
-        {pageIndex * pageSize + 1} - {pageIndex * pageSize + pageNumber} /{' '}
-        {rowNumber}
+        {pageIndex * pageSize + (rowNumber > 0 ? 1 : 0)} -{' '}
+        {pageIndex * pageSize + pageNumber} / {rowNumber}
       </div>
     </StyledPagination>
   );
