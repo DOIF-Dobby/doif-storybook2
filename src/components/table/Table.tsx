@@ -268,11 +268,9 @@ const Table = ({
                               textAlign: cell.column.align,
                             }}
                           >
-                            <span>
-                              {cell.column.formatter
-                                ? cell.column.formatter(cell.render('Cell'))
-                                : cell.render('Cell')}
-                            </span>
+                            {cell.column.formatter
+                              ? cell.column.formatter(cell.render('Cell'))
+                              : cell.render('Cell')}
                           </td>
                         );
                       })}

@@ -42,7 +42,7 @@ export const StyledTable = styled.div<StyledTableProps>`
     border: 1px solid ${(props) => props.theme.tableColors.border};
 
     table {
-      width: max-content;
+      width: ${(props) => props.totalWidth};
       table-layout: fixed;
     }
 
@@ -103,7 +103,7 @@ export const StyledTable = styled.div<StyledTableProps>`
           }
 
           th:last-of-type {
-            width: 510px;
+            width: 100000px;
             /* border-right: 1px solid ${(props) =>
               props.theme.tableColors.border}; */
           }
@@ -139,6 +139,11 @@ export const StyledTable = styled.div<StyledTableProps>`
 
           td {
             /* display: inline-block; */
+            user-select: text;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            vertical-align: middle;
 
             font-size: 0.875rem;
             height: 1.5rem;
@@ -146,19 +151,12 @@ export const StyledTable = styled.div<StyledTableProps>`
             padding-left: 3px;
             padding-right: 3px;
 
-            & > span {
-              user-select: text;
-              white-space: nowrap;
-              overflow: hidden;
-              text-overflow: ellipsis;
-              vertical-align: middle;
-            }
           }
 
           td + td {
             border-left: 1px solid ${(props) => props.theme.tableColors.border};
           }
-          
+
           td:last-of-type {
             /* border-right: 1px solid ${(props) =>
               props.theme.tableColors.border}; */
