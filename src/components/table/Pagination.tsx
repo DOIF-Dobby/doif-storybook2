@@ -1,4 +1,5 @@
 import React from 'react';
+import { DoifDataProps } from '../../props/DoifCommonProps';
 import Button from '../button/Button';
 import Icon from '../icon/Icon';
 import Input from '../input/Input';
@@ -6,6 +7,8 @@ import Select from '../select/Select';
 import { StyledPagination } from './Pagination.style';
 
 interface PaginationProps {
+  rowNumber: number;
+  pageNumber: number;
   canPreviousPage: boolean;
   canNextPage: boolean;
   pageOptions: number[];
@@ -16,9 +19,12 @@ interface PaginationProps {
   setPageSize: (pageSize: number) => void;
   pageIndex: number;
   pageSize: number;
+  pageSizeArray: DoifDataProps[];
 }
 
 const Pagination = ({
+  rowNumber,
+  pageNumber,
   canPreviousPage,
   canNextPage,
   pageOptions,
@@ -29,12 +35,8 @@ const Pagination = ({
   setPageSize,
   pageIndex,
   pageSize,
+  pageSizeArray,
 }: PaginationProps) => {
-  const defaultPageSizes = [
-    { code: '10', name: '10' },
-    { code: '20', name: '20' },
-  ];
-
   const buttonStyle = {
     borderRadius: '1rem',
     width: '2rem',
@@ -43,6 +45,7 @@ const Pagination = ({
 
   return (
     <StyledPagination>
+      <div></div>
       <div className="page-container">
         <Button
           iconOnly
@@ -107,8 +110,12 @@ const Pagination = ({
           onChange={(e) => {
             setPageSize(Number(e.target.value));
           }}
-          data={defaultPageSizes}
+          data={pageSizeArray}
         ></Select>
+      </div>
+      <div className="count-container">
+        {pageIndex * pageSize + 1} - {pageIndex * pageSize + pageNumber} /{' '}
+        {rowNumber}
       </div>
     </StyledPagination>
   );

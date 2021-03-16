@@ -11,8 +11,11 @@ export const StyledPagination = styled.div`
   border-top: none;
   padding: 0.5rem;
 
+  & > div {
+    flex-basis: 33%;
+  }
+
   & > div.page-container {
-    width: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -31,5 +34,10 @@ export const StyledPagination = styled.div`
         }
       }
     }
+  }
+
+  & > div.count-container {
+    display: flex;
+    justify-content: flex-end;
   }
 `;

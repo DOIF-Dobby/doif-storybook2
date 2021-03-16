@@ -24,6 +24,7 @@ import { TableModelProps } from './table.model';
 import Icon from '../icon/Icon';
 import DefaultFilter from './filter/DefaultFilter';
 import { fuzzyTextFilter } from './filter/fuzzyFilter';
+import { DoifDataProps } from '../../props/DoifCommonProps';
 
 interface TableProps {
   /** Table Data 배열 */
@@ -42,6 +43,12 @@ interface TableProps {
   disableSortBy: boolean;
   /** 필터링 헤더 여부입니다. */
   disableFilters: boolean;
+  /** 페이지 사이즈를 설정합니다. */
+  initPageSize: number;
+  /** 페이지 시작 위치를 설정합니다. */
+  initPageIndex: number;
+  /** 페이지 사이즈 배열입니다. */
+  pageSizeArray: DoifDataProps[];
   /** row를 선택했을 때 실행되는 콜백함수입니다. */
   onSelectRow?: (id: string, rowValue: Object) => void;
   /** mulit row를 선택했을 때 실행되는 콜백함수입니다. */
@@ -64,6 +71,9 @@ const Table = ({
   enableMultiSelectRow,
   disableSortBy,
   disableFilters,
+  initPageSize,
+  initPageIndex,
+  pageSizeArray,
   onSelectRow,
   onMultiSelectRow,
 }: TableProps) => {
@@ -97,6 +107,7 @@ const Table = ({
     prepareRow,
     selectedFlatRows,
     footerGroups,
+    rows,
     page,
     canPreviousPage,
     canNextPage,
@@ -114,7 +125,7 @@ const Table = ({
       columns,
       data,
       filterTypes,
-      initialState: { pageIndex: 0 },
+      initialState: { pageIndex: initPageIndex, pageSize: initPageSize },
       disableSortBy,
       disableFilters,
     },
@@ -277,6 +288,8 @@ const Table = ({
       </div>
 
       <Pagination
+        rowNumber={rows.length}
+        pageNumber={page.length}
         canPreviousPage={canPreviousPage}
         canNextPage={canNextPage}
         pageOptions={pageOptions}
@@ -287,6 +300,7 @@ const Table = ({
         setPageSize={setPageSize}
         pageIndex={pageIndex}
         pageSize={pageSize}
+        pageSizeArray={pageSizeArray}
       />
 
       {/* <p>Selected Rows: {Object.keys(selectedRowIds).length}</p>
@@ -313,6 +327,16 @@ Table.defaultProps = {
   enableMultiSelectRow: false,
   disableSortBy: false,
   disableFilters: false,
+  initPageSize: 100,
+  initPageIndex: 0,
+  pageSizeArray: [
+    { code: '10', name: '10' },
+    { code: '20', name: '20' },
+    { code: '50', name: '50' },
+    { code: '100', name: '100' },
+    { code: '200', name: '200' },
+    { code: '1000', name: '1000' },
+  ],
 };
 
 export default React.memo(Table);
