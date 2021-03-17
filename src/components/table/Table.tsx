@@ -20,7 +20,7 @@ import Scroll from '../common/Scroll';
 import useMultiRowSelect from './hooks/useMultiRowSelect';
 import Pagination from './Pagination';
 import { StyledTable } from './Table.style';
-import { TableModelProps } from './table.model';
+import { TableGroupHeaderProps, TableModelProps } from './table.model';
 import Icon from '../icon/Icon';
 import DefaultFilter from './filter/DefaultFilter';
 import { fuzzyTextFilter } from './filter/fuzzyFilter';
@@ -49,6 +49,8 @@ interface TableProps {
   initPageIndex: number;
   /** 페이지 사이즈 배열입니다. */
   pageSizeArray: DoifDataProps[];
+  /** group header를 설정하기 위한 배열입니다. */
+  groupHeaders?: TableGroupHeaderProps[];
   /** row를 선택했을 때 실행되는 콜백함수입니다. */
   onSelectRow?: (id: string, rowValue: Object) => void;
   /** mulit row를 선택했을 때 실행되는 콜백함수입니다. */
@@ -74,6 +76,7 @@ const Table = ({
   initPageSize,
   initPageIndex,
   pageSizeArray,
+  groupHeaders,
   onSelectRow,
   onMultiSelectRow,
 }: TableProps) => {
@@ -128,11 +131,6 @@ const Table = ({
     ...hooks,
   );
 
-  console.log(initColumns);
-
-  console.log(columns);
-  console.log(headerGroups);
-
   /** mulit row Select 시 enableMultiSelectRow가 ture면 콜백실행 */
   useEffect(() => {
     if (enableMultiSelectRow && onMultiSelectRow) {
@@ -183,7 +181,7 @@ const Table = ({
         <div className="thead-container" ref={theadRef}>
           <table {...getTableProps()} summary={caption}>
             <colgroup>
-              {allColumns.map((column) => {
+              {visibleColumns.map((column) => {
                 return (
                   <col
                     {...column.getHeaderProps()}
@@ -195,6 +193,48 @@ const Table = ({
               })}
             </colgroup>
             <thead>
+              {groupHeaders && (
+                <tr>
+                  {visibleColumns.map((column) => {
+                    const matched = groupHeaders.find((groupHeader) => {
+                      return groupHeader.startColumn === column.id;
+                    });
+
+                    return (
+                      <th
+                        {...column.getHeaderProps(
+                          column.getSortByToggleProps(),
+                        )}
+                        style={{
+                          cursor: disableSortBy ? 'auto' : 'pointer',
+                        }}
+                        title={String(column.render('Header'))}
+                      >
+                        <span>{column.render('Header')}</span>
+                        <span className="sort-icon-container">
+                          {column.isSorted ? (
+                            column.isSortedDesc ? (
+                              <Icon icon="downArrow" size="small" />
+                            ) : (
+                              <Icon icon="topArrow" size="small" />
+                            )
+                          ) : (
+                            ''
+                          )}
+                        </span>
+                        {column.id !== '_multi-row-select' && (
+                          <div
+                            {...column.getResizerProps()}
+                            className={`resizer ${
+                              column.isResizing ? 'isResizing' : ''
+                            }`}
+                          />
+                        )}
+                      </th>
+                    );
+                  })}
+                </tr>
+              )}
               {headerGroups.map((headerGroup) => (
                 <tr {...headerGroup.getHeaderGroupProps()}>
                   {headerGroup.headers.map((column) => {
@@ -236,7 +276,7 @@ const Table = ({
               ))}
               {!disableFilters && (
                 <tr>
-                  {allColumns.map((column) => {
+                  {visibleColumns.map((column) => {
                     return (
                       <th
                         {...column.getHeaderProps()}
@@ -341,15 +381,6 @@ export default React.memo(Table);
 
 function getColumns(model: TableModelProps[]): Column<Object>[] {
   return model.map((m) => {
-    if (m.groupHeader) {
-      const columns: Column<Object>[] = m.columns ? getColumns(m.columns) : [];
-
-      return {
-        Header: m.groupHeader,
-        columns: columns,
-      };
-    }
-
     return getColumn(m);
   }) as Column<Object>[];
 }
