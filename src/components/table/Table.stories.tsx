@@ -70,16 +70,74 @@ Default.args = {
 };
 
 export const GroupHeader = () => {
+  const model2: TableModelProps[] = useMemo(
+    () => [
+      {
+        groupHeader: '그룹 헤더 1',
+        columns: [
+          {
+            label: '정산배치타입',
+            name: 'batchConfTypeNm',
+            width: 120,
+            align: 'center',
+          },
+          {
+            label: '정산배치설정ID',
+            name: 'batchConfId',
+            width: 150,
+            align: 'left',
+          },
+        ],
+      },
+      {
+        label: '정산배치설정명',
+        name: 'batchConfNm',
+        width: 250,
+        align: 'left',
+      },
+      {
+        groupHeader: '그룹 헤더 2',
+        columns: [
+          {
+            label: '실행순서',
+            name: 'procOrder',
+            width: 60,
+            align: 'center',
+          },
+          {
+            label: '실행타입',
+            name: 'procTypeNm',
+            width: 100,
+            align: 'center',
+          },
+          {
+            groupHeader: '그룹 헤더 3',
+            columns: [
+              {
+                label: '실행커맨드',
+                name: 'procCmd',
+                width: 400,
+                align: 'left',
+              },
+              {
+                label: '비고',
+                name: 'remark1',
+                width: 150,
+                align: 'left',
+                formatter: (cellValue: React.ReactNode) => (
+                  <div style={{ color: '#fab' }}>{cellValue}</div>
+                ),
+              },
+            ],
+          },
+        ],
+      },
+    ],
+    [],
+  );
   const data = useMemo(() => data1, []);
 
-  return (
-    <Table
-      model={model2}
-      data={data}
-      caption="그룹 헤더"
-      enableMultiSelectRow
-    />
-  );
+  return <Table model={model2} data={data} caption="그룹 헤더" />;
 };
 
 const model1: TableModelProps[] = [
@@ -139,31 +197,5 @@ const model1: TableModelProps[] = [
     name: 'updtdt',
     width: 150,
     align: 'center',
-  },
-];
-
-const model2: TableModelProps[] = [
-  {
-    groupHeader: '그룹 헤더 1',
-    columns: [
-      {
-        label: '정산배치타입',
-        name: 'batchConfTypeNm',
-        width: 120,
-        align: 'center',
-      },
-      {
-        label: '정산배치설정ID',
-        name: 'batchConfId',
-        width: 150,
-        align: 'left',
-      },
-    ],
-  },
-  {
-    label: '정산배치설정명',
-    name: 'batchConfNm',
-    width: 250,
-    align: 'left',
   },
 ];

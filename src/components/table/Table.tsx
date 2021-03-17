@@ -133,11 +133,6 @@ const Table = ({
   console.log(columns);
   console.log(headerGroups);
 
-  console.log(allColumns);
-  console.log(visibleColumns);
-
-  console.log(columnResizing);
-
   /** mulit row Select 시 enableMultiSelectRow가 ture면 콜백실행 */
   useEffect(() => {
     if (enableMultiSelectRow && onMultiSelectRow) {
@@ -211,7 +206,7 @@ const Table = ({
                         style={{
                           cursor: disableSortBy ? 'auto' : 'pointer',
                         }}
-                        title={column.id}
+                        title={String(column.render('Header'))}
                       >
                         <span>{column.render('Header')}</span>
                         <span className="sort-icon-container">
@@ -236,13 +231,12 @@ const Table = ({
                       </th>
                     );
                   })}
-                  <th rowSpan={3}></th>
+                  <th rowSpan={1000}></th>
                 </tr>
               ))}
               {!disableFilters && (
                 <tr>
                   {allColumns.map((column) => {
-                    console.log(column);
                     return (
                       <th
                         {...column.getHeaderProps()}
@@ -322,10 +316,6 @@ const Table = ({
         pageSize={pageSize}
         pageSizeArray={pageSizeArray}
       />
-
-      <pre>
-        <code>{JSON.stringify(columnResizing, null, 2)}</code>
-      </pre>
     </StyledTable>
   );
 };
@@ -352,9 +342,7 @@ export default React.memo(Table);
 function getColumns(model: TableModelProps[]): Column<Object>[] {
   return model.map((m) => {
     if (m.groupHeader) {
-      const columns: Column<Object>[] = m.columns?.map((m) => {
-        return getColumn(m);
-      }) as Column<Object>[];
+      const columns: Column<Object>[] = m.columns ? getColumns(m.columns) : [];
 
       return {
         Header: m.groupHeader,
