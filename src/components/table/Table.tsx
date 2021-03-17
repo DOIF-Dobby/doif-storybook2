@@ -113,6 +113,8 @@ const Table = ({
     setPageSize,
     totalColumnsWidth,
     toggleAllRowsSelected,
+    allColumns,
+    visibleColumns,
     state: { pageIndex, pageSize, selectedRowIds, columnResizing },
   } = useTable(
     {
@@ -126,8 +128,15 @@ const Table = ({
     ...hooks,
   );
 
+  console.log(initColumns);
+
   console.log(columns);
   console.log(headerGroups);
+
+  console.log(allColumns);
+  console.log(visibleColumns);
+
+  console.log(columnResizing);
 
   /** mulit row Select 시 enableMultiSelectRow가 ture면 콜백실행 */
   useEffect(() => {
@@ -178,6 +187,18 @@ const Table = ({
       <div className="table-container">
         <div className="thead-container" ref={theadRef}>
           <table {...getTableProps()} summary={caption}>
+            <colgroup>
+              {allColumns.map((column) => {
+                return (
+                  <col
+                    {...column.getHeaderProps()}
+                    style={{
+                      width: column.totalWidth,
+                    }}
+                  />
+                );
+              })}
+            </colgroup>
             <thead>
               {headerGroups.map((headerGroup) => (
                 <tr {...headerGroup.getHeaderGroupProps()}>
@@ -188,7 +209,6 @@ const Table = ({
                           column.getSortByToggleProps(),
                         )}
                         style={{
-                          width: column.totalWidth,
                           cursor: disableSortBy ? 'auto' : 'pointer',
                         }}
                         title={column.id}
@@ -205,45 +225,48 @@ const Table = ({
                             ''
                           )}
                         </span>
-                        <div
-                          {...column.getResizerProps()}
-                          className={`resizer ${
-                            column.isResizing ? 'isResizing' : ''
-                          }`}
-                        />
-                      </th>
-                    );
-                  })}
-                  <th rowSpan={2}></th>
-                </tr>
-              ))}
-              {!disableFilters &&
-                headerGroups.map((headerGroup) => (
-                  <tr {...headerGroup.getHeaderGroupProps()}>
-                    {headerGroup.headers.map((column) => {
-                      return (
-                        <th
-                          {...column.getHeaderProps()}
-                          style={{
-                            width: column.width,
-                          }}
-                          title={column.id}
-                        >
-                          <div>
-                            {column.canFilter ? column.render('Filter') : null}
-                          </div>
+                        {column.id !== '_multi-row-select' && (
                           <div
                             {...column.getResizerProps()}
                             className={`resizer ${
                               column.isResizing ? 'isResizing' : ''
                             }`}
                           />
-                        </th>
-                      );
-                    })}
-                    {/* <th rowSpan={2}></th> */}
-                  </tr>
-                ))}
+                        )}
+                      </th>
+                    );
+                  })}
+                  <th rowSpan={3}></th>
+                </tr>
+              ))}
+              {!disableFilters && (
+                <tr>
+                  {allColumns.map((column) => {
+                    console.log(column);
+                    return (
+                      <th
+                        {...column.getHeaderProps()}
+                        style={{
+                          width: column.totalWidth,
+                        }}
+                      >
+                        <div>
+                          {column.canFilter ? column.render('Filter') : null}
+                        </div>
+                        {column.id !== '_multi-row-select' && (
+                          <div
+                            {...column.getResizerProps()}
+                            className={`resizer ${
+                              column.isResizing ? 'isResizing' : ''
+                            }`}
+                          />
+                        )}
+                      </th>
+                    );
+                  })}
+                  {/* <th rowSpan={2}></th> */}
+                </tr>
+              )}
             </thead>
           </table>
         </div>
@@ -299,6 +322,10 @@ const Table = ({
         pageSize={pageSize}
         pageSizeArray={pageSizeArray}
       />
+
+      <pre>
+        <code>{JSON.stringify(columnResizing, null, 2)}</code>
+      </pre>
     </StyledTable>
   );
 };

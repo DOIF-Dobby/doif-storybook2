@@ -43,19 +43,19 @@ const IndeterminateCheckbox = forwardRef<HTMLInputElement, CheckboxProps>(
 function useMultiRowSelect(hooks: Hooks<any>) {
   hooks.visibleColumns.push((columns) => [
     {
-      id: 'selection',
+      id: '_multi-row-select',
       // disableResizing: true,
       // disableGroupBy: true,
-      minWidth: 45,
-      width: 45,
-      maxWidth: 45,
+      minWidth: 40,
+      width: 40,
+      maxWidth: 40,
       Header: ({ getToggleAllPageRowsSelectedProps }: HeaderProps<any>) => (
-        <div>
+        <div style={{ position: 'absolute', left: '10px' }}>
           <IndeterminateCheckbox {...getToggleAllPageRowsSelectedProps()} />
         </div>
       ),
       Cell: ({ row }: CellProps<any>) => (
-        <div style={{ textAlign: 'center' }}>
+        <div style={{ textAlign: 'center', height: '100%' }}>
           <IndeterminateCheckbox {...row.getToggleRowSelectedProps()} />
         </div>
       ),

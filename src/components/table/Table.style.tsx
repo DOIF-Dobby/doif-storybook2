@@ -139,6 +139,7 @@ export const StyledTable = styled.div<StyledTableProps>`
 
           td {
             /* display: inline-block; */
+            position: relative;
             user-select: text;
             white-space: nowrap;
             overflow: hidden;

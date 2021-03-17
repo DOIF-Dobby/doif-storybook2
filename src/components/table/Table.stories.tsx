@@ -70,7 +70,16 @@ Default.args = {
 };
 
 export const GroupHeader = () => {
-  return <Table model={model2} data={[]} caption="그룹 헤더" disableFilters />;
+  const data = useMemo(() => data1, []);
+
+  return (
+    <Table
+      model={model2}
+      data={data}
+      caption="그룹 헤더"
+      enableMultiSelectRow
+    />
+  );
 };
 
 const model1: TableModelProps[] = [
