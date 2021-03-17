@@ -165,6 +165,20 @@ const Table = ({
     [onSelectRow, enableMultiSelectRow],
   );
 
+  const groupHeaderArray =
+    groupHeaders &&
+    groupHeaders.map((groupHeader) => {
+      const matchedIndex = visibleColumns.findIndex(
+        (column) => column.id === groupHeader.startColumn,
+      );
+      return visibleColumns.slice(
+        matchedIndex,
+        matchedIndex + groupHeader.size,
+      );
+    });
+
+  console.log(groupHeaderArray);
+
   return (
     <StyledTable height={height} totalWidth={totalColumnsWidth + 'px'}>
       <div className="caption-container">
@@ -209,10 +223,13 @@ const Table = ({
                           cursor: disableSortBy ? 'auto' : 'pointer',
                         }}
                         title={String(column.render('Header'))}
+                        colSpan={matched ? matched.size : 1}
                       >
-                        <span>{column.render('Header')}</span>
+                        <span>
+                          {matched ? matched.label : column.render('Header')}
+                        </span>
                         <span className="sort-icon-container">
-                          {column.isSorted ? (
+                          {column.isSorted && !matched ? (
                             column.isSortedDesc ? (
                               <Icon icon="downArrow" size="small" />
                             ) : (
