@@ -137,8 +137,13 @@ export const GroupHeader = () => {
     () => [
       {
         startColumn: 'batchConfTypeNm',
-        size: 2,
+        size: 3,
         label: '그룹 헤더 1',
+      },
+      {
+        startColumn: 'remark1',
+        size: 2,
+        label: '그룹 헤더 2',
       },
     ],
     [],

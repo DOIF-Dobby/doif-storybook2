@@ -171,13 +171,14 @@ const Table = ({
       const matchedIndex = visibleColumns.findIndex(
         (column) => column.id === groupHeader.startColumn,
       );
-      return visibleColumns.slice(
-        matchedIndex,
-        matchedIndex + groupHeader.size,
-      );
+      return {
+        label: groupHeader.label,
+        arr: visibleColumns.slice(
+          matchedIndex,
+          matchedIndex + groupHeader.size,
+        ),
+      };
     });
-
-  console.log(groupHeaderArray);
 
   return (
     <StyledTable height={height} totalWidth={totalColumnsWidth + 'px'}>
@@ -207,12 +208,36 @@ const Table = ({
               })}
             </colgroup>
             <thead>
-              {groupHeaders && (
+              {groupHeaderArray && groupHeaderArray.length > 0 && (
                 <tr>
                   {visibleColumns.map((column) => {
-                    const matched = groupHeaders.find((groupHeader) => {
-                      return groupHeader.startColumn === column.id;
-                    });
+                    let isFirst = false;
+                    let isLast = false;
+                    let isInclude = false;
+                    let groupSize = 0;
+                    let label = '';
+
+                    for (const groupHeader of groupHeaderArray) {
+                      for (const i in groupHeader.arr) {
+                        if (groupHeader.arr[i].id === column.id) {
+                          isInclude = true;
+
+                          if (i === '0') {
+                            isFirst = true;
+                          } else if (i === String(groupHeader.arr.length - 1)) {
+                            isLast = true;
+                            label = groupHeader.label;
+                            groupSize = groupHeader.arr.length;
+                          }
+                        }
+                      }
+                    }
+
+                    if (isInclude && !isLast) {
+                      return null;
+                    }
+
+                    const hi = column.getSortByToggleProps();
 
                     return (
                       <th
@@ -223,22 +248,26 @@ const Table = ({
                           cursor: disableSortBy ? 'auto' : 'pointer',
                         }}
                         title={String(column.render('Header'))}
-                        colSpan={matched ? matched.size : 1}
+                        colSpan={isLast ? groupSize : 1}
+                        rowSpan={isLast ? 1 : 2}
+                        id={label}
+                        /** @ts-ignore */
+                        onClick={isLast ? () => {} : hi.onClick}
                       >
-                        <span>
-                          {matched ? matched.label : column.render('Header')}
-                        </span>
-                        <span className="sort-icon-container">
-                          {column.isSorted && !matched ? (
-                            column.isSortedDesc ? (
-                              <Icon icon="downArrow" size="small" />
+                        <span>{isLast ? label : column.render('Header')}</span>
+                        {!isLast && (
+                          <span className="sort-icon-container">
+                            {column.isSorted ? (
+                              column.isSortedDesc ? (
+                                <Icon icon="downArrow" size="small" />
+                              ) : (
+                                <Icon icon="topArrow" size="small" />
+                              )
                             ) : (
-                              <Icon icon="topArrow" size="small" />
-                            )
-                          ) : (
-                            ''
-                          )}
-                        </span>
+                              ''
+                            )}
+                          </span>
+                        )}
                         {column.id !== '_multi-row-select' && (
                           <div
                             {...column.getResizerProps()}
@@ -250,6 +279,7 @@ const Table = ({
                       </th>
                     );
                   })}
+                  <th rowSpan={1000}></th>
                 </tr>
               )}
               {headerGroups.map((headerGroup) => (
