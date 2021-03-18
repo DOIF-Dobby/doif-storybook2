@@ -237,6 +237,7 @@ const Table = ({
                     // 그리고 rowSpan을 구한다.
                     const rowSpan = column.placeholderOf ? 2 : 1;
 
+                    // groupHeader가 있는 경우 headerGroupIndex === 1이 되는데, 해당 컬럼들을 렌더링할 때 parent 속성이 없다면 첫번째 row에서 rowSpan을 했으니깐 렌더링하면 안된다.
                     if (headerGroupIndex === 1) {
                       if (!renderColumn.parent) {
                         return null;
