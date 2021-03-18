@@ -80,9 +80,34 @@ const Table = ({
   onSelectRow,
   onMultiSelectRow,
 }: TableProps) => {
-  const initColumns: Column<Object>[] = useMemo(() => getColumns(model), [
-    model,
-  ]);
+  /** groupHeaders가 있다면 해당 정보로 Grouping Column을 만들어 낸다. */
+  const initColumns = useMemo(() => {
+    const initData: Column<Object>[] = getColumns(model);
+    const groupingData = [];
+
+    if (groupHeaders) {
+      for (let i = 0; i < initData.length; ) {
+        const column = initData[i];
+
+        const matched = groupHeaders.find((groupHeader) => {
+          return groupHeader.startColumn === column.accessor;
+        });
+
+        if (matched) {
+          groupingData.push({
+            Header: matched.label,
+            columns: initData.slice(i, i + matched.size),
+          });
+          i += matched.size;
+        } else {
+          i++;
+          groupingData.push(column);
+        }
+      }
+    }
+
+    return groupingData.length > 0 ? groupingData : initData;
+  }, [model, groupHeaders]);
 
   /** react-table hooks */
   const hooks: PluginHook<Object>[] = [
@@ -116,7 +141,6 @@ const Table = ({
     setPageSize,
     totalColumnsWidth,
     toggleAllRowsSelected,
-    allColumns,
     visibleColumns,
     state: { pageIndex, pageSize, selectedRowIds, columnResizing },
   } = useTable(
@@ -165,21 +189,6 @@ const Table = ({
     [onSelectRow, enableMultiSelectRow],
   );
 
-  const groupHeaderArray =
-    groupHeaders &&
-    groupHeaders.map((groupHeader) => {
-      const matchedIndex = visibleColumns.findIndex(
-        (column) => column.id === groupHeader.startColumn,
-      );
-      return {
-        label: groupHeader.label,
-        arr: visibleColumns.slice(
-          matchedIndex,
-          matchedIndex + groupHeader.size,
-        ),
-      };
-    });
-
   return (
     <StyledTable height={height} totalWidth={totalColumnsWidth + 'px'}>
       <div className="caption-container">
@@ -208,97 +217,37 @@ const Table = ({
               })}
             </colgroup>
             <thead>
-              {groupHeaderArray && groupHeaderArray.length > 0 && (
-                <tr>
-                  {visibleColumns.map((column) => {
-                    let isFirst = false;
-                    let isLast = false;
-                    let isInclude = false;
-                    let groupSize = 0;
-                    let label = '';
-
-                    for (const groupHeader of groupHeaderArray) {
-                      for (const i in groupHeader.arr) {
-                        if (groupHeader.arr[i].id === column.id) {
-                          isInclude = true;
-
-                          if (i === '0') {
-                            isFirst = true;
-                          } else if (i === String(groupHeader.arr.length - 1)) {
-                            isLast = true;
-                            label = groupHeader.label;
-                            groupSize = groupHeader.arr.length;
-                          }
-                        }
-                      }
-                    }
-
-                    if (isInclude && !isLast) {
-                      return null;
-                    }
-
-                    const hi = column.getSortByToggleProps();
-
-                    return (
-                      <th
-                        {...column.getHeaderProps(
-                          column.getSortByToggleProps(),
-                        )}
-                        style={{
-                          cursor: disableSortBy ? 'auto' : 'pointer',
-                        }}
-                        title={String(column.render('Header'))}
-                        colSpan={isLast ? groupSize : 1}
-                        rowSpan={isLast ? 1 : 2}
-                        id={label}
-                        /** @ts-ignore */
-                        onClick={isLast ? () => {} : hi.onClick}
-                      >
-                        <span>{isLast ? label : column.render('Header')}</span>
-                        {!isLast && (
-                          <span className="sort-icon-container">
-                            {column.isSorted ? (
-                              column.isSortedDesc ? (
-                                <Icon icon="downArrow" size="small" />
-                              ) : (
-                                <Icon icon="topArrow" size="small" />
-                              )
-                            ) : (
-                              ''
-                            )}
-                          </span>
-                        )}
-                        {column.id !== '_multi-row-select' && (
-                          <div
-                            {...column.getResizerProps()}
-                            className={`resizer ${
-                              column.isResizing ? 'isResizing' : ''
-                            }`}
-                          />
-                        )}
-                      </th>
-                    );
-                  })}
-                  <th rowSpan={1000}></th>
-                </tr>
-              )}
               {headerGroups.map((headerGroup) => (
                 <tr {...headerGroup.getHeaderGroupProps()}>
                   {headerGroup.headers.map((column) => {
+                    /** 첫번째 headerGroup이 그룹핑 헤더라면 두번째 headerGroup에서 해당 column.placeholderOf.id와 같은 Column 객체를 찾아서 해당 객체를 렌더링한다.  */
+                    const renderColumn =
+                      (headerGroups[1]
+                        ? headerGroups[1].headers.find(
+                            (col) =>
+                              column.placeholderOf &&
+                              col.id === column.placeholderOf.id,
+                          )
+                        : column) || column;
+
+                    // 그리고 rowSpan을 구한다.
+                    const rowSpan = column.placeholderOf ? 2 : 1;
+
                     return (
                       <th
-                        {...column.getHeaderProps(
-                          column.getSortByToggleProps(),
+                        {...renderColumn.getHeaderProps(
+                          renderColumn.getSortByToggleProps(),
                         )}
                         style={{
                           cursor: disableSortBy ? 'auto' : 'pointer',
                         }}
-                        title={String(column.render('Header'))}
+                        title={String(renderColumn.render('Header'))}
+                        rowSpan={rowSpan}
                       >
-                        <span>{column.render('Header')}</span>
+                        <span>{renderColumn.render('Header')}</span>
                         <span className="sort-icon-container">
-                          {column.isSorted ? (
-                            column.isSortedDesc ? (
+                          {renderColumn.isSorted ? (
+                            renderColumn.isSortedDesc ? (
                               <Icon icon="downArrow" size="small" />
                             ) : (
                               <Icon icon="topArrow" size="small" />
@@ -307,11 +256,11 @@ const Table = ({
                             ''
                           )}
                         </span>
-                        {column.id !== '_multi-row-select' && (
+                        {renderColumn.id !== '_multi-row-select' && (
                           <div
-                            {...column.getResizerProps()}
+                            {...renderColumn.getResizerProps()}
                             className={`resizer ${
-                              column.isResizing ? 'isResizing' : ''
+                              renderColumn.isResizing ? 'isResizing' : ''
                             }`}
                           />
                         )}
