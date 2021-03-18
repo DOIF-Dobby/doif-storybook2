@@ -109,6 +109,8 @@ const Table = ({
     return groupingData.length > 0 ? groupingData : initData;
   }, [model, groupHeaders]);
 
+  console.log(initColumns);
+
   /** react-table hooks */
   const hooks: PluginHook<Object>[] = [
     useFilters,
@@ -154,6 +156,8 @@ const Table = ({
     },
     ...hooks,
   );
+
+  console.log(headerGroups);
 
   /** mulit row Select 시 enableMultiSelectRow가 ture면 콜백실행 */
   useEffect(() => {
@@ -217,21 +221,27 @@ const Table = ({
               })}
             </colgroup>
             <thead>
-              {headerGroups.map((headerGroup) => (
+              {headerGroups.map((headerGroup, headerGroupIndex) => (
                 <tr {...headerGroup.getHeaderGroupProps()}>
                   {headerGroup.headers.map((column) => {
                     /** 첫번째 headerGroup이 그룹핑 헤더라면 두번째 headerGroup에서 해당 column.placeholderOf.id와 같은 Column 객체를 찾아서 해당 객체를 렌더링한다.  */
                     const renderColumn =
-                      (headerGroups[1]
-                        ? headerGroups[1].headers.find(
-                            (col) =>
-                              column.placeholderOf &&
-                              col.id === column.placeholderOf.id,
-                          )
-                        : column) || column;
+                      (headerGroups[1] &&
+                        headerGroups[1].headers.find(
+                          (col) =>
+                            column.placeholderOf &&
+                            col.id === column.placeholderOf.id,
+                        )) ||
+                      column;
 
                     // 그리고 rowSpan을 구한다.
                     const rowSpan = column.placeholderOf ? 2 : 1;
+
+                    if (headerGroupIndex === 1) {
+                      if (!renderColumn.parent) {
+                        return null;
+                      }
+                    }
 
                     return (
                       <th

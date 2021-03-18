@@ -53,7 +53,10 @@ export { GlobalStyle } from './styles/global-style';
 
 // interface
 export { MenuProps, CategoryProps } from './components/menu/menu.model';
-export { TableModelProps } from './components/table/table.model';
+export {
+  TableModelProps,
+  TableGroupHeaderProps,
+} from './components/table/table.model';
 
 // hooks
 export { default as useOutsideAlerter } from './hooks/useOutsideAlerter';

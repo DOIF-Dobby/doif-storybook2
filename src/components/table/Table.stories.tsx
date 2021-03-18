@@ -155,6 +155,7 @@ export const GroupHeader = () => {
       data={data}
       caption="그룹 헤더"
       groupHeaders={groupHeaders}
+      enableMultiSelectRow
     />
   );
 };
