@@ -60,9 +60,6 @@ export const StyledTable = styled.div<StyledTableProps>`
           th {
             user-select: text;
             position: relative;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
             vertical-align: middle;
             /* display: inline-block; */
 
@@ -73,6 +70,12 @@ export const StyledTable = styled.div<StyledTableProps>`
             padding-right: 3px;
             border-bottom: 1px solid
               ${(props) => props.theme.tableColors.border};
+
+            > div {
+              white-space: nowrap;
+              overflow: hidden;
+              text-overflow: ellipsis;
+            }
 
             .sort-icon-container {
               display: inline-block;

@@ -109,8 +109,6 @@ const Table = ({
     return groupingData.length > 0 ? groupingData : initData;
   }, [model, groupHeaders]);
 
-  console.log(initColumns);
-
   /** react-table hooks */
   const hooks: PluginHook<Object>[] = [
     useFilters,
@@ -156,8 +154,6 @@ const Table = ({
     },
     ...hooks,
   );
-
-  console.log(headerGroups);
 
   /** mulit row Select 시 enableMultiSelectRow가 ture면 콜백실행 */
   useEffect(() => {
@@ -246,27 +242,30 @@ const Table = ({
 
                     return (
                       <th
-                        {...renderColumn.getHeaderProps(
-                          renderColumn.getSortByToggleProps(),
-                        )}
+                        {...renderColumn.getHeaderProps()}
                         style={{
                           cursor: disableSortBy ? 'auto' : 'pointer',
                         }}
                         title={String(renderColumn.render('Header'))}
                         rowSpan={rowSpan}
                       >
-                        <span>{renderColumn.render('Header')}</span>
-                        <span className="sort-icon-container">
-                          {renderColumn.isSorted ? (
-                            renderColumn.isSortedDesc ? (
-                              <Icon icon="downArrow" size="small" />
+                        <div
+                          {...renderColumn.getSortByToggleProps()}
+                          title={String(renderColumn.render('Header'))}
+                        >
+                          <span>{renderColumn.render('Header')}</span>
+                          <span className="sort-icon-container">
+                            {renderColumn.isSorted ? (
+                              renderColumn.isSortedDesc ? (
+                                <Icon icon="downArrow" size="small" />
+                              ) : (
+                                <Icon icon="topArrow" size="small" />
+                              )
                             ) : (
-                              <Icon icon="topArrow" size="small" />
-                            )
-                          ) : (
-                            ''
-                          )}
-                        </span>
+                              ''
+                            )}
+                          </span>
+                        </div>
                         {renderColumn.id !== '_multi-row-select' && (
                           <div
                             {...renderColumn.getResizerProps()}
