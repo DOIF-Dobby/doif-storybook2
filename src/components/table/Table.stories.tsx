@@ -29,6 +29,11 @@ const Template: Story<ComponentProps<typeof Table>> = (args) => {
     console.log(rowValue);
   }, []);
 
+  const onDoubleClickRow = useCallback((id: string, rowValue: Object) => {
+    console.log('double click');
+    console.log(rowValue);
+  }, []);
+
   const onMultiSelectRow = useCallback((rowValues: Object[]) => {
     console.log(rowValues);
   }, []);
@@ -59,6 +64,7 @@ const Template: Story<ComponentProps<typeof Table>> = (args) => {
       caption="테이블 1"
       buttons={buttons}
       onSelectRow={onSelectRow}
+      onDoubleClickRow={onDoubleClickRow}
       onMultiSelectRow={onMultiSelectRow}
     />
   );

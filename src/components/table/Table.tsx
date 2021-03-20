@@ -53,6 +53,8 @@ interface TableProps {
   groupHeaders?: TableGroupHeaderProps[];
   /** row를 선택했을 때 실행되는 콜백함수입니다. */
   onSelectRow?: (id: string, rowValue: Object) => void;
+  /** row를 더블클릭 했을 때 실행되는 콜백함수입니다. */
+  onDoubleClickRow?: (id: string, rowValue: Object) => void;
   /** mulit row를 선택했을 때 실행되는 콜백함수입니다. */
   onMultiSelectRow?: (rowValues: Object[]) => void;
 }
@@ -78,6 +80,7 @@ const Table = ({
   pageSizeArray,
   groupHeaders,
   onSelectRow,
+  onDoubleClickRow,
   onMultiSelectRow,
 }: TableProps) => {
   /** groupHeaders가 있다면 해당 정보로 Grouping Column을 만들어 낸다. */
@@ -187,6 +190,21 @@ const Table = ({
       }
     },
     [onSelectRow, enableMultiSelectRow],
+  );
+
+  /** row 더블 클릭했을 때 실행되는 함수 */
+  const handleDoubleClickRow = useCallback(
+    (row: Row) => {
+      if (!enableMultiSelectRow) {
+        toggleAllRowsSelected(false);
+      }
+      row.toggleRowSelected();
+
+      if (onDoubleClickRow) {
+        onDoubleClickRow(row.id, row.original);
+      }
+    },
+    [onDoubleClickRow, enableMultiSelectRow],
   );
 
   return (
@@ -320,6 +338,7 @@ const Table = ({
                     <tr
                       {...row.getRowProps()}
                       onClick={() => handleSelectRow(row)}
+                      onDoubleClick={() => handleDoubleClickRow(row)}
                       className={row.isSelected ? 'selected' : ''}
                     >
                       {row.cells.map((cell) => {
