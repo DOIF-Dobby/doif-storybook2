@@ -50,7 +50,7 @@ function useMultiRowSelect(hooks: Hooks<any>) {
       width: 40,
       maxWidth: 40,
       Header: ({ getToggleAllPageRowsSelectedProps }: HeaderProps<any>) => (
-        <div style={{ position: 'absolute', left: '10px' }}>
+        <div style={{ position: 'absolute', width: '100%' }}>
           <IndeterminateCheckbox {...getToggleAllPageRowsSelectedProps()} />
         </div>
       ),

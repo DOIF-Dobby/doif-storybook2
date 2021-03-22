@@ -15,7 +15,6 @@ export { ReactComponent as hamburger } from './svg/hamburger.svg';
 export { ReactComponent as search } from './svg/search.svg';
 export { ReactComponent as gear } from './svg/gear.svg';
 export { ReactComponent as rightDoubleArrow } from './svg/right-double-arrow.svg';
-
 export { ReactComponent as plus } from './svg/plus.svg';
 export { ReactComponent as trashCan } from './svg/trash-can.svg';
 export { ReactComponent as refresh } from './svg/refresh.svg';
@@ -29,3 +28,4 @@ export { ReactComponent as detailSearch } from './svg/detail-search.svg';
 export { ReactComponent as collapse } from './svg/collapse.svg';
 export { ReactComponent as lock } from './svg/lock.svg';
 export { ReactComponent as unlock } from './svg/unlock.svg';
+export { ReactComponent as fillArrow } from './svg/fill-arrow.svg';

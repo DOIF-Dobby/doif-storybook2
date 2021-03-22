@@ -75,6 +75,7 @@ export const StyledTable = styled.div<StyledTableProps>`
               white-space: nowrap;
               overflow: hidden;
               text-overflow: ellipsis;
+              position: relative;
             }
 
             .sort-icon-container {

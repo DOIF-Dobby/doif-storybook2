@@ -15,6 +15,8 @@ import {
   useTable,
   useSortBy,
   useFilters,
+  useExpanded,
+  useRowState,
 } from 'react-table';
 import Scroll from '../common/Scroll';
 import useMultiRowSelect from './hooks/useMultiRowSelect';
@@ -25,6 +27,7 @@ import Icon from '../icon/Icon';
 import DefaultFilter from './filter/DefaultFilter';
 import { fuzzyTextFilter } from './filter/fuzzyFilter';
 import { DoifDataProps } from '../../props/DoifCommonProps';
+import useTreeRow from './hooks/useTreeRow';
 
 interface TableProps {
   /** Table Data 배열 */
@@ -116,9 +119,12 @@ const Table = ({
   const hooks: PluginHook<Object>[] = [
     useFilters,
     useSortBy,
+    useExpanded,
     usePagination,
+    useRowState,
     useResizeColumns,
     useRowSelect,
+    useTreeRow,
   ];
 
   /** enableMultiSelectRow가 true라면 useMultiRowSelect 추가 */
@@ -271,7 +277,7 @@ const Table = ({
                           {...renderColumn.getSortByToggleProps()}
                           title={String(renderColumn.render('Header'))}
                         >
-                          <span>{renderColumn.render('Header')}</span>
+                          {renderColumn.render('Header')}
                           <span className="sort-icon-container">
                             {renderColumn.isSorted ? (
                               renderColumn.isSortedDesc ? (
@@ -337,8 +343,14 @@ const Table = ({
                   return (
                     <tr
                       {...row.getRowProps()}
-                      onClick={() => handleSelectRow(row)}
-                      onDoubleClick={() => handleDoubleClickRow(row)}
+                      onClick={(e) => {
+                        handleSelectRow(row);
+                        e.stopPropagation();
+                      }}
+                      onDoubleClick={(e) => {
+                        handleDoubleClickRow(row);
+                        e.stopPropagation();
+                      }}
                       className={row.isSelected ? 'selected' : ''}
                     >
                       {row.cells.map((cell) => {

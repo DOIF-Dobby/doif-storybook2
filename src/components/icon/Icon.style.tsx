@@ -13,6 +13,8 @@ interface StyledIconProps {
 export const StyledIconContainer = styled.div<StyledIconProps>`
   & {
     display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
   & > svg {
