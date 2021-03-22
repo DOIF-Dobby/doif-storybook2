@@ -1,9 +1,4 @@
-import React, {
-  forwardRef,
-  MutableRefObject,
-  useCallback,
-  useEffect,
-} from 'react';
+import React, { useCallback } from 'react';
 import { Hooks, Row } from 'react-table';
 import Icon from '../../icon/Icon';
 

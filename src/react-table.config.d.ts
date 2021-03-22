@@ -117,6 +117,7 @@ declare module 'react-table' {
       UseGroupByColumnProps<D>,
       UseResizeColumnsColumnProps<D>,
       UseSortByColumnProps<D> {
+    index: number;
     align: 'left' | 'center' | 'right';
     formatter: (cellValue: React.ReactNode) => React.ReactNode;
   }

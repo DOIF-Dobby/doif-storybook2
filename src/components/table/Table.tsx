@@ -17,6 +17,7 @@ import {
   useFilters,
   useExpanded,
   useRowState,
+  UseRowStateLocalState,
 } from 'react-table';
 import Scroll from '../common/Scroll';
 import useMultiRowSelect from './hooks/useMultiRowSelect';
@@ -151,13 +152,17 @@ const Table = ({
     totalColumnsWidth,
     toggleAllRowsSelected,
     visibleColumns,
-    state: { pageIndex, pageSize, selectedRowIds, columnResizing },
+    setRowState,
+    state: { pageIndex, pageSize, selectedRowIds, columnResizing, rowState },
   } = useTable(
     {
       columns: initColumns,
       data,
       filterTypes,
-      initialState: { pageIndex: initPageIndex, pageSize: initPageSize },
+      initialState: {
+        pageIndex: initPageIndex,
+        pageSize: initPageSize,
+      },
       disableSortBy,
       disableFilters,
     },
@@ -166,6 +171,7 @@ const Table = ({
 
   /** mulit row Select 시 enableMultiSelectRow가 ture면 콜백실행 */
   useEffect(() => {
+    console.log(rowState);
     if (enableMultiSelectRow && onMultiSelectRow) {
       onMultiSelectRow(
         selectedFlatRows.map((row) => {
@@ -186,16 +192,21 @@ const Table = ({
   /** row 선택했을 때 실행되는 함수 */
   const handleSelectRow = useCallback(
     (row: Row) => {
+      setRowState([row.id], {
+        idonknow: 10,
+      });
+
       if (!enableMultiSelectRow) {
         toggleAllRowsSelected(false);
       }
+
       row.toggleRowSelected();
 
       if (onSelectRow) {
         onSelectRow(row.id, row.original);
       }
     },
-    [onSelectRow, enableMultiSelectRow],
+    [onSelectRow, enableMultiSelectRow, rowState],
   );
 
   /** row 더블 클릭했을 때 실행되는 함수 */
@@ -343,13 +354,11 @@ const Table = ({
                   return (
                     <tr
                       {...row.getRowProps()}
-                      onClick={(e) => {
-                        handleSelectRow(row);
-                        e.stopPropagation();
-                      }}
                       onDoubleClick={(e) => {
                         handleDoubleClickRow(row);
-                        e.stopPropagation();
+                      }}
+                      onClick={(e) => {
+                        handleSelectRow(row);
                       }}
                       className={row.isSelected ? 'selected' : ''}
                     >
@@ -360,6 +369,10 @@ const Table = ({
                             style={{
                               width: cell.column.width,
                               textAlign: cell.column.align,
+                              paddingLeft:
+                                cell.column.index === 0 && cell.row.depth > 0
+                                  ? cell.row.depth * 10 + 3 + 'px'
+                                  : '3px',
                             }}
                           >
                             {cell.column.formatter
@@ -417,18 +430,26 @@ Table.defaultProps = {
 export default React.memo(Table);
 
 function getColumns(model: TableModelProps[]): Column<Object>[] {
-  return model.map((m) => {
-    return getColumn(m);
+  return model.map((m, index) => {
+    return {
+      index: index,
+      Header: m.label,
+      accessor: m.name,
+      width: m.width,
+      align: m.align,
+      formatter: m.formatter,
+      Filter: DefaultFilter,
+    };
   }) as Column<Object>[];
 }
 
-function getColumn(m: TableModelProps): Column<Object> {
-  return {
-    Header: m.label,
-    accessor: m.name,
-    width: m.width,
-    align: m.align,
-    formatter: m.formatter,
-    Filter: DefaultFilter,
-  } as Column<Object>;
-}
+// function getColumn(m: TableModelProps): Column<Object> {
+//   return {
+//     Header: m.label,
+//     accessor: m.name,
+//     width: m.width,
+//     align: m.align,
+//     formatter: m.formatter,
+//     Filter: DefaultFilter,
+//   } as Column<Object>;
+// }

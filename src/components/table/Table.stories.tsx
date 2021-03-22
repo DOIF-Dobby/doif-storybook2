@@ -25,12 +25,13 @@ const Template: Story<ComponentProps<typeof Table>> = (args) => {
   const model = useMemo(() => model1, []);
   const data = useMemo(() => data1, []);
   const onSelectRow = useCallback((id: string, rowValue: Object) => {
+    // console.log('click');
     // console.log(id);
     // console.log(rowValue);
   }, []);
 
   const onDoubleClickRow = useCallback((id: string, rowValue: Object) => {
-    console.log('double click');
+    // console.log('double click');
     // console.log(rowValue);
   }, []);
 
@@ -82,7 +83,7 @@ export const GroupHeader = () => {
         label: '정산배치타입',
         name: 'batchConfTypeNm',
         width: 120,
-        align: 'center',
+        align: 'left',
       },
       {
         label: '정산배치설정ID',
@@ -171,7 +172,7 @@ const model1: TableModelProps[] = [
     label: '정산배치타입',
     name: 'batchConfTypeNm',
     width: 120,
-    align: 'center',
+    align: 'left',
   },
   {
     label: '정산배치설정ID',
