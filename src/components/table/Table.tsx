@@ -11,14 +11,15 @@ import {
   Row,
   usePagination,
   useResizeColumns,
-  useRowSelect,
+  // useRowSelect,
   useTable,
   useSortBy,
   useFilters,
   useExpanded,
   useRowState,
-  UseRowStateLocalState,
 } from 'react-table';
+// @ts-ignore
+import { useRowSelect } from './hooks/useRowSelect';
 import Scroll from '../common/Scroll';
 import useMultiRowSelect from './hooks/useMultiRowSelect';
 import Pagination from './Pagination';
@@ -43,6 +44,8 @@ interface TableProps {
   buttons?: React.ReactNode[];
   /** multi select 여부입니다. */
   enableMultiSelectRow: boolean;
+  /** tree 구조 테이블 여부입니다. */
+  enableTreeTable: boolean;
   /** 컬럼 sorting 여부입니다. */
   disableSortBy: boolean;
   /** 필터링 헤더 여부입니다. */
@@ -77,6 +80,7 @@ const Table = ({
   height,
   buttons,
   enableMultiSelectRow,
+  enableTreeTable,
   disableSortBy,
   disableFilters,
   initPageSize,
@@ -125,8 +129,10 @@ const Table = ({
     useRowState,
     useResizeColumns,
     useRowSelect,
-    useTreeRow,
   ];
+
+  /** enableTreeTable가 true라면  useTreeRow 추가 */
+  enableTreeTable && hooks.push(useTreeRow);
 
   /** enableMultiSelectRow가 true라면 useMultiRowSelect 추가 */
   enableMultiSelectRow && hooks.push(useMultiRowSelect);
@@ -171,7 +177,6 @@ const Table = ({
 
   /** mulit row Select 시 enableMultiSelectRow가 ture면 콜백실행 */
   useEffect(() => {
-    console.log(rowState);
     if (enableMultiSelectRow && onMultiSelectRow) {
       onMultiSelectRow(
         selectedFlatRows.map((row) => {
@@ -192,10 +197,6 @@ const Table = ({
   /** row 선택했을 때 실행되는 함수 */
   const handleSelectRow = useCallback(
     (row: Row) => {
-      setRowState([row.id], {
-        idonknow: 10,
-      });
-
       if (!enableMultiSelectRow) {
         toggleAllRowsSelected(false);
       }
@@ -413,6 +414,7 @@ const Table = ({
 Table.defaultProps = {
   height: '400px',
   enableMultiSelectRow: false,
+  enableTreeTable: false,
   disableSortBy: false,
   disableFilters: false,
   initPageSize: 100,
