@@ -27,7 +27,7 @@ const Template: Story<ComponentProps<typeof Table>> = (args) => {
   const onSelectRow = useCallback((id: string, rowValue: Object) => {
     // console.log('click');
     // console.log(id);
-    console.log(rowValue);
+    // console.log(rowValue);
   }, []);
 
   const onDoubleClickRow = useCallback((id: string, rowValue: Object) => {
@@ -36,7 +36,7 @@ const Template: Story<ComponentProps<typeof Table>> = (args) => {
   }, []);
 
   const onMultiSelectRow = useCallback((rowValues: Object[]) => {
-    console.log(rowValues);
+    // console.log(rowValues);
   }, []);
 
   const buttons = useMemo(
@@ -163,6 +163,7 @@ export const GroupHeader = () => {
       caption="그룹 헤더"
       groupHeaders={groupHeaders}
       enableMultiSelectRow
+      enableTreeTable
     />
   );
 };

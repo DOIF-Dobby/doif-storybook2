@@ -40,28 +40,32 @@ const IndeterminateCheckbox = forwardRef<HTMLInputElement, CheckboxProps>(
   },
 );
 
-function useMultiRowSelect(hooks: Hooks<any>) {
-  hooks.visibleColumns.push((columns) => [
-    {
-      id: '_multi-row-select',
-      // disableResizing: true,
-      // disableGroupBy: true,
-      minWidth: 40,
-      width: 40,
-      maxWidth: 40,
-      Header: ({ getToggleAllPageRowsSelectedProps }: HeaderProps<any>) => (
-        <div style={{ position: 'absolute', width: '100%' }}>
-          <IndeterminateCheckbox {...getToggleAllPageRowsSelectedProps()} />
-        </div>
-      ),
-      Cell: ({ row }: CellProps<any>) => (
-        <div style={{ textAlign: 'center', height: '100%' }}>
-          <IndeterminateCheckbox {...row.getToggleRowSelectedProps()} />
-        </div>
-      ),
-    },
-    ...columns,
-  ]);
+function useMultiRowSelect(enableMultiSelectRow: boolean) {
+  return (hooks: Hooks<any>) => {
+    if (enableMultiSelectRow) {
+      hooks.visibleColumns.push((columns) => [
+        {
+          id: '_multi-row-select',
+          // disableResizing: true,
+          // disableGroupBy: true,
+          minWidth: 40,
+          width: 40,
+          maxWidth: 40,
+          Header: ({ getToggleAllPageRowsSelectedProps }: HeaderProps<any>) => (
+            <div style={{ position: 'absolute', width: '100%' }}>
+              <IndeterminateCheckbox {...getToggleAllPageRowsSelectedProps()} />
+            </div>
+          ),
+          Cell: ({ row }: CellProps<any>) => (
+            <div style={{ textAlign: 'center', height: '100%' }}>
+              <IndeterminateCheckbox {...row.getToggleRowSelectedProps()} />
+            </div>
+          ),
+        },
+        ...columns,
+      ]);
+    }
+  };
 }
 
 export default useMultiRowSelect;

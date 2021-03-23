@@ -18,8 +18,8 @@ import {
   useExpanded,
   useRowState,
 } from 'react-table';
-// @ts-ignore
-import { useRowSelect } from './hooks/useRowSelect';
+//@ts-ignore
+import { useRowSelect } from './hooks/useRowSelect.jsx';
 import Scroll from '../common/Scroll';
 import useMultiRowSelect from './hooks/useMultiRowSelect';
 import Pagination from './Pagination';
@@ -129,13 +129,9 @@ const Table = ({
     useRowState,
     useResizeColumns,
     useRowSelect,
+    useTreeRow(enableTreeTable),
+    useMultiRowSelect(enableMultiSelectRow),
   ];
-
-  /** enableTreeTable가 true라면  useTreeRow 추가 */
-  enableTreeTable && hooks.push(useTreeRow);
-
-  /** enableMultiSelectRow가 true라면 useMultiRowSelect 추가 */
-  enableMultiSelectRow && hooks.push(useMultiRowSelect);
 
   const {
     getTableProps,
@@ -158,7 +154,6 @@ const Table = ({
     totalColumnsWidth,
     toggleAllRowsSelected,
     visibleColumns,
-    setRowState,
     state: { pageIndex, pageSize, selectedRowIds, columnResizing, rowState },
   } = useTable(
     {
