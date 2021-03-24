@@ -24,7 +24,11 @@ import Scroll from '../common/Scroll';
 import useMultiRowSelect from './hooks/useMultiRowSelect';
 import Pagination from './Pagination';
 import { StyledTable } from './Table.style';
-import { TableGroupHeaderProps, TableModelProps } from './table.model';
+import {
+  TableFetchDataProps,
+  TableGroupHeaderProps,
+  TableModelProps,
+} from './table.model';
 import Icon from '../icon/Icon';
 import DefaultFilter from './filter/DefaultFilter';
 import { fuzzyTextFilter } from './filter/fuzzyFilter';
@@ -58,11 +62,19 @@ interface TableProps {
   pageSizeArray: DoifDataProps[];
   /** group header를 설정하기 위한 배열입니다. */
   groupHeaders?: TableGroupHeaderProps[];
-  /** row를 선택했을 때 실행되는 콜백함수입니다. */
+  /** loading 여부입니다. */
+  loading: boolean;
+  /** server side pagination 여부입니다. */
+  enableServerSidePagination: boolean;
+  /** pageCount */
+  pageCount: number;
+  /** server side pagination을 할 때 data를 불러오는 콜백함수 입니다. */
+  onFetchData?: ({ pageSize, pageIndex }: TableFetchDataProps) => void;
+  /** row를 선택했을 때 실행되는 콜백함수 입니다. */
   onSelectRow?: (id: string, rowValue: Object) => void;
-  /** row를 더블클릭 했을 때 실행되는 콜백함수입니다. */
+  /** row를 더블클릭 했을 때 실행되는 콜백함수 입니다. */
   onDoubleClickRow?: (id: string, rowValue: Object) => void;
-  /** mulit row를 선택했을 때 실행되는 콜백함수입니다. */
+  /** mulit row를 선택했을 때 실행되는 콜백함수 입니다. */
   onMultiSelectRow?: (rowValues: Object[]) => void;
 }
 
@@ -87,18 +99,22 @@ const Table = ({
   initPageIndex,
   pageSizeArray,
   groupHeaders,
+  loading,
+  enableServerSidePagination,
+  pageCount: controlledPageCount,
+  onFetchData,
   onSelectRow,
   onDoubleClickRow,
   onMultiSelectRow,
 }: TableProps) => {
   /** groupHeaders가 있다면 해당 정보로 Grouping Column을 만들어 낸다. */
   const initColumns = useMemo(() => {
-    const initData: Column<Object>[] = getColumns(model);
+    const initModel: Column<Object>[] = getColumns(model);
     const groupingData = [];
 
     if (groupHeaders) {
-      for (let i = 0; i < initData.length; ) {
-        const column = initData[i];
+      for (let i = 0; i < initModel.length; ) {
+        const column = initModel[i];
 
         const matched = groupHeaders.find((groupHeader) => {
           return groupHeader.startColumn === column.accessor;
@@ -107,7 +123,7 @@ const Table = ({
         if (matched) {
           groupingData.push({
             Header: matched.label,
-            columns: initData.slice(i, i + matched.size),
+            columns: initModel.slice(i, i + matched.size),
           });
           i += matched.size;
         } else {
@@ -117,21 +133,8 @@ const Table = ({
       }
     }
 
-    return groupingData.length > 0 ? groupingData : initData;
+    return groupingData.length > 0 ? groupingData : initModel;
   }, [model, groupHeaders]);
-
-  /** react-table hooks */
-  const hooks: PluginHook<Object>[] = [
-    useFilters,
-    useSortBy,
-    useExpanded,
-    usePagination,
-    useRowState,
-    useResizeColumns,
-    useRowSelect,
-    useTreeRow(enableTreeTable),
-    useMultiRowSelect(enableMultiSelectRow),
-  ];
 
   const {
     getTableProps,
@@ -154,7 +157,7 @@ const Table = ({
     totalColumnsWidth,
     toggleAllRowsSelected,
     visibleColumns,
-    state: { pageIndex, pageSize, selectedRowIds, columnResizing, rowState },
+    state: { pageIndex, pageSize, selectedRowIds, columnResizing },
   } = useTable(
     {
       columns: initColumns,
@@ -164,10 +167,21 @@ const Table = ({
         pageIndex: initPageIndex,
         pageSize: initPageSize,
       },
+      manualPagination: enableServerSidePagination,
+      pageCount: controlledPageCount,
+      autoResetPage: false,
       disableSortBy,
       disableFilters,
     },
-    ...hooks,
+    useFilters,
+    useSortBy,
+    useExpanded,
+    usePagination,
+    useRowState,
+    useResizeColumns,
+    useRowSelect,
+    useTreeRow(enableTreeTable),
+    useMultiRowSelect(enableMultiSelectRow),
   );
 
   /** mulit row Select 시 enableMultiSelectRow가 ture면 콜백실행 */
@@ -180,6 +194,13 @@ const Table = ({
       );
     }
   }, [selectedFlatRows]);
+
+  /** 서버사이드 페이징 할 때  */
+  useEffect(() => {
+    if (enableServerSidePagination && onFetchData) {
+      onFetchData({ pageSize, pageIndex });
+    }
+  }, [onFetchData, pageIndex, pageSize, enableServerSidePagination]);
 
   /** thead 스크롤을 움직이기 위한 ref */
   const theadRef: RefObject<HTMLDivElement> = useRef(null);
@@ -202,7 +223,7 @@ const Table = ({
         onSelectRow(row.id, row.original);
       }
     },
-    [onSelectRow, enableMultiSelectRow, rowState],
+    [onSelectRow, enableMultiSelectRow],
   );
 
   /** row 더블 클릭했을 때 실행되는 함수 */
@@ -422,6 +443,9 @@ Table.defaultProps = {
     { code: '200', name: '200' },
     { code: '1000', name: '1000' },
   ],
+  loading: false,
+  enableServerSidePagination: false,
+  pageCount: 0,
 };
 
 export default React.memo(Table);

@@ -13,3 +13,8 @@ export interface TableGroupHeaderProps {
   size: number;
   label: string;
 }
+
+export interface TableFetchDataProps {
+  pageSize: number;
+  pageIndex: number;
+}

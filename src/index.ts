@@ -56,6 +56,7 @@ export { MenuProps, CategoryProps } from './components/menu/menu.model';
 export {
   TableModelProps,
   TableGroupHeaderProps,
+  TableFetchDataProps,
 } from './components/table/table.model';
 
 // hooks
