@@ -34,6 +34,7 @@ import DefaultFilter from './filter/DefaultFilter';
 import { fuzzyTextFilter } from './filter/fuzzyFilter';
 import { DoifDataProps } from '../../props/DoifCommonProps';
 import useTreeRow from './hooks/useTreeRow';
+import Loading from '../loading/Loading';
 
 interface TableProps {
   /** Table Data 배열 */
@@ -68,6 +69,8 @@ interface TableProps {
   enableServerSidePagination: boolean;
   /** pageCount */
   pageCount: number;
+  /** 데이터의 총 갯수를 나타냅니다. Server Side Pagination 사용 시 필요합니다. */
+  totalCount?: number;
   /** server side pagination을 할 때 data를 불러오는 콜백함수 입니다. */
   onFetchData?: ({ pageSize, pageIndex }: TableFetchDataProps) => void;
   /** row를 선택했을 때 실행되는 콜백함수 입니다. */
@@ -102,6 +105,7 @@ const Table = ({
   loading,
   enableServerSidePagination,
   pageCount: controlledPageCount,
+  totalCount,
   onFetchData,
   onSelectRow,
   onDoubleClickRow,
@@ -243,186 +247,209 @@ const Table = ({
 
   return (
     <StyledTable height={height} totalWidth={totalColumnsWidth + 'px'}>
-      <div className="caption-container">
-        <span>{caption}</span>
-      </div>
-      {buttons && (
-        <div className="button-container">
-          {buttons.map((button, i) => (
-            <div key={i}>{button}</div>
-          ))}
+      <div className="container">
+        {loading && (
+          <div className="loading-container">
+            <Loading position="absolute" />
+          </div>
+        )}
+        <div className="caption-container">
+          <span>{caption}</span>
         </div>
-      )}
-      <div className="table-container">
-        <div className="thead-container" ref={theadRef}>
-          <table {...getTableProps()} summary={caption}>
-            <colgroup>
-              {visibleColumns.map((column) => {
-                return (
-                  <col
-                    {...column.getHeaderProps()}
-                    style={{
-                      width: column.totalWidth,
-                    }}
-                  />
-                );
-              })}
-            </colgroup>
-            <thead>
-              {headerGroups.map((headerGroup, headerGroupIndex) => (
-                <tr {...headerGroup.getHeaderGroupProps()}>
-                  {headerGroup.headers.map((column) => {
-                    /** 첫번째 headerGroup이 그룹핑 헤더라면 두번째 headerGroup에서 해당 column.placeholderOf.id와 같은 Column 객체를 찾아서 해당 객체를 렌더링한다.  */
-                    const renderColumn =
-                      (headerGroups[1] &&
-                        headerGroups[1].headers.find(
-                          (col) =>
-                            column.placeholderOf &&
-                            col.id === column.placeholderOf.id,
-                        )) ||
-                      column;
-
-                    // 그리고 rowSpan을 구한다.
-                    const rowSpan = column.placeholderOf ? 2 : 1;
-
-                    // groupHeader가 있는 경우 headerGroupIndex === 1이 되는데, 해당 컬럼들을 렌더링할 때 parent 속성이 없다면 첫번째 row에서 rowSpan을 했으니깐 렌더링하면 안된다.
-                    if (headerGroupIndex === 1) {
-                      if (!renderColumn.parent) {
-                        return null;
-                      }
-                    }
-
-                    return (
-                      <th
-                        {...renderColumn.getHeaderProps()}
-                        style={{
-                          cursor: disableSortBy ? 'auto' : 'pointer',
-                        }}
-                        title={String(renderColumn.render('Header'))}
-                        rowSpan={rowSpan}
-                      >
-                        <div
-                          {...renderColumn.getSortByToggleProps()}
-                          title={String(renderColumn.render('Header'))}
-                        >
-                          {renderColumn.render('Header')}
-                          <span className="sort-icon-container">
-                            {renderColumn.isSorted ? (
-                              renderColumn.isSortedDesc ? (
-                                <Icon icon="downArrow" size="small" />
-                              ) : (
-                                <Icon icon="topArrow" size="small" />
-                              )
-                            ) : (
-                              ''
-                            )}
-                          </span>
-                        </div>
-                        {renderColumn.id !== '_multi-row-select' && (
-                          <div
-                            {...renderColumn.getResizerProps()}
-                            className={`resizer ${
-                              renderColumn.isResizing ? 'isResizing' : ''
-                            }`}
-                          />
-                        )}
-                      </th>
-                    );
-                  })}
-                  <th rowSpan={1000}></th>
-                </tr>
-              ))}
-              {!disableFilters && (
-                <tr>
-                  {visibleColumns.map((column) => {
-                    return (
-                      <th
-                        {...column.getHeaderProps()}
-                        style={{
-                          width: column.totalWidth,
-                        }}
-                      >
-                        <div>
-                          {column.canFilter ? column.render('Filter') : null}
-                        </div>
-                        {column.id !== '_multi-row-select' && (
-                          <div
-                            {...column.getResizerProps()}
-                            className={`resizer ${
-                              column.isResizing ? 'isResizing' : ''
-                            }`}
-                          />
-                        )}
-                      </th>
-                    );
-                  })}
-                  {/* <th rowSpan={2}></th> */}
-                </tr>
-              )}
-            </thead>
-          </table>
-        </div>
-        <Scroll onScroll={onScroll}>
-          <div className="tbody-container">
+        {buttons && (
+          <div className="button-container">
+            {buttons.map((button, i) => (
+              <div key={i}>{button}</div>
+            ))}
+          </div>
+        )}
+        <div className="table-container">
+          <div className="thead-container" ref={theadRef}>
             <table {...getTableProps()} summary={caption}>
-              <tbody {...getTableBodyProps()}>
-                {page.map((row: Row, i) => {
-                  prepareRow(row);
+              <colgroup>
+                {visibleColumns.map((column) => {
+                  if (column.hidden) {
+                    return null;
+                  }
+
                   return (
-                    <tr
-                      {...row.getRowProps()}
-                      onDoubleClick={(e) => {
-                        handleDoubleClickRow(row);
+                    <col
+                      {...column.getHeaderProps()}
+                      style={{
+                        width: column.totalWidth,
                       }}
-                      onClick={(e) => {
-                        handleSelectRow(row);
-                      }}
-                      className={row.isSelected ? 'selected' : ''}
-                    >
-                      {row.cells.map((cell) => {
-                        return (
-                          <td
-                            {...cell.getCellProps()}
-                            style={{
-                              width: cell.column.width,
-                              textAlign: cell.column.align,
-                              paddingLeft:
-                                cell.column.index === 0 && cell.row.depth > 0
-                                  ? cell.row.depth * 10 + 3 + 'px'
-                                  : '3px',
-                            }}
-                          >
-                            {cell.column.formatter
-                              ? cell.column.formatter(cell.render('Cell'))
-                              : cell.render('Cell')}
-                          </td>
-                        );
-                      })}
-                      <td></td>
-                    </tr>
+                    />
                   );
                 })}
-              </tbody>
+              </colgroup>
+              <thead>
+                {headerGroups.map((headerGroup, headerGroupIndex) => (
+                  <tr {...headerGroup.getHeaderGroupProps()}>
+                    {headerGroup.headers.map((column) => {
+                      /** 첫번째 headerGroup이 그룹핑 헤더라면 두번째 headerGroup에서 해당 column.placeholderOf.id와 같은 Column 객체를 찾아서 해당 객체를 렌더링한다.  */
+                      const renderColumn =
+                        (headerGroups[1] &&
+                          headerGroups[1].headers.find(
+                            (col) =>
+                              column.placeholderOf &&
+                              col.id === column.placeholderOf.id,
+                          )) ||
+                        column;
+
+                      // 그리고 rowSpan을 구한다.
+                      const rowSpan = column.placeholderOf ? 2 : 1;
+
+                      // groupHeader가 있는 경우 headerGroupIndex === 1이 되는데, 해당 컬럼들을 렌더링할 때 parent 속성이 없다면 첫번째 row에서 rowSpan을 했으니깐 렌더링하면 안된다.
+                      if (headerGroupIndex === 1) {
+                        if (!renderColumn.parent) {
+                          return null;
+                        }
+                      }
+
+                      if (renderColumn.hidden) {
+                        return null;
+                      }
+
+                      return (
+                        <th
+                          {...renderColumn.getHeaderProps()}
+                          style={{
+                            cursor: disableSortBy ? 'auto' : 'pointer',
+                          }}
+                          title={String(renderColumn.render('Header'))}
+                          rowSpan={rowSpan}
+                        >
+                          <div
+                            {...renderColumn.getSortByToggleProps()}
+                            title={String(renderColumn.render('Header'))}
+                          >
+                            {renderColumn.render('Header')}
+                            <span className="sort-icon-container">
+                              {renderColumn.isSorted ? (
+                                renderColumn.isSortedDesc ? (
+                                  <Icon icon="downArrow" size="small" />
+                                ) : (
+                                  <Icon icon="topArrow" size="small" />
+                                )
+                              ) : (
+                                ''
+                              )}
+                            </span>
+                          </div>
+                          {renderColumn.id !== '_multi-row-select' && (
+                            <div
+                              {...renderColumn.getResizerProps()}
+                              className={`resizer ${
+                                renderColumn.isResizing ? 'isResizing' : ''
+                              }`}
+                            />
+                          )}
+                        </th>
+                      );
+                    })}
+                    <th rowSpan={1000}></th>
+                  </tr>
+                ))}
+                {!disableFilters && (
+                  <tr>
+                    {visibleColumns.map((column) => {
+                      if (column.hidden) {
+                        return null;
+                      }
+
+                      return (
+                        <th
+                          {...column.getHeaderProps()}
+                          style={{
+                            width: column.totalWidth,
+                          }}
+                        >
+                          <div>
+                            {column.canFilter ? column.render('Filter') : null}
+                          </div>
+                          {column.id !== '_multi-row-select' && (
+                            <div
+                              {...column.getResizerProps()}
+                              className={`resizer ${
+                                column.isResizing ? 'isResizing' : ''
+                              }`}
+                            />
+                          )}
+                        </th>
+                      );
+                    })}
+                    {/* <th rowSpan={2}></th> */}
+                  </tr>
+                )}
+              </thead>
             </table>
           </div>
-        </Scroll>
-      </div>
+          <Scroll onScroll={onScroll}>
+            <div className="tbody-container">
+              <table {...getTableProps()} summary={caption}>
+                <tbody {...getTableBodyProps()}>
+                  {page.map((row: Row, i) => {
+                    prepareRow(row);
+                    return (
+                      <tr
+                        {...row.getRowProps()}
+                        onDoubleClick={(e) => {
+                          handleDoubleClickRow(row);
+                        }}
+                        onClick={(e) => {
+                          handleSelectRow(row);
+                        }}
+                        className={row.isSelected ? 'selected' : ''}
+                      >
+                        {row.cells.map((cell) => {
+                          if (cell.column.hidden) {
+                            return null;
+                          }
+                          return (
+                            <td
+                              {...cell.getCellProps()}
+                              style={{
+                                width: cell.column.width,
+                                textAlign: cell.column.align,
+                                paddingLeft:
+                                  cell.column.index === 0 && cell.row.depth > 0
+                                    ? cell.row.depth * 10 + 3 + 'px'
+                                    : '3px',
+                              }}
+                            >
+                              {cell.column.formatter
+                                ? cell.column.formatter(cell.render('Cell'))
+                                : cell.render('Cell')}
+                            </td>
+                          );
+                        })}
+                        <td></td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            </div>
+          </Scroll>
+        </div>
 
-      <Pagination
-        rowNumber={rows.length}
-        pageNumber={page.length}
-        canPreviousPage={canPreviousPage}
-        canNextPage={canNextPage}
-        pageOptions={pageOptions}
-        pageCount={pageCount}
-        gotoPage={gotoPage}
-        nextPage={nextPage}
-        previousPage={previousPage}
-        setPageSize={setPageSize}
-        pageIndex={pageIndex}
-        pageSize={pageSize}
-        pageSizeArray={pageSizeArray}
-      />
+        <Pagination
+          rowNumber={totalCount ? totalCount : rows.length}
+          pageNumber={page.length}
+          canPreviousPage={canPreviousPage}
+          canNextPage={canNextPage}
+          pageOptions={pageOptions}
+          pageCount={pageCount}
+          gotoPage={gotoPage}
+          nextPage={nextPage}
+          previousPage={previousPage}
+          setPageSize={setPageSize}
+          pageIndex={pageIndex}
+          pageSize={pageSize}
+          pageSizeArray={pageSizeArray}
+          loading={loading}
+        />
+      </div>
     </StyledTable>
   );
 };
@@ -441,6 +468,7 @@ Table.defaultProps = {
     { code: '50', name: '50' },
     { code: '100', name: '100' },
     { code: '200', name: '200' },
+    { code: '500', name: '500' },
     { code: '1000', name: '1000' },
   ],
   loading: false,
@@ -456,8 +484,9 @@ function getColumns(model: TableModelProps[]): Column<Object>[] {
       index: index,
       Header: m.label,
       accessor: m.name,
-      width: m.width,
-      align: m.align,
+      width: m.width || 0,
+      align: m.align || 'center',
+      hidden: m.hidden,
       formatter: m.formatter,
       Filter: DefaultFilter,
     };

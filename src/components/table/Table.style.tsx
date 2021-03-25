@@ -6,6 +6,17 @@ interface StyledTableProps {
 }
 
 export const StyledTable = styled.div<StyledTableProps>`
+
+  div.container {
+    position: relative;
+    height: 100%;
+  }
+
+  div.loading-container {
+    height: 100%;
+    width: 100%;
+  }
+
   /** caption */
   div.caption-container {
     border: 1px solid ${(props) => props.theme.tableColors.border};
@@ -44,13 +55,13 @@ export const StyledTable = styled.div<StyledTableProps>`
     table {
       width: ${(props) => props.totalWidth};
       table-layout: fixed;
+      position: relative;
     }
 
     /** thead 테이블 */
     div.thead-container {
       overflow: hidden;
       user-select: none;
-
       table {
         tr {
           color: ${(props) => props.theme.tableColors.headerText};

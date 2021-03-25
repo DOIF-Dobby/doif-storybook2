@@ -20,6 +20,7 @@ interface PaginationProps {
   pageIndex: number;
   pageSize: number;
   pageSizeArray: DoifDataProps[];
+  loading: boolean;
 }
 
 const Pagination = ({
@@ -36,6 +37,7 @@ const Pagination = ({
   pageIndex,
   pageSize,
   pageSizeArray,
+  loading,
 }: PaginationProps) => {
   const buttonStyle = {
     borderRadius: '1rem',
@@ -50,7 +52,7 @@ const Pagination = ({
         <Button
           iconOnly
           onClick={() => gotoPage(0)}
-          disabled={!canPreviousPage}
+          disabled={loading || !canPreviousPage}
           size="small"
           variant="ghost"
           style={buttonStyle}
@@ -63,7 +65,7 @@ const Pagination = ({
         <Button
           iconOnly
           onClick={() => previousPage()}
-          disabled={!canPreviousPage}
+          disabled={loading || !canPreviousPage}
           size="small"
           variant="ghost"
           style={buttonStyle}
@@ -74,10 +76,15 @@ const Pagination = ({
           <div>
             <Input
               type="number"
-              value={pageIndex + 1}
-              onChange={(e) => {
-                const page = e.target.value ? Number(e.target.value) - 1 : 0;
-                gotoPage(page);
+              defaultValue={pageIndex + 1}
+              disabled={loading}
+              onKeyPress={(e) => {
+                if (e.key === 'Enter') {
+                  const page = e.currentTarget.value
+                    ? Number(e.currentTarget.value) - 1
+                    : 0;
+                  gotoPage(page);
+                }
               }}
             />
           </div>
@@ -87,7 +94,7 @@ const Pagination = ({
         <Button
           iconOnly
           onClick={() => nextPage()}
-          disabled={!canNextPage}
+          disabled={loading || !canNextPage}
           size="small"
           variant="ghost"
           style={buttonStyle}
@@ -97,7 +104,7 @@ const Pagination = ({
         <Button
           iconOnly
           onClick={() => gotoPage(pageCount - 1)}
-          disabled={!canNextPage}
+          disabled={loading || !canNextPage}
           size="small"
           variant="ghost"
           style={buttonStyle}
@@ -107,6 +114,7 @@ const Pagination = ({
         <Select
           value={String(pageSize)}
           width="100px"
+          disabled={loading}
           onChange={(e) => {
             setPageSize(Number(e.target.value));
           }}

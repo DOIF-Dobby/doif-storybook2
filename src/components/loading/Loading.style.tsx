@@ -2,13 +2,14 @@ import styled, { css } from 'styled-components';
 
 interface StyledLoadingProps {
   zIndex: number;
+  position: string;
 }
 
 export const StyledLoadingContainer = styled.div<StyledLoadingProps>`
   display: flex;
   justify-content: center;
   align-items: center;
-  position: fixed;
+  position: ${(props) => props.position};
   z-index: ${(props) => props.zIndex};
   top: 0;
   left: 0;

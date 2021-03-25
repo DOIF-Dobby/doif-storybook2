@@ -2,12 +2,13 @@ import styled, { css } from 'styled-components';
 
 interface StyledOverlayProps {
   zIndex: number;
+  position: string;
 }
 
 export const StyledOverlay = styled.div<StyledOverlayProps>`
   & {
     z-index: ${(props) => props.zIndex};
-    position: fixed;
+    position: ${(props) => props.position};
     top: 0;
     left: 0;
     width: 100%;

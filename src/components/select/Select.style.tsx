@@ -19,7 +19,7 @@ export const StyledSelectContainer = styled.div<StyledSelectContainerProps>`
     cursor: ${(props) => !props.disabled && 'pointer'};
   }
 
-  & input:not(.search-input) {
+  & input:not(.search-input):not(:disabled) {
     color: transparent;
     text-shadow: 0 0 0 ${(props) => props.theme.subColors.text};
 

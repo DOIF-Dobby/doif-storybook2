@@ -17,6 +17,7 @@ export const data1 = [
     retryYnNm: '예',
     updt_user: '전혜수',
     updtdt: '2020-11-30 18:50:15',
+    hiddenCol: 'hidden Column',
     subRows: [
       {
         batchConfId: 'subRows',
@@ -36,6 +37,7 @@ export const data1 = [
         retryYnNm: '예',
         updt_user: '전혜수',
         updtdt: '2020-11-30 18:50:15',
+        hiddenCol: 'hidden Column',
         subRows: [
           {
             batchConfId: 'subRows2',
@@ -55,6 +57,7 @@ export const data1 = [
             retryYnNm: '예',
             updt_user: '전혜수',
             updtdt: '2020-11-30 18:50:15',
+            hiddenCol: 'hidden Column',
           },
         ],
       },
@@ -78,6 +81,7 @@ export const data1 = [
     retryYnNm: '예',
     updt_user: '전혜수',
     updtdt: '2020-11-30 18:50:50',
+    hiddenCol: 'hidden Column',
   },
   {
     batchConfId: 'calcFeeStep',
@@ -97,6 +101,7 @@ export const data1 = [
     retryYnNm: '예',
     updt_user: '전혜수',
     updtdt: '2020-11-30 21:03:38',
+    hiddenCol: 'hidden Column',
   },
   {
     batchConfId: 'makeDtlStep',
@@ -116,6 +121,7 @@ export const data1 = [
     retryYnNm: '예',
     updt_user: '전혜수',
     updtdt: '2020-11-30 21:03:32',
+    hiddenCol: 'hidden Column',
   },
   {
     batchConfId: 'adjustStep',
@@ -135,6 +141,7 @@ export const data1 = [
     retryYnNm: '예',
     updt_user: '전혜수',
     updtdt: '2020-11-30 21:02:52',
+    hiddenCol: 'hidden Column',
   },
   {
     batchConfId: 'minusOffsetStep',
@@ -154,6 +161,7 @@ export const data1 = [
     retryYnNm: '예',
     updt_user: '전혜수',
     updtdt: '2020-11-30 21:02:48',
+    hiddenCol: 'hidden Column',
   },
   {
     batchConfId: 'makeMstStep',
@@ -173,6 +181,7 @@ export const data1 = [
     retryYnNm: '예',
     updt_user: '전혜수',
     updtdt: '2020-11-30 21:02:44',
+    hiddenCol: 'hidden Column',
   },
   {
     batchConfId: 'chkStatusStep',
@@ -192,6 +201,7 @@ export const data1 = [
     retryYnNm: '예',
     updt_user: '전혜수',
     updtdt: '2020-11-25 16:11:02',
+    hiddenCol: 'hidden Column',
   },
   {
     batchConfId: 'ctUdrsStep',
@@ -211,6 +221,7 @@ export const data1 = [
     retryYnNm: '예',
     updt_user: '전혜수',
     updtdt: '2020-09-28 14:20:46',
+    hiddenCol: 'hidden Column',
   },
   {
     batchConfId: 'calcFeeStep',
@@ -230,6 +241,7 @@ export const data1 = [
     retryYnNm: '예',
     updt_user: '전혜수',
     updtdt: '2020-09-28 14:20:46',
+    hiddenCol: 'hidden Column',
   },
   {
     batchConfId: 'updDtlNoInUdrsStep',
@@ -249,6 +261,7 @@ export const data1 = [
     retryYnNm: '예',
     updt_user: '전혜수',
     updtdt: '2020-09-28 14:20:46',
+    hiddenCol: 'hidden Column',
   },
   {
     batchConfId: 'adjustStep',
@@ -268,6 +281,7 @@ export const data1 = [
     retryYnNm: '예',
     updt_user: '전혜수',
     updtdt: '2020-09-28 14:20:46',
+    hiddenCol: 'hidden Column',
   },
   {
     batchConfId: 'cancelPreAdjustApplyStep',
@@ -287,6 +301,7 @@ export const data1 = [
     retryYnNm: '예',
     updt_user: '김명진',
     updtdt: '2021-02-25 14:32:51',
+    hiddenCol: 'hidden Column',
   },
   {
     batchConfId: 'pendingStep',
@@ -306,6 +321,7 @@ export const data1 = [
     retryYnNm: '예',
     updt_user: '김명진',
     updtdt: '2021-02-25 14:29:17',
+    hiddenCol: 'hidden Column',
   },
   {
     batchConfId: 'minusOffsetStep',
@@ -325,6 +341,7 @@ export const data1 = [
     retryYnNm: '예',
     updt_user: '김명진',
     updtdt: '2021-02-25 14:29:12',
+    hiddenCol: 'hidden Column',
   },
   {
     batchConfId: 'invcOffsetStep',
@@ -344,6 +361,7 @@ export const data1 = [
     retryYnNm: '예',
     updt_user: '김명진',
     updtdt: '2021-02-25 14:29:07',
+    hiddenCol: 'hidden Column',
   },
   {
     batchConfId: 'delayStep',
@@ -363,6 +381,7 @@ export const data1 = [
     retryYnNm: '예',
     updt_user: '김명진',
     updtdt: '2021-02-25 14:29:03',
+    hiddenCol: 'hidden Column',
   },
   {
     batchConfId: 'cancelPreAdjustStep',
@@ -382,6 +401,7 @@ export const data1 = [
     retryYnNm: '예',
     updt_user: '김명진',
     updtdt: '2021-02-25 14:28:58',
+    hiddenCol: 'hidden Column',
   },
   {
     batchConfId: 'makeMstStep',
@@ -401,5 +421,6 @@ export const data1 = [
     retryYnNm: '예',
     updt_user: '김명진',
     updtdt: '2021-02-25 14:28:54',
+    hiddenCol: 'hidden Column',
   },
 ];
