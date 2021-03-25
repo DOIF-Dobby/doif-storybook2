@@ -17,7 +17,7 @@ const Overlay = ({ zIndex, position }: OverlayProps) => {
 
 Overlay.defaultProps = {
   zIndex: 1000,
-  postion: 'fixed',
+  position: 'fixed',
 };
 
 export default React.memo(Overlay);
