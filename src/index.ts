@@ -9,6 +9,8 @@ export { default as Radio } from './components/radio/Radio';
 export { default as Select } from './components/select/Select';
 export { default as Tab } from './components/tab/Tab';
 export { default as Loading } from './components/loading/Loading';
+export { default as Dialog } from './components/dialog/Dialog';
+export { default as Modal } from './components/modal/Modal';
 export { default as Datepicker } from './components/datepicker/Datepicker';
 export { default as Textarea } from './components/textarea/Textarea';
 export { default as MarkdownPreview } from './components/markdown/MarkdownPreview';
