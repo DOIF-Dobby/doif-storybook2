@@ -27,20 +27,28 @@ const Template: Story<ComponentProps<typeof SideMenu>> = (args) => {
       code: 'CATEGORY_01',
       name: '기본정보 관리',
       icon: 'heart',
+      depth: 1,
+      type: 'CATEGORY',
       childrenItems: [
         {
           code: 'CATEGORY_01_01',
           name: '가맹점 정보',
+          depth: 2,
+          type: 'CATEGORY',
           childrenItems: [
             {
               code: 'MENU_01',
               name: '가맹점 정보 관리',
+              depth: 3,
               url: '/entp1',
+              type: 'MENU',
             },
             {
               code: 'MENU_02',
               name: '계약승인처리',
+              depth: 3,
               url: '/entp2',
+              type: 'MENU',
             },
           ],
         },
@@ -48,11 +56,15 @@ const Template: Story<ComponentProps<typeof SideMenu>> = (args) => {
           code: 'CATEGORY_01_02',
           name: '원천사업자 정보',
           icon: '',
+          depth: 2,
+          type: 'CATEGORY',
           childrenItems: [
             {
               code: 'MENU_03',
               name: '원천사업자 정보 관리',
+              depth: 3,
               url: '/optr1',
+              type: 'MENU',
             },
           ],
         },
@@ -62,16 +74,22 @@ const Template: Story<ComponentProps<typeof SideMenu>> = (args) => {
       code: 'CATEGORY_02',
       name: '개발자 메뉴',
       icon: 'pencil',
+      depth: 1,
+      type: 'CATEGORY',
       childrenItems: [
         {
           code: 'MENU_DEV_01',
           name: '시스템캐시리로드',
+          depth: 2,
           url: '/dev1',
+          type: 'MENU',
         },
         {
           code: 'MENU_DEV_02',
           name: '메뉴 관리',
+          depth: 2,
           url: '/dev2',
+          type: 'MENU',
         },
       ],
     },
@@ -80,6 +98,8 @@ const Template: Story<ComponentProps<typeof SideMenu>> = (args) => {
       name: '테스트 메뉴',
       icon: 'exit',
       url: '/test',
+      depth: 1,
+      type: 'MENU',
     },
   ];
 

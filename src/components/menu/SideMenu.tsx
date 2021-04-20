@@ -4,6 +4,7 @@ import { DoifColorType } from '../../styles/themes/DoifThemeProps';
 import Icon, { IconType, iconTypes } from '../icon/Icon';
 import { ChlidrenItems, StyledSpreadMenu } from './SideMenu.style';
 import {
+  changeToCategoryProps,
   changeToMenuProps,
   getDepthItems,
   getOpenChildrenItemsCount,
@@ -47,7 +48,7 @@ const SideMenu = ({
   const [selectedMenu, setSelectedMenu] = useState('');
   const [isInternalFold, setIsInternalFold] = useState(isFold);
 
-  const depthItems = getDepthItems(items);
+  // const depthItems = getDepthItems(items);
 
   useEffect(() => {
     setIsInternalFold(isFold);
@@ -100,7 +101,7 @@ const SideMenu = ({
         onMouseLeave={onMouseLeave}
       >
         <ul className="menu-ul">
-          {depthItems.map((item) => {
+          {items.map((item) => {
             const isOpen =
               openItemCodes && item.depth
                 ? openItemCodes[item.depth - 1] === item.code
@@ -142,7 +143,7 @@ const renderMenuOrCategory = (
   selectedMenu?: string,
   isFold?: boolean,
 ) => {
-  const isMenu = item.hasOwnProperty('url');
+  const isMenu = item.type === 'MENU';
   if (isMenu) {
     const menu: MenuProps = changeToMenuProps(item);
     return (
@@ -155,11 +156,12 @@ const renderMenuOrCategory = (
       />
     );
   } else {
+    const category: CategoryProps = changeToCategoryProps(item);
     return (
       <Category
         color={color}
-        key={item.code}
-        {...item}
+        key={category.code}
+        {...category}
         onClickCategory={onClickCategory}
         openItemCodes={openItemCodes}
         isOpen={isOpen}

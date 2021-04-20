@@ -30,9 +30,8 @@ export const getDepthItems = (
   depth: number = 0,
 ): Array<CategoryProps | MenuProps> => {
   return items.map((item: CategoryProps | MenuProps) => {
-    if (item.hasOwnProperty('childrenItems')) {
+    if (item.type === 'CATEGORY') {
       const category: CategoryProps = changeToCategoryProps(item);
-      category.depth = depth + 1;
 
       if (category.childrenItems && category.childrenItems.length > 0) {
         category.childrenItems = getDepthItems(
@@ -40,8 +39,6 @@ export const getDepthItems = (
           category.depth,
         );
       }
-    } else {
-      item.depth = depth + 1;
     }
 
     return item;
@@ -68,7 +65,7 @@ export const getOpenChildrenItemsCount = (
   count += items.length;
 
   for (const item of items) {
-    if (item.hasOwnProperty('childrenItems')) {
+    if (item.type === 'CATEGORY') {
       const isOpen =
         openItemCodes && item.depth
           ? openItemCodes[item.depth - 1] === item.code

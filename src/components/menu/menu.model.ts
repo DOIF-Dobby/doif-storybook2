@@ -3,7 +3,8 @@ import { DoifColorType } from '../../styles/themes/DoifThemeProps';
 export interface CategoryProps {
   code: string;
   name: string;
-  depth?: number;
+  type: 'CATEGORY';
+  depth: number;
   icon?: string;
   childrenItems?: Array<CategoryProps | MenuProps>;
   isOpen?: boolean;
@@ -18,7 +19,8 @@ export interface CategoryProps {
 export interface MenuProps {
   code: string;
   name: string;
-  depth?: number;
+  type: 'MENU';
+  depth: number;
   icon?: string;
   url: string;
   onClickMenu?: (menu: string) => void;
