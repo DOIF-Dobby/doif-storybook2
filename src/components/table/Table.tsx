@@ -46,7 +46,7 @@ interface TableProps {
   /** `Table`컴포넌트의 높이를 설정합니다. */
   height: string;
   /** `Button` 배열입니다. */
-  buttons?: React.ReactNode[];
+  buttons?: React.ReactNode;
   /** multi select 여부입니다. */
   enableMultiSelectRow: boolean;
   /** tree 구조 테이블 여부입니다. */
@@ -256,13 +256,7 @@ const Table = ({
         <div className="caption-container">
           <span>{caption}</span>
         </div>
-        {buttons && (
-          <div className="button-container">
-            {buttons.map((button, i) => (
-              <div key={i}>{button}</div>
-            ))}
-          </div>
-        )}
+        {buttons && <div className="button-container">{buttons}</div>}
         <div className="table-container">
           <div className="thead-container" ref={theadRef}>
             <table {...getTableProps()} summary={caption}>
