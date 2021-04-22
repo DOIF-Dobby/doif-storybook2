@@ -12,7 +12,9 @@ interface OverlayProps {
  * `Overlay` 컴포넌트는 화면 전체를 반투명한 Layer로 덮습니다.
  */
 const Overlay = ({ zIndex, position }: OverlayProps) => {
-  return <StyledOverlay zIndex={zIndex} position={position} />;
+  return (
+    <StyledOverlay className="overlay" zIndex={zIndex} position={position} />
+  );
 };
 
 Overlay.defaultProps = {

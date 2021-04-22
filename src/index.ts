@@ -1,5 +1,7 @@
 // 컴포넌트 export
 export { default as Button } from './components/button/Button';
+export { default as SaveButton } from './components/button/SaveButton';
+export { default as CloseButton } from './components/button/CloseButton';
 export { default as Icon } from './components/icon/Icon';
 export { default as Container } from './components/container/Container';
 export { default as InFormContainer } from './components/container/InFormContainer';

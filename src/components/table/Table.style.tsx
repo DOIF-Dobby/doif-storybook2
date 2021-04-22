@@ -1,15 +1,17 @@
 import styled from 'styled-components';
 
 interface StyledTableProps {
+  width: string;
   height: string;
   totalWidth: string;
 }
 
 export const StyledTable = styled.div<StyledTableProps>`
 
-  div.container {
+  div.total-container {
     position: relative;
     height: 100%;
+    width: ${(props) => props.width};
   }
 
   div.loading-container {
@@ -21,6 +23,7 @@ export const StyledTable = styled.div<StyledTableProps>`
   div.caption-container {
     border: 1px solid ${(props) => props.theme.tableColors.border};
     border-bottom: none;
+    width: 100%;
     height: 2rem;
     line-height: 2rem;
     padding-left: 1rem;
@@ -38,10 +41,12 @@ export const StyledTable = styled.div<StyledTableProps>`
 
   /** buttons */
   div.button-container {
+    width: 100%;
     display: flex;
     border: 1px solid ${(props) => props.theme.tableColors.border};
     border-bottom: none;
     padding: 1px;
+    overflow: auto;
 
     button {
       font-size: 0.875rem;
@@ -50,6 +55,7 @@ export const StyledTable = styled.div<StyledTableProps>`
 
   /** thead, tbody */
   div.table-container {
+    width: 100%;
     border: 1px solid ${(props) => props.theme.tableColors.border};
 
     table {

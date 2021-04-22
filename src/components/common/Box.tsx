@@ -39,6 +39,7 @@ const StyledBox = styled.div<StyledBoxProps>`
 
   ::-webkit-scrollbar {
     height: 6px;
+    width: 6px;
   }
 
   ::-webkit-scrollbar-track {

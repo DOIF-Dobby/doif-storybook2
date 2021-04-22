@@ -26,6 +26,7 @@ const Column = ({ width, children, ...props }: ColumnProps) => {
 const StyledColumn = styled.div`
   display: flex;
   height: 100%;
+  min-width: 15rem;
 
   & > div {
     width: 100%;

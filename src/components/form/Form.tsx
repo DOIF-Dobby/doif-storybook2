@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Children } from 'react';
 import styled from 'styled-components';
 
 interface FormProps
@@ -19,8 +19,8 @@ const Form = (props: FormProps) => {
 };
 
 const StyledForm = styled.div`
-  min-width: 50rem;
-
+  width: 100%;
+  
   & > form {
     display: flex;
     flex-direction: column;

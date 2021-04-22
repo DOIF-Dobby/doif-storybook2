@@ -10,6 +10,7 @@ export const StyledPagination = styled.div`
   border-bottom-right-radius: ${(props) => props.theme.variants.borderRadius};
   border-top: none;
   padding: 0.5rem;
+  overflow: hidden;
 
   & > div {
     flex-basis: 33%;
@@ -39,5 +40,8 @@ export const StyledPagination = styled.div`
   & > div.count-container {
     display: flex;
     justify-content: flex-end;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 `;

@@ -7,7 +7,7 @@ import {
 } from '../../styles/themes/DoifThemeProps';
 import { StyledButtonContainer } from './Button.style';
 
-interface ButtonPrpos
+export interface ButtonPrpos
   extends React.DetailedHTMLProps<
     React.ButtonHTMLAttributes<HTMLButtonElement>,
     HTMLButtonElement

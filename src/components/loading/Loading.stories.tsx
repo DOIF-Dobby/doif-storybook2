@@ -1,6 +1,7 @@
 import React, { ComponentProps } from 'react';
 import { Story } from '@storybook/react/types-6-0';
 import Loading from './Loading';
+import Container from '../container/Container';
 
 export default {
   title: 'Components/Loading',
@@ -14,7 +15,13 @@ export default {
 };
 
 const Template: Story<ComponentProps<typeof Loading>> = (args) => {
-  return <Loading {...args} />;
+  return (
+    <Container direction="column">
+      <Loading />
+      <div>안녕하세요</div>
+      <div>반갑습니다.</div>
+    </Container>
+  );
 };
 
 export const Default = Template.bind({});

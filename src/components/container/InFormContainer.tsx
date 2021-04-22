@@ -15,7 +15,7 @@ const InFormContainer = ({ ...props }: ComponentProps<typeof Container>) => {
 
 InFormContainer.defaultProps = {
   direction: 'row',
-  align: 'left',
+  align: 'center',
   gap: '0.5rem',
 };
 

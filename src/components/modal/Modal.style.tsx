@@ -2,6 +2,7 @@ import styled, { css } from 'styled-components';
 
 interface StyledModalProps {
   zIndex: number;
+  width: string;
 }
 
 export const StyledModal = styled.div<StyledModalProps>`
@@ -17,6 +18,7 @@ export const StyledModal = styled.div<StyledModalProps>`
     justify-content: center;
 
     & > div {
+      width: ${(props) => props.width};
       box-sizing: border-box;
       border-radius: ${(props) => props.theme.variants.borderRadius};
       background-color: ${(props) => props.theme.subColors.boxBackground};

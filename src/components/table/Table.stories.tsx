@@ -109,15 +109,15 @@ const Template: Story<ComponentProps<typeof Table>> = (args) => {
 
   const buttons = useMemo(
     () => [
-      <Button variant="ghost">
+      <Button variant="ghost" key="plus">
         <Icon icon="plus" />
         추가
       </Button>,
-      <Button variant="ghost">
+      <Button variant="ghost" key="pencil">
         <Icon icon="pencil" />
         수정
       </Button>,
-      <Button variant="ghost">
+      <Button variant="ghost" key="trashCan">
         <Icon icon="trashCan" />
         삭제
       </Button>,
@@ -525,15 +525,15 @@ export const Buttons = () => {
 
   const buttons = useMemo(
     () => [
-      <Button variant="ghost">
+      <Button variant="ghost" key="plus">
         <Icon icon="plus" />
         추가
       </Button>,
-      <Button variant="ghost">
+      <Button variant="ghost" key="pencil">
         <Icon icon="pencil" />
         수정
       </Button>,
-      <Button variant="ghost">
+      <Button variant="ghost" key="trashCan">
         <Icon icon="trashCan" />
         삭제
       </Button>,

@@ -30,7 +30,7 @@ interface StyledRowProps {
 
 const StyledRow = styled.div<StyledRowProps>`
   display: flex;
-
+  
   & > div {
     display: flex;
     min-height: 2.5rem;

@@ -51,7 +51,7 @@ const Dialog = ({
   if (!visible) return null;
 
   return (
-    <>
+    <div className="overlay">
       <Overlay zIndex={zIndex} />
       <StyledDialog zIndex={zIndex + 1} type={type}>
         <Container direction="column" gap="1rem">
@@ -76,7 +76,7 @@ const Dialog = ({
           </div>
         </Container>
       </StyledDialog>
-    </>
+    </div>
   );
 };
 

@@ -5,6 +5,8 @@ import Icon from '../icon/Icon';
 import Container from '../container/Container';
 import Page from '../common/Page';
 import Box from '../common/Box';
+import SaveButton from './SaveButton';
+import CloseButton from './CloseButton';
 
 export default {
   title: 'Components/Button',
@@ -240,5 +242,14 @@ export const OnlyIcon = () => {
         </Button>
       </Container>
     </>
+  );
+};
+
+export const SaveAndCloseButton = () => {
+  return (
+    <Container>
+      <SaveButton />
+      <CloseButton />
+    </Container>
   );
 };

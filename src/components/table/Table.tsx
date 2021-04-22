@@ -45,6 +45,8 @@ interface TableProps {
   caption: string;
   /** `Table`컴포넌트의 높이를 설정합니다. */
   height: string;
+  /** `Table` 컴포넌트의 넓이를 설정합니다. */
+  width: string;
   /** `Button` 배열입니다. */
   buttons?: React.ReactNode;
   /** multi select 여부입니다. */
@@ -92,6 +94,7 @@ const Table = ({
   model,
   data,
   caption,
+  width,
   height,
   buttons,
   enableMultiSelectRow,
@@ -246,8 +249,12 @@ const Table = ({
   );
 
   return (
-    <StyledTable height={height} totalWidth={totalColumnsWidth + 'px'}>
-      <div className="container">
+    <StyledTable
+      width={width}
+      height={height}
+      totalWidth={totalColumnsWidth + 'px'}
+    >
+      <div className="total-container">
         {loading && (
           <div className="loading-container">
             <Loading position="absolute" />
@@ -449,6 +456,7 @@ const Table = ({
 };
 
 Table.defaultProps = {
+  width: '100%',
   height: '400px',
   enableMultiSelectRow: false,
   enableTreeTable: false,

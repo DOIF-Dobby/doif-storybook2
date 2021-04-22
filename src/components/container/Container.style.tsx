@@ -19,7 +19,7 @@ export const StyledContainer = styled.div<StyledContainerProps>`
     justify-content: ${(props) => props.align};
 
     // 내용들 스타일
-    & > div + div {
+    & > div:not(.overlay) + div:not(.overlay) {
       margin-left: ${(props) => props.direction === 'row' && props.gap};
       margin-top: ${(props) => props.direction === 'column' && props.gap};
     }

@@ -14,7 +14,7 @@ interface LoadingProps {
  */
 const Loading = ({ zIndex, position }: LoadingProps) => {
   return (
-    <>
+    <div className="overlay">
       <Overlay zIndex={zIndex} position={position} />
       <StyledLoadingContainer zIndex={zIndex + 1} position={position}>
         <StyledLoading zIndex={zIndex + 2} position={position}>
@@ -29,7 +29,7 @@ const Loading = ({ zIndex, position }: LoadingProps) => {
           <div></div>
         </StyledLoading>
       </StyledLoadingContainer>
-    </>
+    </div>
   );
 };
 

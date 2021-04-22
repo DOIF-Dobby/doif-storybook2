@@ -40,9 +40,9 @@ const Pagination = ({
   loading,
 }: PaginationProps) => {
   const buttonStyle = {
-    borderRadius: '1rem',
-    width: '2rem',
-    height: '2rem',
+    borderRadius: '0.75rem',
+    width: '1.5rem',
+    height: '1.5rem',
   };
 
   return (
@@ -113,7 +113,7 @@ const Pagination = ({
         </Button>
         <Select
           value={String(pageSize)}
-          width="100px"
+          width="80px"
           disabled={loading}
           onChange={(e) => {
             setPageSize(Number(e.target.value));
