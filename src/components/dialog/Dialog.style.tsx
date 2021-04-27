@@ -56,7 +56,9 @@ export const StyledDialog = styled.div<StyledDialogProps>`
           align-items: center;
         }
 
-        & > div.button-container {
+        button.confirm-button {
+          background-color: ${(props) =>
+            props.type ? props.theme.subColors[props.type] : ''};
         }
       }
     }

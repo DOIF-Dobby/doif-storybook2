@@ -53,6 +53,8 @@ interface TableProps {
   enableMultiSelectRow: boolean;
   /** tree 구조 테이블 여부입니다. */
   enableTreeTable: boolean;
+  /** tree 구조 테이블 row exapnd 여부입니다. true면 펼쳐놓고 false면 접습니다. */
+  treeTableRowExpanded: boolean;
   /** 컬럼 sorting 여부입니다. */
   disableSortBy: boolean;
   /** 필터링 헤더 여부입니다. */
@@ -99,6 +101,7 @@ const Table = ({
   buttons,
   enableMultiSelectRow,
   enableTreeTable,
+  treeTableRowExpanded,
   disableSortBy,
   disableFilters,
   initPageSize,
@@ -164,6 +167,7 @@ const Table = ({
     totalColumnsWidth,
     toggleAllRowsSelected,
     visibleColumns,
+    toggleAllRowsExpanded,
     state: { pageIndex, pageSize, selectedRowIds, columnResizing },
   } = useTable(
     {
@@ -190,6 +194,13 @@ const Table = ({
     useTreeRow(enableTreeTable),
     useMultiRowSelect(enableMultiSelectRow),
   );
+
+  /** tree table 처음에 row expand 설정 */
+  useEffect(() => {
+    if (enableTreeTable) {
+      toggleAllRowsExpanded(treeTableRowExpanded);
+    }
+  }, [enableTreeTable, treeTableRowExpanded, data]);
 
   /** mulit row Select 시 enableMultiSelectRow가 ture면 콜백실행 */
   useEffect(() => {
@@ -414,7 +425,7 @@ const Table = ({
                                 textAlign: cell.column.align,
                                 paddingLeft:
                                   cell.column.index === 0 && cell.row.depth > 0
-                                    ? cell.row.depth * 10 + 3 + 'px'
+                                    ? cell.row.depth * 15 + 3 + 'px'
                                     : '3px',
                               }}
                             >
@@ -459,6 +470,7 @@ Table.defaultProps = {
   width: '100%',
   height: '400px',
   enableMultiSelectRow: false,
+  treeTableRowExpanded: true,
   enableTreeTable: false,
   disableSortBy: false,
   disableFilters: false,

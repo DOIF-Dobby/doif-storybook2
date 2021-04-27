@@ -63,7 +63,11 @@ const Dialog = ({
             {children && <div className="children-container">{children}</div>}
             {type && (
               <Container align="center" className="button-container">
-                <Button color={color} onClick={onConfirm}>
+                <Button
+                  color={color}
+                  onClick={onConfirm}
+                  className="confirm-button"
+                >
                   {confirmText}
                 </Button>
                 {isConfirm && (
