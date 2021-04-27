@@ -10,6 +10,7 @@ import Container from '../container/Container';
 import { DoifDataProps } from '../../props/DoifCommonProps';
 import Page from '../common/Page';
 import Box from '../common/Box';
+import Icon from '../icon/Icon';
 
 export default {
   title: 'Components/Select',
@@ -182,6 +183,51 @@ export const DefaultValue = () => {
 
   const data: Array<DoifDataProps> = [
     { code: 'CC', name: '신용카드' },
+    { code: 'AT', name: '계좌이체' },
+  ];
+
+  const defaultValue: DoifDataProps = {
+    code: '',
+    name: '선택없음',
+  };
+
+  const onChange = useCallback((e: React.ChangeEvent<HTMLSelectElement>) => {
+    setValue(e.target.value);
+  }, []);
+
+  return (
+    <Container>
+      <Select
+        data={data}
+        value={value}
+        onChange={onChange}
+        defaultValue={defaultValue}
+      />
+      <Select
+        variant="underline"
+        data={data}
+        value={value}
+        onChange={onChange}
+        defaultValue={defaultValue}
+      />
+    </Container>
+  );
+};
+
+export const RenderReactNode = () => {
+  const [value, setValue] = useState('');
+
+  const data: Array<DoifDataProps> = [
+    {
+      code: 'CC',
+      name: '신용카드',
+      render: (
+        <Container>
+          <Icon icon="gear" />
+          <div>신용카드</div>
+        </Container>
+      ),
+    },
     { code: 'AT', name: '계좌이체' },
   ];
 

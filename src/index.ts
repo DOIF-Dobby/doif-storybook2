@@ -63,6 +63,8 @@ export {
   TableFetchDataProps,
 } from './components/table/table.model';
 
+export { iconTypes, IconType } from './components/icon/Icon';
+
 // hooks
 export { default as useOutsideAlerter } from './hooks/useOutsideAlerter';
 export { default as useChange } from './hooks/useChange';

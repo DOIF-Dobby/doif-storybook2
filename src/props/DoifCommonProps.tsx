@@ -4,4 +4,5 @@
 export interface DoifDataProps {
   code: string;
   name: string;
+  render?: React.ReactNode;
 }

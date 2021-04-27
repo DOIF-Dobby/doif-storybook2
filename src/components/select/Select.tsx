@@ -156,8 +156,9 @@ const Select = ({
                   data-code={d.code}
                   onClick={onSelect}
                   className={d.code === value ? 'selected' : ''}
+                  style={{ textAlign: 'left' }}
                 >
-                  {d.name}
+                  {d.render ? d.render : d.name}
                 </div>
               );
             })}
