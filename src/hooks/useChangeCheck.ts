@@ -2,7 +2,13 @@ import { ChangeEvent, useCallback, useReducer } from 'react';
 
 function reducer(
   state: any,
-  action: { type: string; checked?: boolean; name?: string; value?: string }
+  action: {
+    type: string;
+    checked?: boolean;
+    name?: string;
+    value?: string;
+    replaceState?: any;
+  },
 ) {
   switch (action.type) {
     case 'CHANGE':
@@ -14,13 +20,15 @@ function reducer(
             : state[action.name].filter((val: string) => val !== action.value),
         };
       }
+    case 'REPLACE':
+      return action.replaceState;
     case 'RESET':
       return Object.keys(state).reduce(
         (acc: { [index: string]: any }, current) => {
           acc[current] = [];
           return acc;
         },
-        {}
+        {},
       );
     default:
       return state;
@@ -36,9 +44,14 @@ function useChangeCheck(initForm: { [index: string]: string[] }) {
     dispatch({ type: 'CHANGE', checked, name, value });
   }, []);
 
+  /** state를 통째로 바꾸는 함수 */
+  const onReplace = useCallback((replaceState: any) => {
+    dispatch({ type: 'REPLACE', replaceState });
+  }, []);
+
   const reset = useCallback(() => dispatch({ type: 'RESET' }), []);
 
-  return [form, onChange, reset];
+  return [form, onChange, onReplace, reset];
 }
 
 export default useChangeCheck;

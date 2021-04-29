@@ -2,7 +2,7 @@ import { ChangeEvent, useCallback, useReducer } from 'react';
 
 function reducer(
   state: any,
-  action: { type: string; name?: string; value?: string }
+  action: { type: string; name?: string; value?: string; replaceState?: any },
 ) {
   switch (action.type) {
     case 'CHANGE':
@@ -12,13 +12,15 @@ function reducer(
           [action.name]: action.value,
         };
       }
+    case 'REPLACE':
+      return action.replaceState;
     case 'RESET':
       return Object.keys(state).reduce(
         (acc: { [index: string]: any }, current) => {
           acc[current] = '';
           return acc;
         },
-        {}
+        {},
       );
     default:
       return state;
@@ -34,12 +36,17 @@ function useChange(initForm: { [index: string]: string }) {
       const { name, value } = e.target;
       dispatch({ type: 'CHANGE', name, value });
     },
-    []
+    [],
   );
+
+  /** state를 통째로 바꾸는 함수 */
+  const onReplace = useCallback((replaceState: any) => {
+    dispatch({ type: 'REPLACE', replaceState });
+  }, []);
 
   const reset = useCallback(() => dispatch({ type: 'RESET' }), []);
 
-  return [form, onChange, reset];
+  return [form, onChange, onReplace, reset];
 }
 
 export default useChange;

@@ -28,6 +28,7 @@ export const StyledModal = styled.div<StyledModalProps>`
       & div.title {
         padding-bottom: 1rem;
         border-bottom: 1px solid ${(props) => props.theme.subColors.disabled};
+        font-weight: 600;
       }
     }
   }
