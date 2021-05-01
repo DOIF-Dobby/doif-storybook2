@@ -67,6 +67,9 @@ const Select = ({
     ? [defaultValue, ...data]
     : data;
 
+  // value가 null 이면 제일 앞에있는 값으로 설정한다.
+  value = value === null ? initData[0].code : value;
+
   // state 설정
   const [visible, setVisible] = useState(false);
   const [searchValue, setSearchValue] = useState('');
