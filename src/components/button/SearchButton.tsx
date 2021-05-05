@@ -2,17 +2,17 @@ import React, { ComponentProps } from 'react';
 import Icon from '../icon/Icon';
 import Button from './Button';
 
-const CloseButton = ({ ...props }: ComponentProps<typeof Button>) => {
+const SearchButton = ({ ...props }: ComponentProps<typeof Button>) => {
   return (
-    <Button {...props} variant="outline">
-      <Icon icon="exit" color={props.color} />
+    <Button type="submit" {...props}>
+      <Icon icon="search" color={props.color} />
       {props.children}
     </Button>
   );
 };
 
-CloseButton.defaultProps = {
-  children: '닫기',
+SearchButton.defaultProps = {
+  children: '조회',
   disabled: false,
   color: 'primary',
   variant: 'fill',
@@ -21,4 +21,4 @@ CloseButton.defaultProps = {
   iconOnly: false,
 };
 
-export default React.memo(CloseButton);
+export default React.memo(SearchButton);

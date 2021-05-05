@@ -2,17 +2,17 @@ import React, { ComponentProps } from 'react';
 import Icon from '../icon/Icon';
 import Button from './Button';
 
-const CloseButton = ({ ...props }: ComponentProps<typeof Button>) => {
+const DownloadButton = ({ ...props }: ComponentProps<typeof Button>) => {
   return (
     <Button {...props} variant="outline">
-      <Icon icon="exit" color={props.color} />
+      <Icon icon="download" color={props.color} />
       {props.children}
     </Button>
   );
 };
 
-CloseButton.defaultProps = {
-  children: '닫기',
+DownloadButton.defaultProps = {
+  children: '다운로드',
   disabled: false,
   color: 'primary',
   variant: 'fill',
@@ -21,4 +21,4 @@ CloseButton.defaultProps = {
   iconOnly: false,
 };
 
-export default React.memo(CloseButton);
+export default React.memo(DownloadButton);

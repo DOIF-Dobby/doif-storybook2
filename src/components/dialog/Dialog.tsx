@@ -6,7 +6,7 @@ import Icon from '../icon/Icon';
 import Overlay from '../overlay/Overlay';
 import { StyledDialog } from './Dialog.style';
 
-interface DialogProps {
+export interface DialogProps {
   /** `true`: 화면에 나타남, `false`: 화면에서 사라짐 */
   visible: boolean;
   /** `Dialog` 컴포넌트 상단에 표시되는 글자 */

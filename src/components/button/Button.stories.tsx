@@ -7,6 +7,8 @@ import Page from '../common/Page';
 import Box from '../common/Box';
 import SaveButton from './SaveButton';
 import CloseButton from './CloseButton';
+import SearchButton from './SearchButton';
+import DownloadButton from './DownloadButton';
 
 export default {
   title: 'Components/Button',
@@ -250,6 +252,15 @@ export const SaveAndCloseButton = () => {
     <Container>
       <SaveButton />
       <CloseButton />
+    </Container>
+  );
+};
+
+export const SearchAndDownloadButton = () => {
+  return (
+    <Container>
+      <SearchButton />
+      <DownloadButton />
     </Container>
   );
 };

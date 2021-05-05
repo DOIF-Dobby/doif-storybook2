@@ -1,7 +1,7 @@
 import React, { ComponentProps, useState } from 'react';
 import { Story } from '@storybook/react/types-6-0';
 import Dialog from './Dialog';
-import Container from '../container/Container';
+import DeleteDialog from './DeleteDialog';
 
 export default {
   title: 'Components/Dialog',
@@ -85,4 +85,9 @@ export const onCancel = () => {
       정말 진행하시겠습니까?
     </Dialog>
   );
+};
+
+export const deleteDialog = () => {
+  const [visible, setVisible] = useState(true);
+  return <DeleteDialog visible={visible} />;
 };
