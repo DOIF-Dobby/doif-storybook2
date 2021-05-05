@@ -12,6 +12,7 @@ export interface DoifThemeProps {
   headerColors: DoifThemeHeaderColorProps;
   formColors: DoifFormColorProps;
   tableColors: DoifTableColorProps;
+  pageHeaderColors: DoifPageHeaderColorProps;
 }
 
 /**
@@ -121,6 +122,12 @@ export interface DoifTableColorProps {
   paginationBackground: string;
   hoverRow: string;
   selectedRow: string;
+}
+
+export interface DoifPageHeaderColorProps {
+  menuName: string;
+  menuListItemName: string;
+  bottomLine: string;
 }
 
 /** 컬러 type */

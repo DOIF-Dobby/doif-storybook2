@@ -93,6 +93,11 @@ const Dark: DefaultTheme = {
     hoverRow: '#e2e6ea',
     selectedRow: '#845ef7',
   },
+  pageHeaderColors: {
+    menuName: '#123456',
+    menuListItemName: '#234567',
+    bottomLine: '#556789',
+  },
 };
 
 export default Dark;

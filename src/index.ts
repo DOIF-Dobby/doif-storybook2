@@ -2,6 +2,8 @@
 export { default as Button } from './components/button/Button';
 export { default as SaveButton } from './components/button/SaveButton';
 export { default as CloseButton } from './components/button/CloseButton';
+export { default as SearchButton } from './components/button/SearchButton';
+export { default as SaveDownloadButtonButton } from './components/button/DownloadButton';
 export { default as Icon } from './components/icon/Icon';
 export { default as Container } from './components/container/Container';
 export { default as InFormContainer } from './components/container/InFormContainer';
@@ -12,6 +14,7 @@ export { default as Select } from './components/select/Select';
 export { default as Tab } from './components/tab/Tab';
 export { default as Loading } from './components/loading/Loading';
 export { default as Dialog } from './components/dialog/Dialog';
+export { default as DeleteDialog } from './components/dialog/DeleteDialog';
 export { default as Modal } from './components/modal/Modal';
 export { default as Datepicker } from './components/datepicker/Datepicker';
 export { default as Textarea } from './components/textarea/Textarea';
@@ -31,6 +34,7 @@ export { default as LabelCheck } from './components/form/labelXXX/LabelCheck';
 export { default as LabelRadio } from './components/form/labelXXX/LabelRadio';
 export { default as LabelTextarea } from './components/form/labelXXX/LabelTextarea';
 export { default as Table } from './components/table/Table';
+export { default as PageHeader } from './components/pageHeader/PageHeader';
 
 export { default as Page } from './components/common/Page';
 export { default as Box } from './components/common/Box';

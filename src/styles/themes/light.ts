@@ -1,5 +1,4 @@
 import { DefaultTheme } from 'styled-components';
-import Label from '../../components/form/Label';
 
 /**
  * 밝은 테마이다.
@@ -93,6 +92,11 @@ const Light: DefaultTheme = {
     paginationBackground: '#e9ecef',
     hoverRow: '#e9ecef',
     selectedRow: '#fff3bf',
+  },
+  pageHeaderColors: {
+    menuName: '#2b2a2a',
+    menuListItemName: '#9e9e9e',
+    bottomLine: '#42403f',
   },
 };
 
