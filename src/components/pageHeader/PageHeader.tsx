@@ -16,7 +16,7 @@ const PageHeader = ({ menuName, menuList }: PageHeaderProps) => {
         <div className="menu-name">{menuName}</div>
         <div className="menu-list">
           {menuList.map((menu, i) => (
-            <div className="menu-list-item">
+            <div className="menu-list-item" key={menu}>
               <span className="menu-list-item-name">{menu}</span>
               {i !== menuList.length - 1 && <Icon icon="rightArrow" />}
             </div>
