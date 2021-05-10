@@ -1,5 +1,6 @@
 import React from 'react';
 import { DoifColorType } from '../../styles/themes/DoifThemeProps';
+import Validation from '../validation/Validation';
 import { StyledInputContainer } from './Input.style';
 
 export interface InputProps
@@ -21,6 +22,8 @@ export interface InputProps
   frontIcon?: React.ReactNode;
   /** input 뒤쪽에 icon을 넣습니다. */
   backIcon?: React.ReactNode;
+  /** validation 메세지 */
+  validation?: string;
 }
 
 /**
@@ -34,6 +37,7 @@ const Input = ({
   disabled,
   frontIcon,
   backIcon,
+  validation,
   ...props
 }: InputProps) => {
   const onClick = disabled ? undefined : props.onClick;
@@ -76,6 +80,7 @@ const Input = ({
       <div className="back-icon" onClick={onClick}>
         <div>{backIcon}</div>
       </div>
+      {validation && <Validation message={validation} />}
     </StyledInputContainer>
   );
 };

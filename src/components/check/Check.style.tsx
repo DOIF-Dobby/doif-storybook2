@@ -12,6 +12,8 @@ export const StyledCheckContainer = styled.div<StyledCheckContainerProps>`
     display: flex;
     user-select: none;
     flex-wrap: wrap;
+    position: relative;
+    width: 100%;
   }
 
   & > label {

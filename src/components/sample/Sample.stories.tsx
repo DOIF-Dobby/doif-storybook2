@@ -108,6 +108,7 @@ export const UseCustomHookSample = () => {
           label="Input 1"
           value={inputValue1}
           name="inputValue1"
+          validation="필수항목"
           onChange={onChange}
         />
         <LabelInput
@@ -115,6 +116,7 @@ export const UseCustomHookSample = () => {
           label="Input 2"
           value={inputValue2}
           name="inputValue2"
+          validation="필수 필수 필수 필수 필수 필수 필수 필수 필수 항목"
           onChange={onChange}
         />
       </Row>
@@ -125,6 +127,7 @@ export const UseCustomHookSample = () => {
           value={selectValue1}
           defaultValue={defaultValue}
           name="selectValue1"
+          validation="크크크크앙"
           onChange={onChange}
         />
         <LabelSelect
@@ -133,6 +136,7 @@ export const UseCustomHookSample = () => {
           value={selectValue2}
           defaultValue={defaultValue}
           name="selectValue2"
+          validation="호호호호호"
           onChange={onChange}
         />
       </Row>
@@ -142,12 +146,14 @@ export const UseCustomHookSample = () => {
           selected={startDate}
           onChange={onChangeDate}
           name="startDate"
+          validation="날짜 날짜"
         />
         <LabelDatepicker
           label="Datepicker 2"
           selected={endDate}
           onChange={onChangeDate}
           name="endDate"
+          validation="크크크크크"
         />
       </Row>
       <Row>
@@ -157,6 +163,7 @@ export const UseCustomHookSample = () => {
           onChange={onChangeDate}
           name="month"
           showMonthYearPicker
+          validation="쿄쿄쿄쿄"
         />
         <LabelDatepicker
           label="Timepicker"
@@ -165,6 +172,7 @@ export const UseCustomHookSample = () => {
           name="time"
           showTimeSelect
           showTimeSelectOnly
+          validation="키키키키키"
         />
       </Row>
       <Row>
@@ -173,6 +181,7 @@ export const UseCustomHookSample = () => {
           data={data}
           values={checkValue1}
           name="checkValue1"
+          validation="체크체크"
           onChange={onChangeCheck}
         />
         <LabelCheck
@@ -180,6 +189,7 @@ export const UseCustomHookSample = () => {
           data={data}
           values={checkValue2}
           name="checkValue2"
+          validation="치키차카초코초코쵸"
           onChange={onChangeCheck}
         />
       </Row>
@@ -189,6 +199,7 @@ export const UseCustomHookSample = () => {
           data={data}
           value={radioValue1}
           name="radioValue1"
+          validation="라디오 라디오"
           onChange={onChange}
         />
         <LabelRadio
@@ -196,6 +207,7 @@ export const UseCustomHookSample = () => {
           data={data}
           value={radioValue2}
           name="radioValue2"
+          validation="별이 빛나는 밤에"
           onChange={onChange}
         />
       </Row>
@@ -205,6 +217,7 @@ export const UseCustomHookSample = () => {
           value={textareaValue1}
           onChange={onChange}
           name="textareaValue1"
+          validation="텍스트 Area"
         />
       </Row>
       <InFormContainer align="center">

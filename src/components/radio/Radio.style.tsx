@@ -12,6 +12,8 @@ export const StyledRadioContainer = styled.div<StyledRadioContainerProps>`
     display: flex;
     user-select: none;
     flex-wrap: wrap;
+    position: relative;
+    width: 100%;
   }
 
   & > label {

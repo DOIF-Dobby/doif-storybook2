@@ -36,6 +36,8 @@ export interface SelectProps {
   id?: string;
   /** name 속성입니다. */
   name?: string;
+  /** validation 메시지 */
+  validation?: string;
   /** Selectbox의 값이 바뀔 때 실행되는 콜백 함수입니다. */
   onChange?: (e: React.ChangeEvent<HTMLSelectElement>) => void;
 }
@@ -55,6 +57,7 @@ const Select = ({
   defaultValue,
   id,
   name,
+  validation,
   onChange,
 }: SelectProps) => {
   // input 스타일 설정
@@ -137,6 +140,7 @@ const Select = ({
         placeholder={placeholder}
         readOnly
         backIcon={<Icon icon="downArrow" color={color} />}
+        validation={validation}
         style={inputStyle}
         onClick={onClick}
       />

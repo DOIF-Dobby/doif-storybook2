@@ -12,12 +12,15 @@ import Button from '../button/Button';
 
 import 'react-datepicker/dist/react-datepicker.min.css';
 import { DoifColorType } from '../../styles/themes/DoifThemeProps';
+import Validation from '../validation/Validation';
 
 export interface DatepickerProps extends ReactDatePickerProps {
   /** datepicker의 넓이를 설정합니다. */
   width: number | string;
   /** datepicker의 색상을 설정합니다. */
   color: DoifColorType;
+  /** validation 메세지 */
+  validation?: string;
   /**
    * onChange 함수의 첫번째 parameter는 `Date` 형식
    * */
@@ -60,7 +63,13 @@ const Datepicker = (props: DatepickerProps) => {
         onChange={nameOnChange}
         dateFormat={dateFormat}
         locale={props.locale ? props.locale : 'ko'}
-        customInput={props.customInput ? props.customInput : <DefaultInput />}
+        customInput={
+          props.customInput ? (
+            props.customInput
+          ) : (
+            <DefaultInput validation={props.validation} />
+          )
+        }
         className="custom-date-picker"
         calendarClassName="custom-calendar"
         wrapperClassName="custom-wrapper"
@@ -126,7 +135,7 @@ Datepicker.defaultProps = {
   color: 'primary',
 };
 
-const DefaultInput = forwardRef((props, ref) => (
+const DefaultInput = forwardRef((props: { validation?: string }, ref) => (
   <Input {...props} autoComplete="off" backIcon={<Icon icon="calendar" />} />
 ));
 

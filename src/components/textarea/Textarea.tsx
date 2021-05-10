@@ -1,5 +1,6 @@
 import React from 'react';
 import { DoifColorType } from '../../styles/themes/DoifThemeProps';
+import Validation from '../validation/Validation';
 import { StyledTextarea } from './Textarea.style';
 
 export interface TextareaProps
@@ -19,6 +20,8 @@ export interface TextareaProps
   rows: number;
   /** placeholder를 설정합니다. */
   placeholder?: string;
+  /** validation 메세지 */
+  validation?: string;
 }
 
 /**
@@ -31,6 +34,7 @@ const Textarea = ({
   placeholder,
   resize,
   rows,
+  validation,
   ...props
 }: TextareaProps) => {
   return (
@@ -47,6 +51,7 @@ const Textarea = ({
         rows={rows}
         {...props}
       />
+      {validation && <Validation message={validation} />}
     </StyledTextarea>
   );
 };

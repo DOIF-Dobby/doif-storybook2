@@ -3,6 +3,7 @@ import Ripple from '../common/Ripple';
 import { DoifColorType } from '../../styles/themes/DoifThemeProps';
 import { DoifDataProps } from '../../props/DoifCommonProps';
 import { StyledRadioContainer } from './Radio.style';
+import Validation from '../validation/Validation';
 
 export interface RadioProps {
   /** 보여줄 라디오박스의 배열입니다. { code: string, name: string} */
@@ -17,6 +18,8 @@ export interface RadioProps {
   disabled: boolean;
   /** 라디오박스의 defaultValue를 설정합니다. */
   defaultValue?: DoifDataProps;
+  /** validation 메세지 */
+  validation?: string;
   /** 라디오박스를 변경했을 때 실행되는 콜백함수입니다. */
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
@@ -31,6 +34,7 @@ const Radio = ({
   color,
   disabled,
   defaultValue,
+  validation,
   onChange,
 }: RadioProps) => {
   const initData: Array<DoifDataProps> = defaultValue
@@ -63,6 +67,7 @@ const Radio = ({
           </label>
         );
       })}
+      {validation && <Validation message={validation} />}
     </StyledRadioContainer>
   );
 };

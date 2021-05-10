@@ -4,6 +4,7 @@ import { DoifColorType } from '../../styles/themes/DoifThemeProps';
 import { DoifDataProps } from '../../props/DoifCommonProps';
 import Icon, { IconType } from '../icon/Icon';
 import { StyledCheckContainer } from './Check.style';
+import Validation from '../validation/Validation';
 
 export interface CheckProps {
   /** 보여줄 체크박스의 배열입니다. { code: string, name: string} */
@@ -18,6 +19,8 @@ export interface CheckProps {
   disabled: boolean;
   /** 체크박스의 icon를 정합니다. */
   icon: IconType;
+  /** validation 메세지 */
+  validation?: string;
   /** 체크박스를 변경했을 때 실행되는 콜백함수입니다. */
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
@@ -32,6 +35,7 @@ const Check = ({
   color,
   disabled,
   icon,
+  validation,
   onChange,
 }: CheckProps) => {
   return (
@@ -60,6 +64,7 @@ const Check = ({
           </label>
         );
       })}
+      {validation && <Validation message={validation} />}
     </StyledCheckContainer>
   );
 };
