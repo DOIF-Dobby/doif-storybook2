@@ -119,7 +119,7 @@ const Pagination = ({
             setPageSize(Number(e.target.value));
           }}
           data={pageSizeArray}
-        ></Select>
+        />
       </div>
       <div className="count-container">
         {pageIndex * pageSize + (rowNumber > 0 ? 1 : 0)} -{' '}

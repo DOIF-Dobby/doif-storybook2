@@ -7,6 +7,7 @@ interface StyledTableProps {
 }
 
 export const StyledTable = styled.div<StyledTableProps>`
+  min-width: 400px;
 
   div.total-container {
     position: relative;

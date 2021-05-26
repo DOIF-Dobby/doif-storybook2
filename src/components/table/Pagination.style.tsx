@@ -10,7 +10,7 @@ export const StyledPagination = styled.div`
   border-bottom-right-radius: ${(props) => props.theme.variants.borderRadius};
   border-top: none;
   padding: 0.5rem;
-  overflow: hidden;
+  width: 100%;
 
   & > div {
     flex-basis: 33%;
