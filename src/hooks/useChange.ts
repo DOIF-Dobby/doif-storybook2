@@ -2,7 +2,13 @@ import { ChangeEvent, useCallback, useReducer } from 'react';
 
 function reducer(
   state: any,
-  action: { type: string; name?: string; value?: string; replaceState?: any },
+  action: {
+    type: string;
+    name?: string;
+    value?: string;
+    replaceState?: any;
+    initForm?: any;
+  },
 ) {
   switch (action.type) {
     case 'CHANGE':
@@ -15,6 +21,10 @@ function reducer(
     case 'REPLACE':
       return action.replaceState;
     case 'RESET':
+      return action.initForm;
+    default:
+      return state;
+    case 'EMPTY':
       return Object.keys(state).reduce(
         (acc: { [index: string]: any }, current) => {
           acc[current] = '';
@@ -22,8 +32,6 @@ function reducer(
         },
         {},
       );
-    default:
-      return state;
   }
 }
 
@@ -44,9 +52,10 @@ function useChange(initForm: { [index: string]: string }) {
     dispatch({ type: 'REPLACE', replaceState });
   }, []);
 
-  const reset = useCallback(() => dispatch({ type: 'RESET' }), []);
+  const empty = useCallback(() => dispatch({ type: 'EMPTY' }), []);
+  const reset = useCallback(() => dispatch({ type: 'RESET', initForm }), []);
 
-  return [form, onChange, onReplace, reset];
+  return [form, onChange, onReplace, reset, empty];
 }
 
 export default useChange;
