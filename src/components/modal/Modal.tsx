@@ -1,4 +1,5 @@
 import React from 'react';
+import Draggable from 'react-draggable';
 import Container from '../container/Container';
 import Overlay from '../overlay/Overlay';
 import { StyledModal } from './Modal.style';
@@ -26,12 +27,14 @@ const Modal = ({ visible, title, zIndex, width, children }: ModalProps) => {
   return (
     <div className="overlay">
       <Overlay zIndex={zIndex} />
-      <StyledModal zIndex={zIndex + 1} width={width}>
-        <Container direction="column" gap="1rem">
-          {title && <div className="title">{title}</div>}
-          <div className="content">{children}</div>
-        </Container>
-      </StyledModal>
+      <Draggable>
+        <StyledModal zIndex={zIndex + 1} width={width}>
+          <Container direction="column" gap="1rem">
+            {title && <div className="title">{title}</div>}
+            <div className="content">{children}</div>
+          </Container>
+        </StyledModal>
+      </Draggable>
     </div>
   );
 };

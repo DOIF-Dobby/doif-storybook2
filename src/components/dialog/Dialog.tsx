@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useCallback } from 'react';
+import Draggable from 'react-draggable';
 import { DoifColorType } from '../../styles/themes/DoifThemeProps';
 import Button from '../button/Button';
+import { DraggableContainer } from '../common/DraggableContainer';
 import Container from '../container/Container';
 import Icon from '../icon/Icon';
 import Overlay from '../overlay/Overlay';
@@ -50,37 +52,52 @@ const Dialog = ({
   // visible이 false면 null return
   if (!visible) return null;
 
+  const onEnterKeyPress = useCallback(
+    (e: React.KeyboardEvent<HTMLDivElement>) => {
+      if (e.key === 'Enter') {
+        console.log('hi');
+      }
+    },
+    [],
+  );
+
   return (
-    <div className="overlay">
+    <DraggableContainer className="overlay">
       <Overlay zIndex={zIndex} />
-      <StyledDialog zIndex={zIndex + 1} type={type}>
-        <Container direction="column" gap="1rem">
-          {title && <div className="title">{title}</div>}
-          <div className="content">
-            {type && (
-              <div className="icon-container">{<Icon icon={type} />}</div>
-            )}
-            {children && <div className="children-container">{children}</div>}
-            {type && (
-              <Container align="center" className="button-container">
-                <Button
-                  color={color}
-                  onClick={onConfirm}
-                  className="confirm-button"
-                >
-                  {confirmText}
-                </Button>
-                {isConfirm && (
-                  <Button color={color} variant="ghost" onClick={onCancel}>
-                    {cancelText}
+      <Draggable>
+        <StyledDialog
+          zIndex={zIndex + 1}
+          type={type}
+          onKeyPress={onEnterKeyPress}
+        >
+          <Container direction="column" gap="1rem">
+            {title && <div className="title">{title}</div>}
+            <div className="content">
+              {type && (
+                <div className="icon-container">{<Icon icon={type} />}</div>
+              )}
+              {children && <div className="children-container">{children}</div>}
+              {type && (
+                <Container align="center" className="button-container">
+                  <Button
+                    color={color}
+                    onClick={onConfirm}
+                    className="confirm-button"
+                  >
+                    {confirmText}
                   </Button>
-                )}
-              </Container>
-            )}
-          </div>
-        </Container>
-      </StyledDialog>
-    </div>
+                  {isConfirm && (
+                    <Button color={color} variant="ghost" onClick={onCancel}>
+                      {cancelText}
+                    </Button>
+                  )}
+                </Container>
+              )}
+            </div>
+          </Container>
+        </StyledDialog>
+      </Draggable>
+    </DraggableContainer>
   );
 };
 

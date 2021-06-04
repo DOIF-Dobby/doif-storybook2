@@ -65,6 +65,7 @@
     "@types/react-table": "^7.0.29",
     "codemirror": "^5.59.2",
     "react-datepicker": "^3.4.1",
+    "react-draggable": "^4.4.3",
     "react-table": "^7.6.3"
   },
   "scripts": {

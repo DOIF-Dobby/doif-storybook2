@@ -97,9 +97,9 @@ export const StyledSelectContainer = styled.div<StyledSelectContainerProps>`
       }
 
       & > div.selected {
-        background-color: ${(props) =>
-          props.theme.mainColors[props.color].base};
-        color: ${(props) => props.theme.subColors.content};
+        color: ${(props) => props.theme.mainColors[props.color].base};
+        font-style: italic;
+        font-weight: 600;
       }
     }
   }
