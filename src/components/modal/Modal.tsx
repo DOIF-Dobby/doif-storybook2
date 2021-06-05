@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Draggable from 'react-draggable';
+import { DraggableContainer } from '../common/DraggableContainer';
 import Container from '../container/Container';
 import Overlay from '../overlay/Overlay';
 import { StyledModal } from './Modal.style';
@@ -24,18 +25,36 @@ const Modal = ({ visible, title, zIndex, width, children }: ModalProps) => {
   // visible이 false면 null return
   if (!visible) return null;
 
+  const [dragState, setDragState] = useState({
+    x: 0,
+    y: 0,
+    isRendered: false,
+  });
+
+  const itemRef: React.RefObject<HTMLDivElement> = useRef(null);
+
+  useEffect(() => {
+    setDragState({
+      x: itemRef.current ? itemRef.current.getBoundingClientRect().x : 0,
+      y: itemRef.current ? itemRef.current.getBoundingClientRect().y : 0,
+      isRendered: true,
+    });
+  }, []);
+
   return (
-    <div className="overlay">
+    <DraggableContainer className="overlay" isRendered={dragState.isRendered}>
       <Overlay zIndex={zIndex} />
-      <Draggable>
+      <Draggable positionOffset={{ x: dragState.x, y: dragState.y }}>
         <StyledModal zIndex={zIndex + 1} width={width}>
-          <Container direction="column" gap="1rem">
-            {title && <div className="title">{title}</div>}
-            <div className="content">{children}</div>
-          </Container>
+          <div ref={itemRef}>
+            <Container direction="column" gap="1rem">
+              {title && <div className="title">{title}</div>}
+              <div className="content">{children}</div>
+            </Container>
+          </div>
         </StyledModal>
       </Draggable>
-    </div>
+    </DraggableContainer>
   );
 };
 
