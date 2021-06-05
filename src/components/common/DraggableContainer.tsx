@@ -1,11 +1,12 @@
 import styled from 'styled-components';
 
-export const DraggableContainer = styled.div`
-  .react-draggable-dragged {
-    width: auto;
-    height: auto;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+interface DraggableContainerProps {
+  isRendered: boolean;
+}
+
+export const DraggableContainer = styled.div<DraggableContainerProps>`
+  .react-draggable {
+    ${(props) => props.isRendered && 'width: auto;'}
+    ${(props) => props.isRendered && 'height: auto;'}
   }
 `;
