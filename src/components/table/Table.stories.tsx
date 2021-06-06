@@ -801,3 +801,25 @@ export const ServerSidePagination = () => {
     />
   );
 };
+
+export const NoDataTable = () => {
+  const model: TableModelProps[] = useMemo(
+    () => [
+      {
+        label: '데이터 없을 경우',
+        name: 'selectRow',
+        width: 1000,
+        align: 'left',
+      },
+      {
+        label: '호호호',
+        name: 'hohoho',
+        width: 1000,
+        align: 'left',
+      },
+    ],
+    [],
+  );
+
+  return <Table caption="Row 선택 시" model={model} data={[]} />;
+};

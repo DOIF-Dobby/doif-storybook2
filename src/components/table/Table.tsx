@@ -397,7 +397,10 @@ const Table = ({
             </table>
           </div>
           <Scroll onScroll={onScroll}>
-            <div className="tbody-container">
+            <div
+              className="tbody-container"
+              style={{ width: totalColumnsWidth + 'px' }}
+            >
               <table {...getTableProps()} summary={caption}>
                 <tbody {...getTableBodyProps()}>
                   {page.map((row: Row, i) => {

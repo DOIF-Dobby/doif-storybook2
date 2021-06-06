@@ -76,8 +76,14 @@ const Pagination = ({
           <div>
             <Input
               type="number"
-              defaultValue={pageIndex + 1}
+              value={pageIndex + 1}
               disabled={loading}
+              onChange={(e) => {
+                const page = e.currentTarget.value
+                  ? Number(e.currentTarget.value) - 1
+                  : 0;
+                gotoPage(page);
+              }}
               onKeyPress={(e) => {
                 if (e.key === 'Enter') {
                   const page = e.currentTarget.value
