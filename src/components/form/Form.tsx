@@ -43,6 +43,13 @@ const StyledForm = styled.div`
             props.theme.variants.borderRadius};
         }
       }
+
+      div.column:last-of-type  {
+        div.field {
+          border-top-right-radius: ${(props) =>
+            props.theme.variants.borderRadius};
+        }
+      }
     }
 
     & > div.row:last-of-type {
@@ -55,6 +62,13 @@ const StyledForm = styled.div`
       div.column:first-of-type  {
         div.label {
           border-bottom-left-radius: ${(props) =>
+            props.theme.variants.borderRadius};
+        }
+      }
+
+      div.column:last-of-type  {
+        div.field {
+          border-bottom-right-radius: ${(props) =>
             props.theme.variants.borderRadius};
         }
       }

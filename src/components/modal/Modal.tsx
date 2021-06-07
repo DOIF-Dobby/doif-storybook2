@@ -44,7 +44,10 @@ const Modal = ({ visible, title, zIndex, width, children }: ModalProps) => {
   return (
     <DraggableContainer className="overlay" isRendered={dragState.isRendered}>
       <Overlay zIndex={zIndex} />
-      <Draggable positionOffset={{ x: dragState.x, y: dragState.y }}>
+      <Draggable
+        positionOffset={{ x: dragState.x, y: dragState.y }}
+        enableUserSelectHack={false}
+      >
         <StyledModal zIndex={zIndex + 1} width={width}>
           <div ref={itemRef}>
             <Container direction="column" gap="1rem">

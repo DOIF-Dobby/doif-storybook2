@@ -71,7 +71,10 @@ const Dialog = ({
   return (
     <DraggableContainer className="overlay" isRendered={dragState.isRendered}>
       <Overlay zIndex={zIndex} />
-      <Draggable positionOffset={{ x: dragState.x, y: dragState.y }}>
+      <Draggable
+        positionOffset={{ x: dragState.x, y: dragState.y }}
+        enableUserSelectHack={false}
+      >
         <StyledDialog zIndex={zIndex + 1} type={type}>
           <div ref={itemRef}>
             <Container direction="column" gap="1rem">
