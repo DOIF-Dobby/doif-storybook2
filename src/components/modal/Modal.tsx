@@ -47,9 +47,10 @@ const Modal = ({ visible, title, zIndex, width, children }: ModalProps) => {
       <Draggable
         positionOffset={{ x: dragState.x, y: dragState.y }}
         enableUserSelectHack={false}
+        cancel=".container-warpper"
       >
         <StyledModal zIndex={zIndex + 1} width={width}>
-          <div ref={itemRef}>
+          <div ref={itemRef} style={{ cursor: 'grab' }}>
             <Container direction="column" gap="1rem">
               {title && <div className="title">{title}</div>}
               <div className="content">{children}</div>

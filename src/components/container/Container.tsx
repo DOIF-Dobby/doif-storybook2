@@ -35,7 +35,9 @@ const Container = ({
 
   return (
     <StyledContainer direction={direction} align={styledAlign} gap={gap}>
-      <div {...props}>{children}</div>
+      <div {...props} className="container-warpper">
+        {children}
+      </div>
     </StyledContainer>
   );
 };

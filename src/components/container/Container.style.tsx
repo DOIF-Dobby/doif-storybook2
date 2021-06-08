@@ -12,11 +12,12 @@ export const StyledContainer = styled.div<StyledContainerProps>`
     width: 100%;
   }
 
-  & > div {
+  & > div.container-warpper {
     width: 100%;
     display: flex;
     flex-direction: ${(props) => props.direction};
     justify-content: ${(props) => props.align};
+    cursor: default;
 
     // 내용들 스타일
     & > div:not(.overlay) + div:not(.overlay) {
