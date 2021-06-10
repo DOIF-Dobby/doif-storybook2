@@ -4,6 +4,7 @@ import React, {
   useEffect,
   useMemo,
   useRef,
+  useState,
 } from 'react';
 import {
   Column,
@@ -177,6 +178,16 @@ const Table = ({
       initialState: {
         pageIndex: initPageIndex,
         pageSize: initPageSize,
+        selectedRowIds: (() => {
+          const selectedRowIds: any = {};
+
+          data.forEach((obj: any, index) => {
+            if (obj.checked) {
+              selectedRowIds[String(index)] = obj.checked;
+            }
+          });
+          return selectedRowIds;
+        })(),
       },
       manualPagination: enableServerSidePagination,
       pageCount: controlledPageCount,
@@ -405,6 +416,7 @@ const Table = ({
                 <tbody {...getTableBodyProps()}>
                   {page.map((row: Row, i) => {
                     prepareRow(row);
+
                     return (
                       <tr
                         {...row.getRowProps()}

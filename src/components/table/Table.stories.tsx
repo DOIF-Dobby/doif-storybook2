@@ -291,10 +291,12 @@ export const MultiSelectRow = () => {
       {
         selectRow: 'Row 선택 시 onMultiSelectRow 함수를 실행합니다.',
         hohoho: '호호호호호',
+        checked: true,
       },
       {
         selectRow: 'enableMultiSelectRow 속성을 ture',
         hohoho: '하하하',
+        checked: false,
       },
     ],
     [],
