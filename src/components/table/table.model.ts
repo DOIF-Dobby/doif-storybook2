@@ -6,7 +6,11 @@ export interface TableModelProps {
   width?: number;
   align?: 'left' | 'center' | 'right';
   hidden?: boolean;
-  formatter?: (cellValue: React.ReactNode, id: string) => React.ReactNode;
+  formatter?: (
+    cellValue: React.ReactNode,
+    rowValue: Object,
+    id: string,
+  ) => React.ReactNode;
 }
 
 export interface TableGroupHeaderProps {

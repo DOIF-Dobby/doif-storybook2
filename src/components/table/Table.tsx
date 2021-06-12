@@ -437,6 +437,7 @@ const Table = ({
                               {cell.column.formatter
                                 ? cell.column.formatter(
                                     cell.render('Cell'),
+                                    row.original,
                                     row.id,
                                   )
                                 : cell.render('Cell')}
