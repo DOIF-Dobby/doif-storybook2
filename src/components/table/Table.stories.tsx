@@ -164,7 +164,7 @@ export const AboutColumnProperty = () => {
         name: 'col3',
         width: 500,
         align: 'center',
-        formatter: (cellValue: React.ReactNode) => {
+        formatter: (cellValue: React.ReactNode, id: string) => {
           return (
             <Button
               size="small"
