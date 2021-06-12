@@ -178,16 +178,6 @@ const Table = ({
       initialState: {
         pageIndex: initPageIndex,
         pageSize: initPageSize,
-        selectedRowIds: (() => {
-          const selectedRowIds: any = {};
-
-          data.forEach((obj: any, index) => {
-            if (obj.checked) {
-              selectedRowIds[String(index)] = obj.checked;
-            }
-          });
-          return selectedRowIds;
-        })(),
       },
       manualPagination: enableServerSidePagination,
       pageCount: controlledPageCount,
