@@ -31,6 +31,7 @@ const Modal = ({ visible, title, zIndex, width, children }: ModalProps) => {
     isRendered: false,
   });
 
+  const dragRef = useRef(null);
   const itemRef: React.RefObject<HTMLDivElement> = useRef(null);
 
   useEffect(() => {
@@ -47,9 +48,10 @@ const Modal = ({ visible, title, zIndex, width, children }: ModalProps) => {
       <Draggable
         positionOffset={{ x: dragState.x, y: dragState.y }}
         enableUserSelectHack={false}
+        nodeRef={dragRef}
         cancel=".container-warpper"
       >
-        <StyledModal zIndex={zIndex + 1} width={width}>
+        <StyledModal zIndex={zIndex + 1} width={width} ref={dragRef}>
           <div ref={itemRef} style={{ cursor: 'grab' }}>
             <Container direction="column" gap="1rem">
               {title && <div className="title">{title}</div>}

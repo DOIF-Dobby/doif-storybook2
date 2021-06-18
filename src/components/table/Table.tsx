@@ -147,6 +147,8 @@ const Table = ({
     return groupingData.length > 0 ? groupingData : initModel;
   }, [model, groupHeaders]);
 
+  const [test, setTest] = useState(undefined);
+
   const {
     getTableProps,
     getTableBodyProps,
@@ -195,6 +197,8 @@ const Table = ({
     useTreeRow(enableTreeTable),
     useMultiRowSelect(enableMultiSelectRow),
   );
+
+  console.log(columnResizing);
 
   /** tree table 처음에 row expand 설정 */
   useEffect(() => {

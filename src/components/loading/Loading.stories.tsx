@@ -18,8 +18,6 @@ const Template: Story<ComponentProps<typeof Loading>> = (args) => {
   return (
     <Container direction="column">
       <Loading />
-      <div>안녕하세요</div>
-      <div>반갑습니다.</div>
     </Container>
   );
 };

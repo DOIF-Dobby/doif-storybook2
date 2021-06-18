@@ -58,6 +58,7 @@ const Dialog = ({
     isRendered: false,
   });
 
+  const dragRef = useRef(null);
   const itemRef: React.RefObject<HTMLDivElement> = useRef(null);
 
   useEffect(() => {
@@ -74,9 +75,10 @@ const Dialog = ({
       <Draggable
         positionOffset={{ x: dragState.x, y: dragState.y }}
         enableUserSelectHack={false}
+        nodeRef={dragRef}
         cancel=".container-warpper"
       >
-        <StyledDialog zIndex={zIndex + 1} type={type}>
+        <StyledDialog zIndex={zIndex + 1} type={type} ref={dragRef}>
           <div ref={itemRef} style={{ cursor: 'grab' }}>
             <Container direction="column" gap="1rem">
               {title && <div className="title">{title}</div>}
