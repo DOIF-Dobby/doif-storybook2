@@ -94,17 +94,26 @@ const Select = ({
   }, []);
 
   // Selectbox에서 데이터 검색할 때 타자 칠 때마다 바뀌면 눈이 아프니깐 debounce 함수로 onChange 함수를 만든다.
-  const onDebounceChangeData = _.debounce((target: HTMLInputElement) => {
-    setDataList(
-      data.filter((d) =>
-        d.name.toUpperCase().includes(target.value.toUpperCase()),
-      ),
-    );
-  }, 200);
+  // const onDebounceChangeData = _.debounce((target: HTMLInputElement) => {
+  //   setDataList(
+  //     data.filter((d) =>
+  //       d.name.toUpperCase().includes(target.value.toUpperCase()),
+  //     ),
+  //   );
+  // }, 200);
 
   const onChangeData = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     setSearchValue(e.target.value);
-    onDebounceChangeData(e.target);
+
+    if (e.target.value) {
+      setDataList(
+        data.filter((d) =>
+          d.name.toUpperCase().includes(e.target.value.toUpperCase()),
+        ),
+      );
+    } else {
+      setDataList(initData);
+    }
   }, []);
 
   // Selectbox의 값을 선택했을 때 실행되는 함수
@@ -123,6 +132,8 @@ const Select = ({
     },
     [],
   );
+
+  console.log(dataList);
 
   return (
     <StyledSelectContainer
