@@ -222,10 +222,7 @@ export const AboutColumnProperty = () => {
   );
 };
 
-let row: any = {};
-
 export const SelectRow = () => {
-  const [test, setTest] = useState({ hi: 'zzz', hello: '123' });
   const model: TableModelProps[] = useMemo(
     () => [
       {
@@ -259,16 +256,13 @@ export const SelectRow = () => {
   );
 
   const onSelectRow = useCallback((id: string, rowValue: Object) => {
-    row = rowValue;
-    // alert(
-    //   'rowId: ' + id + '\r\n' + 'rowValue: \r\n' + JSON.stringify(rowValue),
-    // );
-    setTest((state) => ({ ...state, hello: state.hello + '1' }));
+    alert(
+      'rowId: ' + id + '\r\n' + 'rowValue: \r\n' + JSON.stringify(rowValue),
+    );
   }, []);
 
   return (
     <>
-      {test.hello}
       <Table
         caption="Row 선택 시"
         model={model}
