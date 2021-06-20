@@ -180,11 +180,15 @@ export const Height = () => {
 
 export const DefaultValue = () => {
   const [value, setValue] = useState('');
-
-  const data: Array<DoifDataProps> = [
+  const [data, setData] = useState([
     { code: 'CC', name: '신용카드' },
     { code: 'AT', name: '계좌이체' },
-  ];
+  ]);
+
+  // const data: Array<DoifDataProps> = [
+  //   { code: 'CC', name: '신용카드' },
+  //   { code: 'AT', name: '계좌이체' },
+  // ];
 
   const defaultValue: DoifDataProps = {
     code: '',
