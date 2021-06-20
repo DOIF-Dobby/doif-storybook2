@@ -133,8 +133,6 @@ const Select = ({
     [],
   );
 
-  console.log(dataList);
-
   return (
     <StyledSelectContainer
       ref={selectboxContainerRef}
