@@ -198,8 +198,6 @@ const Table = ({
     useMultiRowSelect(enableMultiSelectRow),
   );
 
-  console.log(columnResizing);
-
   /** tree table 처음에 row expand 설정 */
   useEffect(() => {
     if (enableTreeTable) {
