@@ -5,6 +5,7 @@ import React, {
   useRef,
   useState,
   useEffect,
+  useMemo,
 } from 'react';
 import useOutsideAlerter from '../../hooks/useOutsideAlerter';
 import { DoifDataProps } from '../../props/DoifCommonProps';
@@ -67,9 +68,9 @@ const Select = ({
   };
 
   // defaultValue 있으면 제일 앞에 위치시킨다.
-  const initData: Array<DoifDataProps> = defaultValue
-    ? [defaultValue, ...data]
-    : data;
+  const initData: Array<DoifDataProps> = useMemo(() => {
+    return defaultValue ? [defaultValue, ...data] : data;
+  }, [defaultValue, data]);
 
   // value가 null 이면 제일 앞에있는 값으로 설정한다.
   value = value === null ? initData[0].code : value;
@@ -133,6 +134,10 @@ const Select = ({
     },
     [],
   );
+
+  useEffect(() => {
+    setDataList(initData);
+  }, [initData]);
 
   return (
     <StyledSelectContainer
