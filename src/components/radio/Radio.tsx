@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import Ripple from '../common/Ripple';
 import { DoifColorType } from '../../styles/themes/DoifThemeProps';
 import { DoifDataProps } from '../../props/DoifCommonProps';
@@ -37,9 +37,9 @@ const Radio = ({
   validation,
   onChange,
 }: RadioProps) => {
-  const initData: Array<DoifDataProps> = defaultValue
-    ? [defaultValue, ...data]
-    : data;
+  const initData: Array<DoifDataProps> = useMemo(() => {
+    return defaultValue ? [defaultValue, ...data] : data;
+  }, [defaultValue, data]);
 
   return (
     <StyledRadioContainer color={color} disabled={disabled}>
