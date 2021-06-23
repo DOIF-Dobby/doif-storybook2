@@ -104,19 +104,22 @@ const Select = ({
   //   );
   // }, 200);
 
-  const onChangeData = useCallback((e: ChangeEvent<HTMLInputElement>) => {
-    setSearchValue(e.target.value);
+  const onChangeData = useCallback(
+    (e: ChangeEvent<HTMLInputElement>) => {
+      setSearchValue(e.target.value);
 
-    if (e.target.value) {
-      setDataList(
-        data.filter((d) =>
-          d.name.toUpperCase().includes(e.target.value.toUpperCase()),
-        ),
-      );
-    } else {
-      setDataList(initData);
-    }
-  }, []);
+      if (e.target.value) {
+        setDataList(
+          dataList.filter((d) =>
+            d.name.toUpperCase().includes(e.target.value.toUpperCase()),
+          ),
+        );
+      } else {
+        setDataList(initData);
+      }
+    },
+    [dataList],
+  );
 
   // Selectbox의 값을 선택했을 때 실행되는 함수
   // div 클릭 이벤트가 발생했을 때 <select> 태그의 value 값을 변경시키고 select의 event를 트리거한다.
